@@ -1,8 +1,6 @@
-# Balise — Assessment Methodology (v0.1, for ratification)
+# Balise — Assessment Methodology (v0.1)
 
-**Project:** [[P02 - Career and Financial Predictions]] / One-Coat Plan Stage 1
 **Date:** 2026-08-22
-**Type:** decisions
 
 ## Summary
 
