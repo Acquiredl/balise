@@ -19,3 +19,7 @@ build/
 
 # env / secrets
 .env
+
+# operator files - local only, never public
+CLAUDE.md
+METACOG.md
