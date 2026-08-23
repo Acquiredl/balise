@@ -157,7 +157,7 @@ def _lang_section(findings: list[Finding], target: str, lang: str,
             f"<h3>{c.plain_fr if fr else c.plain_en}{_chip(f.status, lang)}</h3>"
             f'<p class="why"><b>{"Pourquoi c’est important" if fr else "Why it matters"}</b>'
             f"{c.risk_fr if fr else c.risk_en}</p>"
-            f'<p class="act"><b>{"Par où commencer" if fr else "Where to start"}</b>'
+            f'<p class="act"><b>{"Action recommandée" if fr else "Recommended action"}</b>'
             f"{c.action_fr if fr else c.action_en}</p>"
             f'<p class="ref">{f.check.id} · {f.check.legal_hook} [{tier}]</p>'
             f"</div>")
