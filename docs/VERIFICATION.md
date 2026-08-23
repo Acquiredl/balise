@@ -2,26 +2,43 @@
 
 **Status: OPEN — no client-facing report may ship until every row is checked.**
 
+## Sources to open (French text is the authoritative version)
+
+1. Private Sector Act, CQLR c. P-39.1 — FR: https://www.legisquebec.gouv.qc.ca/fr/document/lc/P-39.1 · EN: https://www.legisquebec.gouv.qc.ca/en/document/cs/P-39.1
+2. Regulation respecting confidentiality incidents — reachable from the P-39.1 page's "Regulations" link
+3. LCCJTI, CQLR c. C-1.1 (ss. 44–45) — https://www.legisquebec.gouv.qc.ca/fr/document/lc/C-1.1
+4. Charter of the French Language, CQLR c. C-11 (ss. 52, 55) — https://www.legisquebec.gouv.qc.ca/fr/document/lc/C-11
+5. CAI, Lignes directrices 2023-1 (consentement) — https://www.cai.gouv.qc.ca/uploads/pdfs/CAI_Criteres_Validite_Consentement.pdf
+6. CAI sanctions page — https://www.cai.gouv.qc.ca/protection-renseignements-personnels/information-entreprises-privees/sanctions-entreprises-poursuites
+
+**If a section number doesn't match what we claim:** don't just note it — write the correct number in the row, and flag it so `src/balise/registry.py` and `docs/methodology.md` get fixed before Status flips to CLOSED.
+
 The check registry's section references were triangulated from CAI guidance and ≥3 convergent law-firm sources because LegisQuébec and CanLII block automated retrieval. Before Balise output is used with any client, a human must verify each reference against the consolidated statute on LegisQuébec (CQLR c. P-39.1; LCCJTI CQLR c. C-1.1; Charter CQLR c. C-11) and initial the row.
 
 | Check | Claimed reference | Verified against LegisQuébec | Initials / date |
 |---|---|---|---|
-| A1, A2, A9 | Private Sector Act, ss. 8, 8.2 | ☐ | |
-| A3 | s. 3.1 (officer; publication of title + contact) | ☐ | |
-| A4, B5 | s. 3.2 (governance policies; publication) | ☐ | |
-| A5, A6 | s. 8.1 (tracking/profiling; activation means) + s. 9.1 cookie carve-out | ☐ | |
+| A1, A2, A9 | Private Sector Act, ss. 8, 8.2 | ☑ confirmed against official EN text in browser — three-tier disclosure structure (at-collection / if-applicable incl. outside-Québec / on-request), clear-simple-language rule, policy publication + amendment-notice duty. A2 calibration (first two tiers) ratified. | steph / 2026-08-23 |
+| A3 | s. 3.1 (officer; publication of title + contact) | ☑ confirmed — publication duty covers BOTH title and contact information; A3's partial-without-contact scoring is correct | steph / 2026-08-23 |
+| A4, B5 | s. 3.2 (governance policies; publication) | ☑ confirmed against official text (in-session, browser) — duty is to publish detailed information ABOUT the policies, notably covering retention/destruction, lifecycle roles, complaints; full policies need not be public. A4 semantic question tightened accordingly. | steph + Claude / 2026-08-23 |
+| A5, A6 | s. 8.1 (tracking/profiling; activation means) + s. 9.1 cookie carve-out | ☑ confirmed — "must FIRST inform" (prior notice), "means available to activate" (functions start off), profiling definition verbatim; s. 9.1's browser-cookie carve-out sentence verified as claimed. A5's CAI-contested tier stands. | steph / 2026-08-23 |
 | A7 | Charter of the French Language, ss. 52, 55 | ☐ | |
-| A8 | s. 14 (consent request form) | ☐ | |
-| B1 | ss. 3.5–3.8 + Regulation respecting confidentiality incidents (8 register elements, 5-yr retention; "with diligence" standard) | ☐ | |
-| B2 | s. 3.3 (PIA triggers) | ☐ | |
-| B3 | s. 17 (out-of-Quebec communication; adequacy analysis; written agreement) | ☐ | |
+| A8 | s. 14 (consent request form) | ☑ confirmed against official EN text — per-purpose, clear simple language, presented separately when written, assistance on request, time-limited, non-conforming consent without effect; minors: under-14 by parent/tutor, 14+ by minor or parent. Official EN standard is "clear, free and informed" (older "manifest/enlightened" translation never shipped in repo). | steph / 2026-08-23 |
+| B1 | ss. 3.5–3.8 + Regulation respecting confidentiality incidents (8 register elements, 5-yr retention; "with diligence" standard) | ☑ FULLY confirmed against official EN/FR text (Act + Regulation A-2.1, r. 3.1): NO fixed deadline anywhere (steph searched hours/72/months — only "promptly"); register = exactly 8 elements, ≥5-yr retention, kept up to date, covers all incidents ("whether or not" serious); CAI notice = 11 elements, individual notice = 6, public-notice alternative (s. 6). Corrections banked: law-enforcement-only deferral; CAI and individual notices are parallel prompt duties (no CAI confirmation step). Register content regulation-set → re-open gate on regulatory change. | steph / 2026-08-23 |
+| B2 | s. 3.3 (PIA triggers) | ☑ confirmed against official FR + EN text — trigger covers acquire/develop/overhaul of info systems AND electronic service delivery, any PI lifecycle op; officer from outset; proportionality factors verbatim; al. 3 portability-by-design added to B2 intake question | steph / 2026-08-23 |
+| B3 | s. 17 (out-of-Quebec communication; adequacy analysis; written agreement) | ☑ confirmed against official EN text — 4 factors incl. receiving-state legal framework, "adequate protection… generally recognized principles", written agreement; al. 3 explicitly covers entrusting/outsourcing outside Québec (cloud hosting caught by statute text). No adequacy whitelist confirmed by absence. | steph / 2026-08-23 |
 | B4 | s. 18.3 (mandatary contracts) | ☐ | |
 | B6 | LCCJTI, ss. 44–45 (biometrics; 60-day CAI declaration) | ☐ | |
-| B7 | s. 12.1 (automated decisions) | ☐ | |
-| B8 | s. 4.1 (minors under 14) | ☐ | |
-| B9 | s. 27 (portability; collected-not-inferred) | ☐ | |
-| B10 | ss. 12–13 (sensitive information; express consent) | ☐ | |
+| B7 | s. 12.1 (automated decisions) | ☑ confirmed — inform by decision time; on request: PI used, reasons/principal factors/parameters, correction right; observations to personnel able to review. Verbatim match. | steph / 2026-08-23 |
+| B8 | s. 4.1 (minors under 14) | ☑ confirmed against official EN text, read in browser — parental-authority/tutor consent, "clearly for the minor's benefit" exception, and scope is collection FROM the minor directly (forms a child can self-submit), not mere holding of parent-provided data | steph / 2026-08-23 |
+| B9 | s. 27 (portability; collected-not-inferred) | ☑ confirmed — "structured, commonly used technological format", excludes created/inferred info, "serious practical difficulties" carve-out; accommodation duty for handicapped persons noted. | steph / 2026-08-23 |
+| B10 | ss. 12–13 (sensitive information; express consent) | ☑ confirmed — express consent for use (s. 12) AND communication (s. 13); sensitivity by nature OR context (note added to registry); prospection never a consistent purpose (spawned B15). | steph / 2026-08-23 |
 | B11 | CAI guidance only — confirm NO statutory training mandate exists (negative check) | ☐ | |
+| B12 (added at gate) | s. 10 (proportionate security safeguards) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
+| B13 (added at gate) | s. 11 (accuracy for decisions; ≥1-yr keep) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
+| B14 (added at gate) | s. 23 (destruction or anonymization; regulation-grade criteria) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
+| B15 (added at gate) | ss. 12, 22 (prospection: consent required; identify + withdrawal) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
+| B16 (added at gate) | ss. 27–34 (access/rectification: 30-day written reply, deemed refusal, free access, reasoned refusals) | ☑ born-verified — added from official text read in-session. The only hard deadline in the law. | steph / 2026-08-23 |
+| A10 (added at gate) | s. 9 (no refusal of goods/services over non-necessary PI; doubt = non-necessary) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
 
 Also verify at the same sitting:
 

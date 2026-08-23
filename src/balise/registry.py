@@ -88,21 +88,38 @@ CHECKS: tuple[Check, ...] = (
     Check("A9", "A", Domain.TRANSPARENCY, Mode.SEMANTIC, Tier.STATUTE, "s. 8.2",
           "Pratique d'avis de modification de la politique",
           "Policy amendment-notice practice"),
+    Check("A10", "A", Domain.TRANSPARENCY, Mode.SEMANTIC, Tier.STATUTE, "s. 9",
+          "Formulaires : aucun refus de biens ou services pour refus de fournir des RP non nécessaires",
+          "Forms: no refusal of goods or services over declining to provide unnecessary PI",
+          note="Burden is on the enterprise: 'in case of doubt, personal information is "
+               "deemed non-necessary' (s. 9 in fine). Assess required form fields against "
+               "the stated purpose. Added at verification gate 2026-08-23."),
     # ---- Module B: intake --------------------------------------------------
     Check("B1", "B", Domain.INCIDENTS, Mode.INTAKE, Tier.STATUTE,
           "ss. 3.5-3.8 + Règlement sur les incidents",
           "Registre des incidents de confidentialité (8 éléments prescrits, conservation 5 ans) et processus de réponse",
           "Confidentiality-incident register (8 prescribed elements, 5-year retention) and response process",
-          note="Notification standard is 'with diligence' — there is NO 72-hour statutory "
-               "deadline (that figure is GDPR, not Quebec)."),
+          note="Notification standard is 'promptly' / « avec diligence » — there is NO "
+               "72-hour statutory deadline (that figure is GDPR, not Quebec). Individual "
+               "notice may be deferred ONLY while it could hamper an investigation by a "
+               "body legally responsible for preventing/detecting/repressing crime or "
+               "statutory offences — internal or hired investigations do NOT qualify, "
+               "and CAI notification is never deferred (s. 3.5)."),
     Check("B2", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 3.3",
           "EFVP pour tout système d'information acquis, développé ou refondu impliquant des RP",
-          "PIA for any acquired, developed or overhauled information system involving PI"),
+          "PIA for any acquired, developed or overhauled information system involving PI",
+          note="Trigger also covers electronic service delivery systems and any PI "
+               "lifecycle operation (collection through destruction). s. 3.3 al. 3 adds "
+               "portability-by-design: projects must ensure collected computerized PI "
+               "can be output in a structured, commonly used format."),
     Check("B3", "B", Domain.VENDORS_TRANSFERS, Mode.INTAKE, Tier.STATUTE, "s. 17",
           "EFVP et entente écrite pour toute communication hors Québec (incluant chaque SaaS hébergé aux É.-U.)",
           "PIA and written agreement for any communication outside Quebec (including every US-hosted SaaS)",
           note="No adequacy whitelist exists; analysis depth is a proportionality judgment "
-               "(FIRM-level methodology). Empirically the biggest unmet paper obligation."),
+               "(FIRM-level methodology). Empirically the biggest unmet paper obligation. "
+               "Verified 2026-08-23: s. 17 al. 3 explicitly extends the duty to entrusting "
+               "collection/use/keeping to a person outside Québec — cloud hosting is caught "
+               "by the statute's own words."),
     Check("B4", "B", Domain.VENDORS_TRANSFERS, Mode.INTAKE, Tier.STATUTE, "s. 18.3",
           "Contrats écrits avec les mandataires et fournisseurs de services",
           "Written contracts with mandataries and service providers"),
@@ -125,11 +142,40 @@ CHECKS: tuple[Check, ...] = (
           "Data-portability request handling (structured, commonly used technological format)"),
     Check("B10", "B", Domain.SPECIAL_CATEGORIES, Mode.INTAKE, Tier.STATUTE, "ss. 12-13",
           "Renseignements sensibles : consentement exprès pour l'utilisation et la communication",
-          "Sensitive information: express consent for use and communication"),
+          "Sensitive information: express consent for use and communication",
+          note="Sensitivity arises from the information's nature (medical, biometric, "
+               "otherwise intimate) OR from the context of its use or communication "
+               "(s. 12 in fine) — context alone can make ordinary info sensitive."),
     Check("B11", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.CAI, "attente de la CAI (guides)",
           "Formation et sensibilisation du personnel à la protection des RP",
           "Staff privacy training and awareness",
           note="CAI guidance expectation, not an explicit statutory training mandate."),
+    # ---- added at verification gate 2026-08-23 (from official text sweep) ----
+    Check("B12", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 10",
+          "Mesures de sécurité proportionnées (sensibilité, finalité, quantité, répartition, support)",
+          "Security safeguards proportionate to sensitivity, purpose, quantity, distribution, medium"),
+    Check("B13", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 11",
+          "Exactitude et mise à jour des RP utilisés pour une décision; conservation ≥ 1 an après la décision",
+          "Accuracy and currency of PI used to make a decision; keep decision-info ≥ 1 year after"),
+    Check("B14", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 23",
+          "Destruction ou anonymisation des RP lorsque les fins sont accomplies",
+          "Destruction or anonymization of PI once purposes are achieved",
+          note="Anonymization must meet regulation-determined criteria and best practices "
+               "(see Regulation respecting the anonymization of personal information)."),
+    Check("B15", "B", Domain.TRANSPARENCY, Mode.INTAKE, Tier.STATUTE, "ss. 12, 22",
+          "Prospection commerciale : consentement requis (jamais une « fin compatible »); identification et droit de retrait",
+          "Commercial prospection: consent required (never a 'consistent purpose'); self-identification and withdrawal right",
+          note="s. 12 states expressly that commercial or philanthropic prospection may "
+               "not be considered a consistent purpose — marketing reuse always needs "
+               "consent; s. 22 adds identify-yourself and stop-on-withdrawal duties."),
+    Check("B16", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "ss. 27-34",
+          "Traitement des demandes d'accès et de rectification : réponse écrite sous 30 jours, gratuité, refus motivés",
+          "Access/rectification request handling: written reply within 30 days, free access, reasoned refusals",
+          note="The ONE hard statutory deadline in this law: reply promptly and no later "
+               "than 30 days (s. 32); silence = deemed refusal. Requests go to the "
+               "privacy officer; refusals must cite the provision, remedies, and time "
+               "limit (s. 34). The market fears a fake 72-hour rule and misses this "
+               "real 30-day one."),
 )
 
 

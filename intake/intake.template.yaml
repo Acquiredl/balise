@@ -27,11 +27,17 @@ answers:
     details: ""
   B2:
     question_fr: >-
-      Réalisez-vous une ÉFVP pour tout système d'information acquis, développé
-      ou refondu qui implique des renseignements personnels?
+      Réalisez-vous une ÉFVP pour tout projet d'acquisition, de développement
+      ou de refonte de système d'information ou de prestation électronique de
+      services impliquant des renseignements personnels — et ces projets
+      garantissent-ils que les RP recueillis puissent être communiqués dans un
+      format technologique structuré et couramment utilisé (art. 3.3, al. 3)?
     question_en: >-
-      Do you conduct a PIA for any acquired, developed or overhauled
-      information system involving personal information?
+      Do you conduct a PIA for any project to acquire, develop or overhaul an
+      information system or electronic service delivery system involving
+      personal information — and do those projects ensure collected PI can be
+      output in a structured, commonly used technological format (s. 3.3
+      para. 3, portability-by-design)?
     answer: unknown
     details: ""
   B3:
@@ -116,5 +122,55 @@ answers:
     question_en: >-
       Does your staff receive privacy training/awareness? (CAI expectation —
       not an explicit statutory mandate.)
+    answer: unknown
+    details: ""
+  B12:
+    question_fr: >-
+      Avez-vous des mesures de sécurité proportionnées à la sensibilité, à la
+      finalité, à la quantité, à la répartition et au support des RP (art. 10)?
+    question_en: >-
+      Do you have security measures proportionate to the sensitivity, purpose,
+      quantity, distribution and medium of the PI you hold (s. 10)?
+    answer: unknown
+    details: ""
+  B13:
+    question_fr: >-
+      Les RP utilisés pour prendre une décision au sujet d'une personne
+      sont-ils exacts et à jour au moment de la décision, et conservés au
+      moins 1 an après celle-ci (art. 11)?
+    question_en: >-
+      Is PI used to make a decision about a person accurate and up to date at
+      decision time, and kept at least 1 year after the decision (s. 11)?
+    answer: unknown
+    details: ""
+  B14:
+    question_fr: >-
+      Lorsque les fins sont accomplies, détruisez-vous les RP ou les
+      anonymisez-vous selon les critères réglementaires (art. 23)?
+    question_en: >-
+      Once purposes are achieved, do you destroy PI or anonymize it to
+      regulation-grade criteria (s. 23)?
+    answer: unknown
+    details: ""
+  B15:
+    question_fr: >-
+      Vos communications de prospection reposent-elles sur un consentement
+      (la prospection n'est jamais une « fin compatible », art. 12), avec
+      identification de l'entreprise et retrait honoré (art. 22)?
+    question_en: >-
+      Is your marketing/prospection based on consent (prospection is never a
+      'consistent purpose', s. 12), with self-identification and honored
+      withdrawal (s. 22)?
+    answer: unknown
+    details: ""
+  B16:
+    question_fr: >-
+      Traitez-vous les demandes d'accès et de rectification par écrit dans un
+      délai maximal de 30 jours, sans frais d'accès, avec refus motivés
+      indiquant recours et délais (art. 27 à 34)? (Le silence vaut refus.)
+    question_en: >-
+      Do you handle access/rectification requests in writing within 30 days
+      maximum, free of charge, with reasoned refusals citing remedies and
+      deadlines (ss. 27-34)? (Silence is deemed refusal.)
     answer: unknown
     details: ""

@@ -18,7 +18,7 @@ from .external import Finding
 from .fetcher import SiteSnapshot
 from .registry import Status, by_id
 
-SEMANTIC_CHECK_IDS = ("A2", "A4", "A6", "A8", "A9")
+SEMANTIC_CHECK_IDS = ("A2", "A4", "A6", "A8", "A9", "A10")
 
 _SYSTEM = (
     "You are a compliance-readiness analyst for Quebec's Law 25. You receive "
@@ -38,12 +38,22 @@ _QUESTIONS = {
           "consent withdrawal, third-party recipients, and the possibility of "
           "communication outside Quebec (ss. 8, 8.2)?",
     "A4": "Is detailed information about the enterprise's personal-information "
-          "governance policies and practices published (s. 3.2)?",
+          "governance policies and practices published — notably addressing "
+          "retention/destruction rules, lifecycle roles and responsibilities, "
+          "and the complaint-handling process (s. 3.2, incl. 'notamment en ce "
+          "qui concerne le contenu exigé au premier alinéa')? Publication of "
+          "the full internal policies is NOT required — information about "
+          "them, in clear plain terms, suffices.",
     "A6": "Are technologies with identification, location or profiling functions "
           "disclosed, including the means available to activate those functions (s. 8.1)?",
     "A8": "Do forms collecting personal information request consent per purpose, "
           "in clear plain language, presented separately from other terms (s. 14)?",
     "A9": "Does the policy state how amendments are announced (s. 8.2 notice duty)?",
+    "A10": "Do visible forms require personal information beyond what appears "
+           "necessary for their stated purpose (e.g., mandatory phone/birthdate "
+           "fields on a simple contact or checkout form)? s. 9: goods/services "
+           "may not be refused over declining non-necessary PI, and in case of "
+           "doubt the information is deemed non-necessary.",
 }
 
 _VALID_STATUSES = {s.value for s in Status}
