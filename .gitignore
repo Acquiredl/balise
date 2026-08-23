@@ -2,6 +2,9 @@
 balise-out/
 engagement-*/
 mandat-*/
+
+# reference documents (CAI publications) — cited, never redistributed
+.refs/
 intake/*.yaml
 !intake/intake.template.yaml
 
