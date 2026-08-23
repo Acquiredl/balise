@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balise — Préparation à la Loi 25, sans la peur</title>
+<meta name="description" content="Évaluation de préparation à la Loi 25 pour les PME québécoises. Chaque constat montre sa preuve, sa base légale et sa force réelle. Pas de peur, pas de verdict, pas de boîte noire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16232e;
+  --ink-soft:#3d4f5e;
+  --paper:#faf6ef;
+  --paper-deep:#f1ead c;
+  --paper-deep:#f2ecdf;
+  --line:#d8cfbc;
+  --beacon:#c96f1e;
+  --beacon-deep:#a55712;
+  --tide:#1e5f5b;
+  --statute:#1e5f5b;
+  --cai:#8a6a1f;
+  --firm:#7a4a63;
+  --ok:#2e6b46;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);background:var(--paper);
+  line-height:1.6;font-size:17px;
+  background-image:
+    radial-gradient(circle at 15% 8%, rgba(201,111,30,.05), transparent 42%),
+    repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(22,35,46,.025) 47px, rgba(22,35,46,.025) 48px);
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+.en{display:none}
+body.lang-en .fr{display:none}
+body.lang-en .en{display:revert}
+
+/* header */
+header{padding:26px 0;border-bottom:1px solid var(--line)}
+.header-row{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.wordmark{font-family:var(--serif);font-weight:700;font-size:26px;letter-spacing:.5px;display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.mark{width:22px;height:22px;flex:none}
+.lang-toggle{font-family:var(--mono);font-size:13px;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:7px 14px;cursor:pointer;letter-spacing:1px}
+.lang-toggle:hover{background:var(--ink);color:var(--paper)}
+
+/* hero */
+.hero{padding:88px 0 72px;position:relative;overflow:hidden}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,6vw,64px);line-height:1.08;max-width:15ch}
+.hero h1 em{font-style:italic;color:var(--beacon)}
+.hero .lede{margin-top:26px;font-size:19px;color:var(--ink-soft);max-width:56ch}
+.hero-actions{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:16px;padding:14px 26px;border:2px solid var(--ink);transition:transform .15s ease, box-shadow .15s ease}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--beacon)}
+.btn-ghost{color:var(--ink);background:transparent}
+.btn-ghost:hover{background:var(--paper-deep)}
+.hero-note{font-size:14px;color:var(--ink-soft);margin-top:14px;font-style:italic}
+.beacon-line{position:absolute;right:-40px;top:20px;width:340px;height:340px;opacity:.9;pointer-events:none}
+@media(max-width:860px){.beacon-line{display:none}}
+
+/* section scaffolding */
+section{padding:64px 0;border-top:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--beacon-deep);margin-bottom:14px}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.6vw,38px);line-height:1.15;max-width:24ch}
+.section-lede{margin-top:16px;color:var(--ink-soft);max-width:62ch}
+
+/* two layers */
+.layers{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:40px}
+@media(max-width:760px){.layers{grid-template-columns:1fr}}
+.layer{border:1.5px solid var(--ink);padding:28px;background:var(--paper)}
+.layer.dim{border-style:dashed;border-color:var(--ink-soft);color:var(--ink-soft)}
+.layer h3{font-family:var(--serif);font-size:21px;margin-bottom:6px}
+.layer .tag{font-family:var(--mono);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;display:inline-block;margin-bottom:14px}
+.layer ul{list-style:none;margin-top:10px}
+.layer li{padding:7px 0 7px 26px;position:relative;border-top:1px dotted var(--line);font-size:15.5px}
+.layer li:first-child{border-top:none}
+.layer li::before{content:"◆";position:absolute;left:2px;top:7px;font-size:11px;color:var(--beacon)}
+.layer.dim li::before{content:"○";color:var(--ink-soft)}
+
+/* sample finding */
+.constat{margin-top:42px;border:2px solid var(--ink);background:#fffdf8;box-shadow:8px 8px 0 var(--paper-deep);max-width:720px}
+.constat-head{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:2px solid var(--ink);font-family:var(--mono);font-size:13px;letter-spacing:1px}
+.constat-body{padding:22px;font-size:15.5px}
+.constat-row{display:grid;grid-template-columns:150px 1fr;gap:10px;padding:9px 0;border-top:1px dotted var(--line)}
+.constat-row:first-child{border-top:none}
+.constat-row .k{font-family:var(--mono);font-size:12.5px;letter-spacing:.5px;color:var(--ink-soft);text-transform:uppercase;padding-top:2px}
+@media(max-width:560px){.constat-row{grid-template-columns:1fr}}
+.chip{font-family:var(--mono);font-size:12px;letter-spacing:1px;padding:3px 10px;border:1.5px solid currentColor;display:inline-block}
+.chip.statute{color:var(--statute)}
+.chip.cai{color:var(--cai)}
+.chip.firm{color:var(--firm)}
+.status-met{color:var(--ok);font-weight:600}
+.status-partial{color:var(--cai);font-weight:600}
+
+/* rules */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--ink);border:2px solid var(--ink);margin-top:40px}
+@media(max-width:820px){.rules{grid-template-columns:1fr}}
+.rule{background:var(--paper);padding:30px 26px}
+.rule .num{font-family:var(--serif);font-style:italic;font-size:44px;color:var(--beacon);line-height:1}
+.rule h3{font-family:var(--serif);font-size:20px;margin:12px 0 8px}
+.rule p{font-size:15px;color:var(--ink-soft)}
+
+/* myth strip */
+.myth{background:var(--ink);color:var(--paper);padding:56px 0;border-top:none}
+.myth .kicker{color:var(--beacon)}
+.myth-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:26px}
+@media(max-width:760px){.myth-grid{grid-template-columns:1fr}}
+.myth h3{font-family:var(--serif);font-size:24px;line-height:1.25}
+.myth .dead{text-decoration:line-through;text-decoration-color:var(--beacon);text-decoration-thickness:3px;opacity:.75}
+.myth p{margin-top:10px;font-size:15.5px;color:#c8d2da}
+.myth .big{font-family:var(--serif);font-size:56px;color:var(--beacon);line-height:1}
+
+/* how */
+.steps{counter-reset:step;margin-top:36px;max-width:760px}
+.step{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--line)}
+.step::before{counter-increment:step;content:counter(step,decimal-leading-zero);font-family:var(--serif);font-style:italic;font-size:34px;color:var(--beacon)}
+.step h3{font-family:var(--serif);font-size:19px;margin-bottom:4px}
+.step p{font-size:15.5px;color:var(--ink-soft)}
+
+/* MSP band */
+.msp{background:var(--paper-deep)}
+.msp-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+@media(max-width:820px){.msp-inner{grid-template-columns:1fr}}
+.msp p{margin-top:14px;color:var(--ink-soft);max-width:56ch}
+
+/* honesty */
+.honest ul{margin-top:24px;max-width:66ch;list-style:none}
+.honest li{padding:10px 0 10px 30px;position:relative;border-top:1px dotted var(--line);color:var(--ink-soft);font-size:15.5px}
+.honest li::before{content:"—";position:absolute;left:0;color:var(--beacon)}
+.legal-note{margin-top:30px;border-left:3px solid var(--beacon);padding:14px 20px;background:#fffdf8;font-size:15px;max-width:66ch}
+
+/* CTA */
+.cta{text-align:left}
+.cta .btn-primary{font-size:18px}
+.cta-sub{margin-top:16px;font-size:15px;color:var(--ink-soft)}
+footer{border-top:2px solid var(--ink);padding:30px 0 50px;font-size:14px;color:var(--ink-soft)}
+.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--ink)}
+
+/* reveal */
+@media(prefers-reduced-motion:no-preference){
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .7s ease forwards}
+  .reveal.d1{animation-delay:.08s}.reveal.d2{animation-delay:.18s}.reveal.d3{animation-delay:.3s}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <a class="wordmark" href="#top">
+      <svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 L15 9 H9 Z" fill="#c96f1e"/><rect x="10.8" y="9" width="2.4" height="9" fill="#16232e"/><path d="M5 21 Q12 17.5 19 21" stroke="#1e5f5b" stroke-width="1.8" fill="none"/></svg>
+      Balise
+    </a>
+    <button class="lang-toggle" onclick="toggleLang()" aria-label="Switch language"><span class="fr">EN</span><span class="en">FR</span></button>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap">
+  <div class="hero">
+    <svg class="beacon-line" viewBox="0 0 300 300" aria-hidden="true">
+      <circle cx="150" cy="150" r="140" fill="none" stroke="#d8cfbc" stroke-width="1"/>
+      <circle cx="150" cy="150" r="100" fill="none" stroke="#d8cfbc" stroke-width="1" stroke-dasharray="4 6"/>
+      <circle cx="150" cy="150" r="60" fill="none" stroke="#c96f1e" stroke-width="1.2" stroke-dasharray="2 5"/>
+      <path d="M150 118 L162 146 H138 Z" fill="#c96f1e"/><rect x="146" y="146" width="8" height="38" fill="#16232e"/>
+    </svg>
+    <h1 class="reveal">
+      <span class="fr">La Loi 25, <em>sans la peur.</em></span>
+      <span class="en">Law 25, <em>without the fear.</em></span>
+    </h1>
+    <p class="lede reveal d1">
+      <span class="fr">Balise évalue la préparation de votre PME aux obligations de la Loi 25 et vous remet un rapport où chaque constat montre sa preuve, sa base légale et la force réelle de cette base. Pas de pourcentage magique. Pas de menace d'amende. Juste l'état des lieux, vérifiable ligne par ligne.</span>
+      <span class="en">Balise assesses your SMB's readiness against Quebec's Law 25 and hands you a report where every finding shows its evidence, its legal basis, and how strong that basis actually is. No magic percentage. No fine-threat theatre. Just where you stand, verifiable line by line.</span>
+    </p>
+    <div class="hero-actions reveal d2">
+      <a class="btn btn-primary" href="#contact"><span class="fr">Demander une évaluation</span><span class="en">Request an assessment</span></a>
+      <a class="btn btn-ghost" href="https://github.com/Acquiredl/balise" rel="noopener"><span class="fr">Voir la méthode (code ouvert)</span><span class="en">See the method (open source)</span></a>
+    </div>
+    <p class="hero-note reveal d3">
+      <span class="fr">Outil d'autoévaluation de préparation. Ce n'est pas un avis juridique, et il ne rend jamais de verdict de conformité.</span>
+      <span class="en">A readiness self-assessment tool. Not legal advice, and it never renders a compliance verdict.</span>
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="kicker"><span class="fr">Ce que les scanners manquent</span><span class="en">What scanners miss</span></p>
+    <h2><span class="fr">L'essentiel de la Loi 25 n'est pas sur votre site web.</span><span class="en">Most of Law 25 isn't on your website.</span></h2>
+    <p class="section-lede">
+      <span class="fr">Les outils automatisés vérifient la surface : une bannière de témoins, une politique affichée. Or la majorité des obligations vivent dans vos opérations. Balise évalue les deux couches.</span>
+      <span class="en">Automated tools check the surface: a cookie banner, a posted policy. But most obligations live inside your operations. Balise assesses both layers.</span>
+    </p>
+    <div class="layers">
+      <div class="layer dim">
+        <h3><span class="fr">La surface</span><span class="en">The surface</span></h3>
+        <span class="tag"><span class="fr">ce que tout le monde vérifie</span><span class="en">what everyone checks</span></span>
+        <ul>
+          <li><span class="fr">Bannière de témoins</span><span class="en">Cookie banner</span></li>
+          <li><span class="fr">Politique de confidentialité affichée</span><span class="en">Privacy policy posted</span></li>
+          <li><span class="fr">Responsable publié</span><span class="en">Officer published</span></li>
+        </ul>
+      </div>
+      <div class="layer">
+        <h3><span class="fr">L'organisation</span><span class="en">The organization</span></h3>
+        <span class="tag"><span class="fr">ce que Balise évalue aussi</span><span class="en">what Balise also assesses</span></span>
+        <ul>
+          <li><span class="fr">Registre des incidents de confidentialité</span><span class="en">Confidentiality-incident register</span></li>
+          <li><span class="fr">ÉFVP pour chaque fournisseur hébergé hors Québec</span><span class="en">PIA for every vendor hosted outside Quebec</span></li>
+          <li><span class="fr">Contrats de mandataires et ententes de transfert</span><span class="en">Processor contracts and transfer agreements</span></li>
+          <li><span class="fr">Biométrie (horodateurs, caméras) — le seul domaine où le régulateur sévit déjà</span><span class="en">Biometrics (time-clocks, cameras) — the one area the regulator already enforces</span></li>
+          <li><span class="fr">Demandes d'accès : le vrai délai de 30 jours</span><span class="en">Access requests: the real 30-day deadline</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker"><span class="fr">Un constat, pas une boîte noire</span><span class="en">A finding, not a black box</span></p>
+    <h2><span class="fr">Voici à quoi ressemble un constat Balise.</span><span class="en">This is what a Balise finding looks like.</span></h2>
+    <div class="constat">
+      <div class="constat-head">
+        <span>A3 — <span class="fr">Responsable publié</span><span class="en">Officer published</span></span>
+        <span class="status-partial"><span class="fr">PARTIEL</span><span class="en">PARTIAL</span></span>
+      </div>
+      <div class="constat-body">
+        <div class="constat-row">
+          <span class="k"><span class="fr">Base légale</span><span class="en">Legal basis</span></span>
+          <span>art. 3.1 &nbsp;<span class="chip statute"><span class="fr">LOI</span><span class="en">STATUTE</span></span></span>
+        </div>
+        <div class="constat-row">
+          <span class="k"><span class="fr">Éléments observés</span><span class="en">Evidence</span></span>
+          <span class="fr">Le responsable est nommé sur la page « À propos », mais aucun moyen de le joindre n'apparaît à proximité.</span>
+          <span class="en">The officer is named on the About page, but no contact means appears nearby.</span>
+        </div>
+        <div class="constat-row">
+          <span class="k"><span class="fr">Raisonnement</span><span class="en">Reasoning</span></span>
+          <span class="fr">L'article 3.1 exige la publication du titre <em>et</em> des coordonnées. Le titre y est; les coordonnées manquent.</span>
+          <span class="en">Section 3.1 requires publishing the title <em>and</em> the contact information. The title is there; the contact means is missing.</span>
+        </div>
+      </div>
+    </div>
+    <p class="section-lede" style="margin-top:26px">
+      <span class="fr">Trois niveaux d'autorité : <span class="chip statute">LOI</span> texte légal explicite, <span class="chip cai">CAI</span> attente du régulateur, <span class="chip firm">INTERPRÉTATION</span> lecture convergente des cabinets. Les points contestés sont rapportés à leur juste force, jamais gonflés.</span>
+      <span class="en">Three authority tiers: <span class="chip statute">STATUTE</span> explicit legal text, <span class="chip cai">CAI</span> regulator expectation, <span class="chip firm">FIRM</span> convergent interpretation. Contested points are reported at their true strength, never inflated.</span>
+    </p>
+  </div>
+</section>
+
+<section class="myth">
+  <div class="wrap">
+    <p class="kicker"><span class="fr">Un exemple de notre honnêteté</span><span class="en">An example of our honesty</span></p>
+    <div class="myth-grid">
+      <div>
+        <h3 class="dead"><span class="fr">« Vous avez 72 heures pour déclarer une fuite. »</span><span class="en">"You have 72 hours to report a breach."</span></h3>
+        <p><span class="fr">Ce délai n'existe pas dans la loi québécoise. C'est le RGPD européen. La norme réelle : agir « avec diligence ». On l'a vérifié dans le texte officiel, article par article.</span><span class="en">That deadline doesn't exist in Quebec law. It's the European GDPR. The real standard: act "promptly." We verified it in the official text, section by section.</span></p>
+      </div>
+      <div>
+        <p class="big">30 <span style="font-size:22px"><span class="fr">jours</span><span class="en">days</span></span></p>
+        <p><span class="fr">Le vrai délai ferme de la Loi 25 : répondre par écrit à une demande d'accès. Le silence vaut refus. Presque personne n'en parle. Nous, oui.</span><span class="en">The one hard deadline Law 25 actually has: replying in writing to an access request. Silence counts as refusal. Almost nobody talks about it. We do.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker"><span class="fr">Comment ça marche</span><span class="en">How it works</span></p>
+    <h2><span class="fr">Trois étapes, un rapport bilingue.</span><span class="en">Three steps, one bilingual report.</span></h2>
+    <div class="steps">
+      <div class="step"><div>
+        <h3><span class="fr">Analyse externe</span><span class="en">External scan</span></h3>
+        <p><span class="fr">On examine votre site public : politique, responsable, traceurs, exposition linguistique. Rien à installer.</span><span class="en">We examine your public site: policy, officer, trackers, language exposure. Nothing to install.</span></p>
+      </div></div>
+      <div class="step"><div>
+        <h3><span class="fr">Questionnaire organisationnel</span><span class="en">Organizational questionnaire</span></h3>
+        <p><span class="fr">Une rencontre guidée sur vos pratiques : incidents, fournisseurs, ÉFVP, biométrie, demandes d'accès. Vos réponses restent chez vous.</span><span class="en">A guided walkthrough of your practices: incidents, vendors, PIAs, biometrics, access requests. Your answers stay with you.</span></p>
+      </div></div>
+      <div class="step"><div>
+        <h3><span class="fr">Rapport et piste de vérification</span><span class="en">Report and audit trail</span></h3>
+        <p><span class="fr">Posture par domaine, constats priorisés, et l'annexe complète du raisonnement — utile aussi pour répondre au questionnaire de votre assureur cyber.</span><span class="en">Posture by domain, prioritized findings, and the full reasoning annex — also useful for answering your cyber insurer's questionnaire.</span></p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="msp">
+  <div class="wrap msp-inner">
+    <div>
+      <p class="kicker"><span class="fr">Fournisseurs TI et agences</span><span class="en">MSPs and agencies</span></p>
+      <h2><span class="fr">Vous servez des PME? Offrez la couche que vos outils ne couvrent pas.</span><span class="en">You serve SMBs? Offer the layer your tools don't cover.</span></h2>
+      <p><span class="fr">Vous gérez déjà leurs TI ou leur site. Balise ajoute l'évaluation organisationnelle, sous votre marque ou en référence, avec un rapport défendable que vos clients peuvent montrer à leur assureur.</span><span class="en">You already run their IT or their website. Balise adds the organizational assessment, white-labeled or by referral, with a defensible report your clients can show their insurer.</span></p>
+    </div>
+    <div>
+      <a class="btn btn-primary" href="#contact"><span class="fr">Parlons partenariat</span><span class="en">Let's talk partnership</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="honest">
+  <div class="wrap">
+    <p class="kicker"><span class="fr">Limites assumées</span><span class="en">Honest limitations</span></p>
+    <h2><span class="fr">Ce que Balise ne fait pas.</span><span class="en">What Balise doesn't do.</span></h2>
+    <ul>
+      <li><span class="fr">Pas de verdict de conformité ni de note en pourcentage : un chiffre unique serait un verdict juridique déguisé.</span><span class="en">No compliance verdict and no percentage score: a single number would be a legal verdict in disguise.</span></li>
+      <li><span class="fr">L'analyse des traceurs est statique; le comportement à l'exécution est signalé comme à confirmer, pas deviné.</span><span class="en">Tracker analysis is static; runtime behavior is flagged as to-confirm, not guessed.</span></li>
+      <li><span class="fr">Vos réponses au questionnaire sont autodéclarées et consignées comme telles.</span><span class="en">Your questionnaire answers are self-reported and recorded as such.</span></li>
+    </ul>
+    <div class="legal-note">
+      <span class="fr"><strong>Avis</strong> — Balise est un outil d'autoévaluation de préparation. Il ne constitue pas un avis juridique et ne remplace pas la consultation d'un professionnel du droit.</span>
+      <span class="en"><strong>Notice</strong> — Balise is a readiness self-assessment tool. It is not legal advice and does not replace consulting a legal professional.</span>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap">
+    <p class="kicker"><span class="fr">Premier arrivés, premiers servis</span><span class="en">First come, first served</span></p>
+    <h2><span class="fr">On prend un petit nombre de premières évaluations.</span><span class="en">We're taking a small number of first assessments.</span></h2>
+    <p class="section-lede">
+      <span class="fr">Écrivez-nous en une ligne : votre entreprise, votre site web, et ce qui vous amène. On vous répond avec les prochaines étapes, sans pression et sans infolettre surprise.</span>
+      <span class="en">Write us one line: your company, your website, and what brings you. We reply with next steps, no pressure and no surprise newsletter.</span>
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:CONTACT-A-DEFINIR@example.com"><span class="fr">Écrivez-nous</span><span class="en">Write to us</span></a>
+      <a class="btn btn-ghost" href="https://github.com/Acquiredl/balise" rel="noopener">GitHub</a>
+    </div>
+    <p class="cta-sub"><span class="fr">La méthode est publique et le code est ouvert. Vous pouvez lire exactement comment on évalue avant de nous écrire.</span><span class="en">The method is public and the code is open. You can read exactly how we assess before you write.</span></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>Balise — <span class="fr">évaluation de préparation à la Loi 25</span><span class="en">Law 25 readiness assessment</span></span>
+    <span><a href="https://github.com/Acquiredl/balise" rel="noopener">github.com/Acquiredl/balise</a> · MIT</span>
+  </div>
+</footer>
+
+<script>
+function toggleLang(){
+  document.body.classList.toggle('lang-en');
+  const en = document.body.classList.contains('lang-en');
+  document.documentElement.lang = en ? 'en' : 'fr';
+  try{localStorage.setItem('balise-lang', en ? 'en' : 'fr')}catch(e){}
+}
+try{
+  if(localStorage.getItem('balise-lang') === 'en'){toggleLang()}
+  else if(!localStorage.getItem('balise-lang') && navigator.language && !navigator.language.startsWith('fr')){toggleLang()}
+}catch(e){}
+</script>
+</body>
+</html>
