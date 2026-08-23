@@ -55,13 +55,24 @@ CHECKS: tuple[Check, ...] = (
     # ---- Module A: external scan -------------------------------------------
     Check("A1", "A", Domain.TRANSPARENCY, Mode.DETERMINISTIC, Tier.STATUTE, "s. 8.2",
           "Politique de confidentialité publiée sur le site web",
-          "Privacy policy published on the website"),
+          "Privacy policy published on the website",
+          note="Trigger is conditional: applies when PI is collected BY TECHNOLOGICAL "
+               "MEANS (website, email, app) — CAI policy guide p. 2. Statute also "
+               "requires DIFFUSION to reach the persons concerned, which a website scan "
+               "cannot observe — reported as a scan limitation."),
     Check("A2", "A", Domain.TRANSPARENCY, Mode.SEMANTIC, Tier.STATUTE, "ss. 8, 8.2 + guide CAI",
           "Politique en termes simples et clairs, couvrant fins, droits, tiers et communication hors Québec",
-          "Policy in clear and plain language, covering purposes, rights, third parties and communication outside Quebec"),
+          "Policy in clear and plain language, covering purposes, rights, third parties and communication outside Quebec",
+          note="Content beyond s. 8's own disclosure list is CAI recommendation, not "
+               "statute: the CAI states no private-sector content regulation exists "
+               "(policy guide p. 3). Semantic rubric mirrors the guide's [must]/[may] "
+               "structure, incl. its anti-conflation rule: ToS and privacy policy must "
+               "not be merged (guide s. 1.2)."),
     Check("A3", "A", Domain.GOVERNANCE, Mode.DETERMINISTIC, Tier.STATUTE, "s. 3.1",
           "Titre et coordonnées du responsable de la protection des renseignements personnels publiés",
-          "Privacy officer title and contact information published"),
+          "Privacy officer title and contact information published",
+          note="TITLE + contact are mandatory; the officer's NAME is optional per the "
+               "CAI policy guide (s. 2.5) — never penalize its absence."),
     Check("A4", "A", Domain.GOVERNANCE, Mode.SEMANTIC, Tier.STATUTE, "s. 3.2",
           "Information détaillée sur les politiques de gouvernance publiée",
           "Detailed information about governance policies published"),
@@ -70,8 +81,11 @@ CHECKS: tuple[Check, ...] = (
           "Témoins non essentiels inactifs avant consentement; bannière avec refus accessible",
           "Non-essential trackers inactive before consent; banner with accessible refusal",
           contested=True,
-          note="Opt-in rests on CAI guidance; s. 9.1 excludes browser cookies from "
-               "privacy-by-default. Reported as regulator expectation, not settled statute."),
+          note="The CAI drafts off-by-default in MANDATORY language (Guidelines 2023-1 "
+               "s. B.4: 'doivent être désactivées par défaut') and applies it to "
+               "profiling cookies (Ex. B-b) — the CAI does not hedge. The contest is "
+               "between the CAI's reading and the statutory browser-cookie carve-out "
+               "(s. 9.1); the Guidelines themselves state they lack force of law."),
     Check("A6", "A", Domain.TRANSPARENCY, Mode.SEMANTIC, Tier.STATUTE, "s. 8.1",
           "Technologies de repérage, localisation ou profilage divulguées, avec moyens d'activation",
           "Tracking, locating or profiling technology disclosed, with means of activation"),
@@ -88,10 +102,16 @@ CHECKS: tuple[Check, ...] = (
                "used in relations with persons outside Québec."),
     Check("A8", "A", Domain.TRANSPARENCY, Mode.SEMANTIC, Tier.STATUTE, "s. 14",
           "Formulaires : consentement par finalité, en termes clairs, demandé distinctement",
-          "Forms: purpose-granular consent, in clear language, requested separately"),
+          "Forms: purpose-granular consent, in clear language, requested separately",
+          note="CAI Guidelines 2023-1 define EIGHT validity criteria: manifeste, libre, "
+               "éclairé, spécifique, granulaire, compréhensible, temporaire, DISTINCT — "
+               "violating any one voids the consent. 'Temporaire' requires the duration "
+               "be delimited IN ADVANCE (by deadline or event, Guidelines s. 7.2)."),
     Check("A9", "A", Domain.TRANSPARENCY, Mode.SEMANTIC, Tier.STATUTE, "s. 8.2",
           "Pratique d'avis de modification de la politique",
-          "Policy amendment-notice practice"),
+          "Policy amendment-notice practice",
+          note="Statute-only sourcing: no CAI guide restates the amendment-notice duty "
+               "(the policy guide only recommends periodic re-evaluation)."),
     Check("A10", "A", Domain.TRANSPARENCY, Mode.SEMANTIC, Tier.STATUTE, "s. 9",
           "Formulaires : aucun refus de biens ou services pour refus de fournir des RP non nécessaires",
           "Forms: no refusal of goods or services over declining to provide unnecessary PI",
@@ -108,14 +128,21 @@ CHECKS: tuple[Check, ...] = (
                "notice may be deferred ONLY while it could hamper an investigation by a "
                "body legally responsible for preventing/detecting/repressing crime or "
                "statutory offences — internal or hired investigations do NOT qualify, "
-               "and CAI notification is never deferred (s. 3.5)."),
+               "and CAI notification is never deferred (s. 3.5). CAI expectation "
+               "(prevention checklist p. 8): an incident-MANAGEMENT policy/procedures "
+               "(detect, record, report, respond) as a governance artifact distinct "
+               "from the register itself."),
     Check("B2", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 3.3",
           "EFVP pour tout système d'information acquis, développé ou refondu impliquant des RP",
           "PIA for any acquired, developed or overhauled information system involving PI",
           note="Trigger also covers electronic service delivery systems and any PI "
                "lifecycle operation (collection through destruction). s. 3.3 al. 3 adds "
                "portability-by-design: projects must ensure collected computerized PI "
-               "can be output in a structured, commonly used format."),
+               "can be output in a structured, commonly used format (statute-only — the "
+               "CAI EFVP guide is silent on this prong). Client pointer: CAI EFVP guide "
+               "v3.1 (avril 2024) + the CAI's modele generique de rapport d'EFVP; the "
+               "guide names biometric, AI, video-surveillance systems, member zones, "
+               "mobile apps as s. 3.3 triggers (s. 7.2)."),
     Check("B3", "B", Domain.VENDORS_TRANSFERS, Mode.INTAKE, Tier.STATUTE, "s. 17",
           "EFVP et entente écrite pour toute communication hors Québec (incluant chaque SaaS hébergé aux É.-U.)",
           "PIA and written agreement for any communication outside Quebec (including every US-hosted SaaS)",
@@ -123,7 +150,10 @@ CHECKS: tuple[Check, ...] = (
                "(FIRM-level methodology). Empirically the biggest unmet paper obligation. "
                "Verified 2026-08-23: s. 17 al. 3 explicitly extends the duty to entrusting "
                "collection/use/keeping to a person outside Québec — cloud hosting is caught "
-               "by the statute's own words."),
+               "by the statute's own words. Cite CAI EFVP guide s. 7.1 (4 factors, 11 "
+               "recognized principles as the adequacy rubric, refuse-if-inadequate) — NOT "
+               "the 2015 infonuagique fiche (outdated 'equivalent' standard, marked en "
+               "cours de révision)."),
     Check("B4", "B", Domain.VENDORS_TRANSFERS, Mode.INTAKE, Tier.STATUTE, "s. 18.3",
           "Contrats écrits avec les mandataires et fournisseurs de services",
           "Written contracts with mandataries and service providers",
@@ -142,7 +172,12 @@ CHECKS: tuple[Check, ...] = (
                "cease/destroy orders). Highest-yield intake question. Verified 2026-08-23: "
                "s. 44 also requires prior CAI disclosure of the verification PRACTICE "
                "itself (not just the s. 45 database), strict minimization, no secondary "
-               "use, and destruction of records as soon as the purpose is met."),
+               "use, and destruction of records as soon as the purpose is met. CAI "
+               "biometrics guide adds: a no-pressure ALTERNATIVE means on refusal is "
+               "mandatory; no collection a l'insu; journaling (LCCJTI 41 al. 2) with "
+               "log review; prefer irreversible template over raw image; the guide's "
+               "11-item consent-disclosure list + the CAI's model consent form are "
+               "the client pointers."),
     Check("B7", "B", Domain.SPECIAL_CATEGORIES, Mode.INTAKE, Tier.STATUTE, "s. 12.1",
           "Décisions fondées exclusivement sur un traitement automatisé : information et droit de faire des observations",
           "Decisions based exclusively on automated processing: disclosure and right to submit observations"),
@@ -161,7 +196,9 @@ CHECKS: tuple[Check, ...] = (
     Check("B11", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.CAI, "attente de la CAI (guides)",
           "Formation et sensibilisation du personnel à la protection des RP",
           "Staff privacy training and awareness",
-          note="CAI guidance expectation, not an explicit statutory training mandate."),
+          note="Not a freestanding statutory mandate; the CAI frames training as the "
+               "expected way to IMPLEMENT the s. 3.2 governance obligation (prevention "
+               "checklist p. 6 nests it under that duty as an example)."),
     # ---- added at verification gate 2026-08-23 (from official text sweep) ----
     Check("B12", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 10",
           "Mesures de sécurité proportionnées (sensibilité, finalité, quantité, répartition, support)",
@@ -179,7 +216,9 @@ CHECKS: tuple[Check, ...] = (
           "Commercial prospection: consent required (never a 'consistent purpose'); self-identification and withdrawal right",
           note="s. 12 states expressly that commercial or philanthropic prospection may "
                "not be considered a consistent purpose — marketing reuse always needs "
-               "consent; s. 22 adds identify-yourself and stop-on-withdrawal duties."),
+               "consent; s. 22 adds identify-yourself and stop-on-withdrawal duties. "
+               "Statute-only sourcing: no current CAI guide addresses prospection "
+               "(the 2013 profilage fiche predates these provisions)."),
     Check("B16", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "ss. 27-34",
           "Traitement des demandes d'accès et de rectification : réponse écrite sous 30 jours, gratuité, refus motivés",
           "Access/rectification request handling: written reply within 30 days, free access, reasoned refusals",

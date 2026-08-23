@@ -33,10 +33,18 @@ _SYSTEM = (
 )
 
 _QUESTIONS = {
-    "A2": "Is the privacy policy written in clear and plain language, and does it "
-          "cover: purposes of collection, rights of access/rectification and "
-          "consent withdrawal, third-party recipients, and the possibility of "
-          "communication outside Quebec (ss. 8, 8.2)?",
+    "A2": "Assess the privacy policy against the CAI's own rubric (guide, Dec 2023). "
+          "MUST elements (statutory, ss. 8, 8.2): clear and plain language; the "
+          "technological means of collection (incl. cookies); the PI collected and "
+          "the purposes; rights of access/rectification and consent withdrawal plus "
+          "the complaint process; categories of internal personnel with access; for "
+          "third-party transmissions the recipients/categories and purposes; the "
+          "possibility of communication outside Quebec; means to refuse certain "
+          "collection and consequences; effective/updated dates. MAY elements (CAI "
+          "recommendation only — absence is a suggestion, not a gap): security "
+          "measures description, officer's name, technological rights-exercise "
+          "means. Also check the anti-conflation rule: the policy must not be "
+          "merged into the terms of service (linking is fine, fusion is not).",
     "A4": "Is detailed information about the enterprise's personal-information "
           "governance policies and practices published — notably addressing "
           "retention/destruction rules, lifecycle roles and responsibilities, "
@@ -47,7 +55,11 @@ _QUESTIONS = {
     "A6": "Are technologies with identification, location or profiling functions "
           "disclosed, including the means available to activate those functions (s. 8.1)?",
     "A8": "Do forms collecting personal information request consent per purpose, "
-          "in clear plain language, presented separately from other terms (s. 14)?",
+          "in clear plain language, presented separately from other terms (s. 14)? "
+          "The CAI's 8 validity criteria (Guidelines 2023-1): manifeste, libre, "
+          "eclaire, specifique, granulaire, comprehensible, temporaire (duration "
+          "delimited in advance), distinct (separate from ToS/policy/signatures) — "
+          "violating any one voids the consent.",
     "A9": "Does the policy state how amendments are announced (s. 8.2 notice duty)?",
     "A10": "Do visible forms require personal information beyond what appears "
            "necessary for their stated purpose (e.g., mandatory phone/birthdate "
