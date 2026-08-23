@@ -51,11 +51,16 @@ answers:
     details: ""
   B4:
     question_fr: >-
-      Vos contrats avec mandataires et fournisseurs contiennent-ils des clauses
-      de confidentialité et de notification d'incident?
+      Vos contrats avec mandataires et fournisseurs sont-ils écrits et
+      prévoient-ils : mesures de confidentialité, usage limité au mandat,
+      aucune conservation après l'échéance, notification sans délai des
+      violations (même tentées) au responsable, et droit de vérification
+      (art. 18.3)?
     question_en: >-
-      Do your mandatary/vendor contracts contain confidentiality and
-      incident-notification clauses?
+      Are your mandatary/vendor contracts in writing and do they provide:
+      confidentiality measures, use limited to the mandate, no retention
+      after expiry, without-delay notification of violations (even attempted)
+      to your privacy officer, and verification rights (s. 18.3)?
     answer: unknown
     details: ""
   B5:
@@ -70,12 +75,17 @@ answers:
   B6:
     question_fr: >-
       Utilisez-vous des systèmes biométriques (horodateurs à empreinte,
-      reconnaissance faciale)? Si oui: consentement exprès obtenu et
-      déclaration à la CAI 60 jours avant la mise en service?
+      reconnaissance faciale)? Si oui: consentement exprès obtenu, la
+      pratique de vérification elle-même divulguée à la CAI, banque de
+      données déclarée 60 jours avant la mise en service, minimisation
+      stricte, et destruction des enregistrements dès que la fin est
+      accomplie (LCCJTI, art. 44-45)?
     question_en: >-
       Do you use biometric systems (fingerprint time-clocks, facial
-      recognition)? If so: express consent obtained and CAI declaration
-      filed 60 days before service?
+      recognition)? If so: express consent obtained, the verification
+      practice itself disclosed to the CAI, the database declared 60 days
+      before service, strict minimization, and records destroyed as soon as
+      the purpose is met (LCCJTI, ss. 44-45)?
     answer: unknown
     details: ""
   B7:

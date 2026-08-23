@@ -80,8 +80,12 @@ CHECKS: tuple[Check, ...] = (
           "Version française du site, de la politique et des conditions (français d'abord pour les contrats d'adhésion)",
           "French version of site, policy and terms (French-first for adhesion contracts)",
           contested=True,
-          note="Policies-in-scope of s. 52 is convergent firm interpretation. Dual exposure: "
-               "Law 25 plain-language + OQLF ($3k-$30k per offence)."),
+          note="Policies-in-scope of s. 52 is convergent firm interpretation ('documents of "
+               "the same nature', 'regardless of the medium'). Dual exposure: Law 25 "
+               "plain-language + OQLF ($3k-$30k per offence). Verified 2026-08-23: other "
+               "languages allowed if the French version is available on terms at least as "
+               "favourable; s. 55 French-first for adhesion contracts exempts contracts "
+               "used in relations with persons outside Québec."),
     Check("A8", "A", Domain.TRANSPARENCY, Mode.SEMANTIC, Tier.STATUTE, "s. 14",
           "Formulaires : consentement par finalité, en termes clairs, demandé distinctement",
           "Forms: purpose-granular consent, in clear language, requested separately"),
@@ -122,7 +126,12 @@ CHECKS: tuple[Check, ...] = (
                "by the statute's own words."),
     Check("B4", "B", Domain.VENDORS_TRANSFERS, Mode.INTAKE, Tier.STATUTE, "s. 18.3",
           "Contrats écrits avec les mandataires et fournisseurs de services",
-          "Written contracts with mandataries and service providers"),
+          "Written contracts with mandataries and service providers",
+          note="Verified 2026-08-23: contract must also bar retention after expiry; "
+               "processor must notify the privacy officer without delay of violations "
+               "AND attempted violations, and allow confidentiality verifications. "
+               "Contract-content requirements waived for public bodies and members of "
+               "professional orders (s. 18.3 in fine)."),
     Check("B5", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 3.2",
           "Politiques internes : rôles du cycle de vie, conservation/destruction, traitement des plaintes",
           "Internal policies: lifecycle roles, retention/destruction, complaint handling"),
@@ -130,7 +139,10 @@ CHECKS: tuple[Check, ...] = (
           "Systèmes biométriques : consentement exprès et déclaration à la CAI 60 jours avant la mise en service",
           "Biometric systems: express consent and CAI declaration 60 days before service",
           note="The CAI's only active enforcement area (Transcontinental 2024, Metro 2025 — "
-               "cease/destroy orders). Highest-yield intake question."),
+               "cease/destroy orders). Highest-yield intake question. Verified 2026-08-23: "
+               "s. 44 also requires prior CAI disclosure of the verification PRACTICE "
+               "itself (not just the s. 45 database), strict minimization, no secondary "
+               "use, and destruction of records as soon as the purpose is met."),
     Check("B7", "B", Domain.SPECIAL_CATEGORIES, Mode.INTAKE, Tier.STATUTE, "s. 12.1",
           "Décisions fondées exclusivement sur un traitement automatisé : information et droit de faire des observations",
           "Decisions based exclusively on automated processing: disclosure and right to submit observations"),

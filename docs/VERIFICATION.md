@@ -1,6 +1,6 @@
 # Statutory Verification Gate
 
-**Status: OPEN — no client-facing report may ship until every row is checked.**
+**Status: CLOSED — 2026-08-23.** All rows verified by steph against official LegisQuébec text (consolidated to 2026-04-07) in a guided in-session read, with Claude surfacing the text and steph ruling on each claim. Outcomes: every original reference confirmed; 2 interpretation corrections banked (s. 3.5 investigation-deferral scope; parallel notice duties); 6 checks added from official text (A10, B12–B16); multiple intake questions enriched. **Re-open on any change to the statute, its regulations, or CAI guidance** — register content and anonymization criteria are regulation-set and can move without legislative amendment.
 
 ## Sources to open (French text is the authoritative version)
 
@@ -21,18 +21,18 @@ The check registry's section references were triangulated from CAI guidance and 
 | A3 | s. 3.1 (officer; publication of title + contact) | ☑ confirmed — publication duty covers BOTH title and contact information; A3's partial-without-contact scoring is correct | steph / 2026-08-23 |
 | A4, B5 | s. 3.2 (governance policies; publication) | ☑ confirmed against official text (in-session, browser) — duty is to publish detailed information ABOUT the policies, notably covering retention/destruction, lifecycle roles, complaints; full policies need not be public. A4 semantic question tightened accordingly. | steph + Claude / 2026-08-23 |
 | A5, A6 | s. 8.1 (tracking/profiling; activation means) + s. 9.1 cookie carve-out | ☑ confirmed — "must FIRST inform" (prior notice), "means available to activate" (functions start off), profiling definition verbatim; s. 9.1's browser-cookie carve-out sentence verified as claimed. A5's CAI-contested tier stands. | steph / 2026-08-23 |
-| A7 | Charter of the French Language, ss. 52, 55 | ☐ | |
+| A7 | Charter of the French Language, ss. 52, 55 | ☑ confirmed — s. 52 "regardless of the medium" + "documents of the same nature" (policy coverage = interpretation → FIRM tier stands); equal-terms rule for other languages; s. 55 French-first mechanics (remit FR first, express wish, no charge) with outside-Québec-relations exemption. s. 52.1 software-in-French flagged for SaaS clients. | steph / 2026-08-23 |
 | A8 | s. 14 (consent request form) | ☑ confirmed against official EN text — per-purpose, clear simple language, presented separately when written, assistance on request, time-limited, non-conforming consent without effect; minors: under-14 by parent/tutor, 14+ by minor or parent. Official EN standard is "clear, free and informed" (older "manifest/enlightened" translation never shipped in repo). | steph / 2026-08-23 |
 | B1 | ss. 3.5–3.8 + Regulation respecting confidentiality incidents (8 register elements, 5-yr retention; "with diligence" standard) | ☑ FULLY confirmed against official EN/FR text (Act + Regulation A-2.1, r. 3.1): NO fixed deadline anywhere (steph searched hours/72/months — only "promptly"); register = exactly 8 elements, ≥5-yr retention, kept up to date, covers all incidents ("whether or not" serious); CAI notice = 11 elements, individual notice = 6, public-notice alternative (s. 6). Corrections banked: law-enforcement-only deferral; CAI and individual notices are parallel prompt duties (no CAI confirmation step). Register content regulation-set → re-open gate on regulatory change. | steph / 2026-08-23 |
 | B2 | s. 3.3 (PIA triggers) | ☑ confirmed against official FR + EN text — trigger covers acquire/develop/overhaul of info systems AND electronic service delivery, any PI lifecycle op; officer from outset; proportionality factors verbatim; al. 3 portability-by-design added to B2 intake question | steph / 2026-08-23 |
 | B3 | s. 17 (out-of-Quebec communication; adequacy analysis; written agreement) | ☑ confirmed against official EN text — 4 factors incl. receiving-state legal framework, "adequate protection… generally recognized principles", written agreement; al. 3 explicitly covers entrusting/outsourcing outside Québec (cloud hosting caught by statute text). No adequacy whitelist confirmed by absence. | steph / 2026-08-23 |
-| B4 | s. 18.3 (mandatary contracts) | ☐ | |
-| B6 | LCCJTI, ss. 44–45 (biometrics; 60-day CAI declaration) | ☐ | |
+| B4 | s. 18.3 (mandatary contracts) | ☑ confirmed — written form, confidentiality measures, mandate-limited use, PLUS: no retention after expiry, without-delay notice of violations and attempted violations to the officer, verification rights; public-body/professional-order exemption from content requirements. Intake question enriched. | steph / 2026-08-23 |
+| B6 | LCCJTI, ss. 44–45 (biometrics; 60-day CAI declaration) | ☑ confirmed against official EN text — express consent, 60-day database declaration, CAI suspend/prohibit/destroy powers; enrichments banked: prior disclosure of the verification practice itself, minimization, no secondary use, destroy-on-purpose-met. | steph / 2026-08-23 |
 | B7 | s. 12.1 (automated decisions) | ☑ confirmed — inform by decision time; on request: PI used, reasons/principal factors/parameters, correction right; observations to personnel able to review. Verbatim match. | steph / 2026-08-23 |
 | B8 | s. 4.1 (minors under 14) | ☑ confirmed against official EN text, read in browser — parental-authority/tutor consent, "clearly for the minor's benefit" exception, and scope is collection FROM the minor directly (forms a child can self-submit), not mere holding of parent-provided data | steph / 2026-08-23 |
 | B9 | s. 27 (portability; collected-not-inferred) | ☑ confirmed — "structured, commonly used technological format", excludes created/inferred info, "serious practical difficulties" carve-out; accommodation duty for handicapped persons noted. | steph / 2026-08-23 |
 | B10 | ss. 12–13 (sensitive information; express consent) | ☑ confirmed — express consent for use (s. 12) AND communication (s. 13); sensitivity by nature OR context (note added to registry); prospection never a consistent purpose (spawned B15). | steph / 2026-08-23 |
-| B11 | CAI guidance only — confirm NO statutory training mandate exists (negative check) | ☐ | |
+| B11 | CAI guidance only — confirm NO statutory training mandate exists (negative check) | ☑ confirmed — full-text search of P-39.1: the only "training" occurrence is s. 3.4(4), a measure the privacy officer MAY SUGGEST during a PIA, not a mandate. CAI-expectation tier stands. | steph + Claude / 2026-08-23 |
 | B12 (added at gate) | s. 10 (proportionate security safeguards) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
 | B13 (added at gate) | s. 11 (accuracy for decisions; ≥1-yr keep) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
 | B14 (added at gate) | s. 23 (destruction or anonymization; regulation-grade criteria) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
@@ -42,8 +42,8 @@ The check registry's section references were triangulated from CAI guidance and 
 
 Also verify at the same sitting:
 
-- ☐ The incident-notification standard is "with diligence" — confirm no 72-hour deadline anywhere in the Act or Regulation.
-- ☐ AMP scheme ss. 90.1 ff. and penal s. 91 maximums ($10M/2%; $25M/4%) as cited in marketing materials.
-- ☐ CAI Guidelines 2023-1 remain the current consent guidance (check for successors).
+- ☑ The incident-notification standard is "promptly"/« avec diligence » — NO 72-hour deadline anywhere in the Act or the Regulation (steph, full-text search + readthrough, 2026-08-23).
+- ☑ AMP s. 90.12 ($10M / 2% worldwide, whichever greater; $50K natural persons) and penal s. 91 ($15K–$25M / 4%, whichever greater; $5K–$100K natural persons), doubling on recidivism confirmed at s. 92.1. Bonus: s. 91(2) and 91(4) make failure to report incidents and failure to take s. 10 security measures penal offences. (steph, 2026-08-23)
+- ☑ CAI Guidelines 2023-1 remain the current consent guidance — PDF live (HTTP 200, 2026-08-23), no successor on the CAI guides page. Bonus: CAI publishes a model biometric consent form (DOCX) + worked example — resource pointer for B6 findings. CAI sanctions page checked same day: AMP framework described, no imposed sanctions published (honest-broker claim current).
 
 When all rows are checked: change Status above to CLOSED with date, and record the session in the repo log. Re-open this gate whenever the statute or CAI guidance changes.
