@@ -226,7 +226,29 @@ CHECKS: tuple[Check, ...] = (
                "than 30 days (s. 32); silence = deemed refusal. Requests go to the "
                "privacy officer; refusals must cite the provision, remedies, and time "
                "limit (s. 34). The market fears a fake 72-hour rule and misses this "
-               "real 30-day one."),
+               "real 30-day one. Covers the CAI's full four-rights frame: access, "
+               "rectification, portability (see B9), and cessation of dissemination / "
+               "de-indexing (s. 28.1). Duty of complete-and-serious search extends to "
+               "email, messaging, and PI held by third parties/processors."),
+    # ---- added from CAI corpus triple-check 2026-08-23 ----
+    Check("B17", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.CAI,
+          "pratique-phare de la CAI (aide-mémoire; guide prévention, étape 2; guide EFVP, étape 3)",
+          "Inventaire à jour des renseignements personnels détenus, avec évaluation de sensibilité",
+          "Up-to-date inventory of personal information held, with sensitivity assessment",
+          note="The CAI's cornerstone practice — not a discrete statutory mandate, but "
+               "the foundation every statutory duty rests on (you cannot protect, "
+               "destroy, or produce what you have not located). Quoi/Pourquoi/Qui/"
+               "Comment/Où/Quand model table in the prevention guide."),
+    Check("B18", "B", Domain.SPECIAL_CATEGORIES, Mode.INTAKE, Tier.CAI,
+          "fiche vidéosurveillance (2019, jurisprudence) + s. 8; EFVP obligatoire post-Loi 25",
+          "Vidéosurveillance : nécessité/proportionnalité documentées, affichage, conservation limitée (~30 jours)",
+          "Video surveillance: documented necessity/proportionality, signage, limited retention (~30 days)",
+          note="Necessity must be evidenced ('de simples appréhensions... ne suffisent "
+               "pas'); signage with contact info (s. 8 duty applied); the corpus's only "
+               "quantified retention benchmark: ~30 days generally sufficient and "
+               "recommended; camera projects trigger a mandatory PIA post-Loi 25 "
+               "(named in EFVP guide s. 7.2). Fiche is 2019/pre-Loi 25 — necessity test "
+               "is jurisprudence-grounded and current; procedural details are stale."),
 )
 
 

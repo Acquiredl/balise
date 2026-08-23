@@ -175,12 +175,39 @@ answers:
     details: ""
   B16:
     question_fr: >-
-      Traitez-vous les demandes d'accès et de rectification par écrit dans un
+      Traitez-vous les demandes liées aux quatre droits (accès, rectification,
+      portabilité, cessation de diffusion/désindexation) par écrit dans un
       délai maximal de 30 jours, sans frais d'accès, avec refus motivés
-      indiquant recours et délais (art. 27 à 34)? (Le silence vaut refus.)
+      indiquant recours et délais (art. 27 à 34, 28.1)? (Le silence vaut
+      refus; le repérage doit couvrir courriels, messageries et tiers.)
     question_en: >-
-      Do you handle access/rectification requests in writing within 30 days
-      maximum, free of charge, with reasoned refusals citing remedies and
-      deadlines (ss. 27-34)? (Silence is deemed refusal.)
+      Do you handle requests under the four rights (access, rectification,
+      portability, cessation of dissemination/de-indexing) in writing within
+      30 days maximum, free of charge, with reasoned refusals citing remedies
+      and deadlines (ss. 27-34, 28.1)? (Silence is deemed refusal; the search
+      must cover email, messaging, and third-party-held PI.)
+    answer: unknown
+    details: ""
+  B17:
+    question_fr: >-
+      Tenez-vous un inventaire à jour des renseignements personnels détenus
+      (quoi, pourquoi, qui, comment, où, quand) avec évaluation de leur
+      sensibilité? (Pratique-phare recommandée par la CAI.)
+    question_en: >-
+      Do you keep an up-to-date inventory of the personal information you
+      hold (what, why, who, how, where, when) with a sensitivity assessment?
+      (The CAI's cornerstone recommended practice.)
+    answer: unknown
+    details: ""
+  B18:
+    question_fr: >-
+      Si vous utilisez la vidéosurveillance : nécessité documentée par des
+      faits, affichage avec coordonnées, conservation limitée (~30 jours
+      recommandés par la CAI), accès restreint, et ÉFVP réalisée pour le
+      projet de caméras?
+    question_en: >-
+      If you use video surveillance: necessity documented with facts, signage
+      with contact info, limited retention (~30 days per CAI guidance),
+      restricted access, and a PIA conducted for the camera project?
     answer: unknown
     details: ""

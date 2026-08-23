@@ -38,7 +38,11 @@ The check registry's section references were triangulated from CAI guidance and 
 | B14 (added at gate) | s. 23 (destruction or anonymization; regulation-grade criteria) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
 | B15 (added at gate) | ss. 12, 22 (prospection: consent required; identify + withdrawal) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
 | B16 (added at gate) | ss. 27–34 (access/rectification: 30-day written reply, deemed refusal, free access, reasoned refusals) | ☑ born-verified — added from official text read in-session. The only hard deadline in the law. | steph / 2026-08-23 |
-| A10 (added at gate) | s. 9 (no refusal of goods/services over non-necessary PI; doubt = non-necessary) | ☑ born-verified — added from official text read in-session | steph / 2026-08-23 |
+| A10 (added at gate) | s. 9 (no refusal of goods/services over non-necessary PI; doubt = non-necessary) | ☑ born-verified — added from official text read in-session; corroborated by CAI Guidelines s. 2.3 (refuse secondary purposes without affecting the service) | steph / 2026-08-23 |
+| B17 (added from CAI corpus) | CAI cornerstone practice — PI inventory + sensitivity | ☑ born-verified against CAI aide-mémoire, prevention guide step 2, EFVP guide step 3; CAI tier (no statutory mandate) | steph / 2026-08-23 |
+| B18 (added from CAI corpus) | Video surveillance — necessity/proportionality, signage, ~30-day retention | ☑ born-verified against 2019 fiche (jurisprudence-grounded; currency caveat noted) + EFVP guide s. 7.2 mandatory-PIA trigger | steph / 2026-08-23 |
+
+**Triple-check pass (2026-08-23, post-closure):** all 25 CAI publications read against the registry by two agents; calibration fixes applied across 12 checks (see commit 1716783); one factual correction (8 consent criteria, not 7 — never shipped); confirmed no private-sector communications-register obligation exists. Outstanding visual check: whether the prevention guide (pp. 11–13) bolds staff training as statutory — B11's current phrasing is safe under either answer. Stale-fiche warnings recorded (cloud 2015, profilage 2013, vidéosurv 2019).
 
 Also verify at the same sitting:
 
