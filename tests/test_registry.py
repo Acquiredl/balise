@@ -35,3 +35,14 @@ def test_no_72_hour_myth_encoded_anywhere():
 def test_by_id_round_trip():
     assert by_id("B6").tier is Tier.STATUTE
     assert by_id("A5").contested is True
+
+
+def test_client_copy_covers_every_check():
+    from balise.advice import CLIENT_COPY
+    for check in CHECKS:
+        copy = CLIENT_COPY.get(check.id)
+        assert copy is not None, f"{check.id} has no client copy"
+        for fieldname in ("plain_fr", "plain_en", "risk_fr", "risk_en",
+                          "action_fr", "action_en"):
+            assert getattr(copy, fieldname).strip(), f"{check.id}.{fieldname} empty"
+        assert copy.priority in (1, 2, 3), check.id

@@ -10,7 +10,7 @@ import argparse
 import re
 import sys
 
-from . import external, fetcher, intake as intake_mod, report, semantic
+from . import external, fetcher, intake as intake_mod, report, semantic, summary
 
 # Balise assesses the PRIVATE-sector regime (CQLR c. P-39.1). Public bodies
 # fall under the Loi sur l'accès instead — assessing them against the wrong
@@ -69,9 +69,13 @@ def main(argv: list[str] | None = None) -> int:
     intake_data = intake_mod.load_intake(args.intake) if args.intake else None
     findings += intake_mod.run_intake_assessment(intake_data)
 
+    notices = _scope_notices(site.root_url, intake_data)
     paths = report.write_report(findings, target=site.root_url, out_dir=args.out,
-                                notices=_scope_notices(site.root_url, intake_data))
+                                notices=notices)
+    summary_path = summary.write_summary(findings, target=site.root_url,
+                                         out_dir=args.out, notices=notices)
     print(f"report:      {paths.report_md}")
+    print(f"summary:     {summary_path}")
     print(f"audit trail: {paths.audit_jsonl}")
     return 0
 

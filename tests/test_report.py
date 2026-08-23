@@ -77,6 +77,25 @@ def test_intake_parses_natural_french_answers():
     assert findings["B18"].reasoning_fr.startswith("Déclaré sans objet")
 
 
+def test_summary_orders_priorities_and_explains_unknown(tmp_path):
+    from balise.summary import write_summary
+    findings = [
+        Finding("A9", Status.NOT_MET, reasoning="x", reasoning_fr="x"),   # priority 3
+        Finding("B1", Status.NOT_MET, reasoning="x", reasoning_fr="x"),   # priority 1
+        Finding("B9", Status.UNKNOWN, reasoning="x", reasoning_fr="x"),
+        Finding("A1", Status.MET, reasoning="x", reasoning_fr="x"),
+    ]
+    path = write_summary(findings, target="https://x.example", out_dir=tmp_path,
+                         notices=[("Avis public.", "Public notice.")])
+    body = path.read_text(encoding="utf-8")
+    # urgent (B1, priority 1) renders before priority-3 (A9)
+    assert body.index("registre des incidents") < body.index("changements de politique")
+    assert "Pourquoi c’est important" in body
+    assert "point de discussion, pas un échec" in body   # unknown explained
+    assert "Avis public." in body and "Public notice." in body
+    assert "Autodéclaré" not in body                     # report internals stay out
+
+
 def test_findings_sort_naturally_and_notices_render(tmp_path):
     findings = [
         Finding("A10", Status.UNKNOWN, reasoning="x", reasoning_fr="x"),
