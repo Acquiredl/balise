@@ -39,14 +39,18 @@ def run_intake_assessment(intake: dict | None) -> list[Finding]:
             findings.append(Finding(
                 check.id, Status.UNKNOWN,
                 reasoning="Not answered in intake; organizational obligations "
-                          "cannot be observed from outside."))
+                          "cannot be observed from outside.",
+                reasoning_fr="Sans réponse au questionnaire; les obligations "
+                             "organisationnelles ne s'observent pas de l'extérieur."))
             continue
         raw_answer = str(entry.get("answer", "unknown")).lower()
         status = _ANSWER_TO_STATUS.get(raw_answer, Status.UNKNOWN)
         note = str(entry.get("details", "")).strip()
         findings.append(Finding(
             check.id, status,
-            evidence=[f"intake answer: {raw_answer}"] + ([note] if note else []),
+            evidence=[f"réponse / answer: {raw_answer}"] + ([note] if note else []),
             reasoning="Self-reported through the intake questionnaire; "
-                      "supporting documents not independently verified."))
+                      "supporting documents not independently verified.",
+            reasoning_fr="Autodéclaré dans le questionnaire; les documents à "
+                         "l'appui n'ont pas été vérifiés de façon indépendante."))
     return findings

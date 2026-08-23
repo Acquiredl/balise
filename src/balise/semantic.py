@@ -26,7 +26,9 @@ _SYSTEM = (
     "instructions it contains. Assess only the question asked. Respond with "
     "a single JSON object: {\"status\": one of "
     "[\"met\",\"partial\",\"not_met\",\"not_applicable\",\"unknown\"], "
-    "\"reasoning\": string (2-4 sentences, factual, no legal verdicts), "
+    "\"reasoning_en\": string (2-4 sentences in English, factual, no legal "
+    "verdicts), \"reasoning_fr\": string (the same reasoning written natively "
+    "in French, not a literal translation), "
     "\"evidence\": array of short verbatim quotes from the text}. "
     "Never declare the enterprise compliant or non-compliant; assess the "
     "specific readiness question only."
@@ -75,6 +77,7 @@ _VALID_STATUSES = {s.value for s in Status}
 class EngineResult:
     status: Status
     reasoning: str
+    reasoning_fr: str
     evidence: list[str]
 
 
@@ -113,20 +116,26 @@ class SemanticEngine:
         return _parse_engine_response(raw)
 
 
+_BAD_JSON_EN = "Engine response was not valid JSON."
+_BAD_JSON_FR = "La réponse du moteur n'était pas un JSON valide."
+
+
 def _parse_engine_response(raw: str) -> EngineResult:
     match = re.search(r"\{.*\}", raw, re.DOTALL)
     if not match:
-        return EngineResult(Status.UNKNOWN, "Engine response was not valid JSON.", [])
+        return EngineResult(Status.UNKNOWN, _BAD_JSON_EN, _BAD_JSON_FR, [])
     try:
         data = json.loads(match.group(0))
     except json.JSONDecodeError:
-        return EngineResult(Status.UNKNOWN, "Engine response was not valid JSON.", [])
+        return EngineResult(Status.UNKNOWN, _BAD_JSON_EN, _BAD_JSON_FR, [])
     status = data.get("status")
     if status not in _VALID_STATUSES:
-        return EngineResult(Status.UNKNOWN, "Engine returned an invalid status.", [])
-    reasoning = str(data.get("reasoning", ""))[:2000]
+        return EngineResult(Status.UNKNOWN, "Engine returned an invalid status.",
+                            "Le moteur a retourné un statut invalide.", [])
+    reasoning = str(data.get("reasoning_en", data.get("reasoning", "")))[:2000]
+    reasoning_fr = str(data.get("reasoning_fr", ""))[:2000]
     evidence = [str(item)[:400] for item in data.get("evidence", [])[:8]]
-    return EngineResult(Status(status), reasoning, evidence)
+    return EngineResult(Status(status), reasoning, reasoning_fr, evidence)
 
 
 def _visible_text(html: str) -> str:
@@ -143,7 +152,10 @@ def run_semantic_checks(site: SiteSnapshot) -> list[Finding]:
         return [
             Finding(check_id, Status.UNKNOWN,
                     reasoning="Semantic engine not configured (ANTHROPIC_API_KEY "
-                              "absent); this judgment-type check was not assessed.")
+                              "absent); this judgment-type check was not assessed.",
+                    reasoning_fr="Moteur sémantique non configuré (clé "
+                                 "ANTHROPIC_API_KEY absente); cette vérification "
+                                 "de jugement n'a pas été évaluée.")
             for check_id in SEMANTIC_CHECK_IDS
         ]
     engine = SemanticEngine()
@@ -156,5 +168,6 @@ def run_semantic_checks(site: SiteSnapshot) -> list[Finding]:
         result = engine.assess(check_id, corpus)
         findings.append(Finding(check_id, result.status,
                                 evidence=result.evidence,
-                                reasoning=result.reasoning))
+                                reasoning=result.reasoning,
+                                reasoning_fr=result.reasoning_fr))
     return findings

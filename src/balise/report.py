@@ -85,11 +85,13 @@ def _render_finding(finding: Finding, lang: str) -> str:
         label = "Éléments observés" if lang == "fr" else "Evidence"
         lines.append(f"- **{label}:**")
         lines.extend(f"  - {item}" for item in finding.evidence)
-    if finding.reasoning:
+    # Registry notes are operator context (verification history, market framing)
+    # and are never rendered into the client-facing report.
+    reasoning = (finding.reasoning_fr or finding.reasoning) if lang == "fr" \
+        else (finding.reasoning or finding.reasoning_fr)
+    if reasoning:
         label = "Raisonnement" if lang == "fr" else "Reasoning"
-        lines.append(f"- **{label}:** {finding.reasoning}")
-    if check.note:
-        lines.append(f"- **Note:** {check.note}")
+        lines.append(f"- **{label}:** {reasoning}")
     lines.append("")
     return "\n".join(lines)
 
@@ -132,6 +134,7 @@ def write_report(findings: list[Finding], target: str, out_dir: str | Path) -> R
                 "status": finding.status.value,
                 "evidence": finding.evidence,
                 "reasoning": finding.reasoning,
+                "reasoning_fr": finding.reasoning_fr,
             }
             record["sha256"] = hashlib.sha256(
                 json.dumps(record, sort_keys=True, ensure_ascii=False).encode("utf-8")

@@ -9,10 +9,13 @@ from balise.report import write_report
 def test_report_is_bilingual_with_disclaimers_and_audit_trail(tmp_path):
     findings = [
         Finding("A1", Status.MET, evidence=["https://x.example/politique"],
-                reasoning="Policy page retrieved."),
-        Finding("B6", Status.NOT_MET, evidence=["intake answer: no"],
+                reasoning="Policy page retrieved.",
+                reasoning_fr="Page de politique trouvée."),
+        Finding("B6", Status.NOT_MET, evidence=["réponse / answer: no"],
                 reasoning="Self-reported through the intake questionnaire; "
-                          "supporting documents not independently verified."),
+                          "supporting documents not independently verified.",
+                reasoning_fr="Autodéclaré dans le questionnaire; documents non "
+                             "vérifiés de façon indépendante."),
     ]
     paths = write_report(findings, target="https://x.example", out_dir=tmp_path)
 
@@ -23,11 +26,21 @@ def test_report_is_bilingual_with_disclaimers_and_audit_trail(tmp_path):
     assert "[LOI]" in body             # FR tier label
     assert "[STATUTE]" in body         # EN tier label
 
+    # FR section uses the French reasoning, not the English fallback
+    fr_section = body.split("Law 25 Readiness Report")[0]
+    assert "Page de politique trouvée." in fr_section
+    assert "Policy page retrieved." not in fr_section
+
+    # operator registry notes never leak into the client report
+    assert "Highest-yield" not in body        # B6 note fragment
+    assert "Verified 2026" not in body        # verification-history fragments
+
     lines = paths.audit_jsonl.read_text(encoding="utf-8").strip().splitlines()
     assert len(lines) == len(findings)
     for line in lines:
         record = json.loads(line)
-        assert {"check", "legal_hook", "tier", "status", "reasoning", "sha256"} <= set(record)
+        assert {"check", "legal_hook", "tier", "status", "reasoning",
+                "reasoning_fr", "sha256"} <= set(record)
 
 
 def test_unanswered_intake_reports_unknown_not_failure():
