@@ -56,6 +56,12 @@ class ReportPaths:
     audit_jsonl: Path
 
 
+def _check_order(finding: Finding) -> tuple[str, int]:
+    """Natural order: A1..A10 then B1..B18 (never A1, A10, A2)."""
+    check_id = finding.check_id
+    return (check_id[0], int(check_id[1:]))
+
+
 def _posture_line(findings: list[Finding], domain: Domain, lang: str) -> str:
     relevant = [f for f in findings if f.check.domain == domain]
     if not relevant:
@@ -96,7 +102,8 @@ def _render_finding(finding: Finding, lang: str) -> str:
     return "\n".join(lines)
 
 
-def _render_language_section(findings: list[Finding], target: str, lang: str) -> str:
+def _render_language_section(findings: list[Finding], target: str, lang: str,
+                             notices: list[tuple[str, str]]) -> str:
     title = ("Rapport de préparation — Loi 25" if lang == "fr"
              else "Law 25 Readiness Report")
     disclaimer = DISCLAIMER_FR if lang == "fr" else DISCLAIMER_EN
@@ -104,27 +111,32 @@ def _render_language_section(findings: list[Finding], target: str, lang: str) ->
     findings_title = "Constats" if lang == "fr" else "Findings"
     lines = [f"# {title}", "", f"**{'Site' if lang == 'fr' else 'Site'}:** {target}",
              f"**Date:** {datetime.now(timezone.utc).date().isoformat()}", "",
-             disclaimer, "", f"## {posture_title}", ""]
+             disclaimer, ""]
+    for notice_fr, notice_en in notices:
+        lines.extend([f"> ⚠️ **{notice_fr if lang == 'fr' else notice_en}**", ""])
+    lines.extend([f"## {posture_title}", ""])
     for domain in Domain:
         line = _posture_line(findings, domain, lang)
         if line:
             lines.append(f"- {line}")
     lines.extend(["", f"## {findings_title}", ""])
-    for finding in sorted(findings, key=lambda f: f.check_id):
+    for finding in sorted(findings, key=_check_order):
         lines.append(_render_finding(finding, lang))
     return "\n".join(lines)
 
 
-def write_report(findings: list[Finding], target: str, out_dir: str | Path) -> ReportPaths:
+def write_report(findings: list[Finding], target: str, out_dir: str | Path,
+                 notices: list[tuple[str, str]] | None = None) -> ReportPaths:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    body = (_render_language_section(findings, target, "fr")
+    notices = notices or []
+    body = (_render_language_section(findings, target, "fr", notices)
             + "\n\n---\n\n"
-            + _render_language_section(findings, target, "en"))
+            + _render_language_section(findings, target, "en", notices))
 
     audit_path = out / "audit-trail.jsonl"
     with audit_path.open("w", encoding="utf-8") as handle:
-        for finding in sorted(findings, key=lambda f: f.check_id):
+        for finding in sorted(findings, key=_check_order):
             record = {
                 "ts": datetime.now(timezone.utc).isoformat(),
                 "check": finding.check_id,

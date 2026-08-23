@@ -11,6 +11,7 @@ rendered into client-facing reports.
 
 from __future__ import annotations
 
+import html
 import re
 from dataclasses import dataclass, field
 
@@ -69,16 +70,24 @@ class Finding:
         return by_id(self.check_id)
 
 
+def _page_text(page: Page) -> str:
+    """Visible text of a page — evidence snippets must never be HTML soup."""
+    stripped = re.sub(r"<(script|style)\b.*?</\1>", " ", page.html,
+                      flags=re.IGNORECASE | re.DOTALL)
+    stripped = re.sub(r"<[^>]+>", " ", stripped)
+    return re.sub(r"\s+", " ", html.unescape(stripped))
+
+
 def _search_pages(site: SiteSnapshot, patterns: tuple[str, ...]) -> list[tuple[Page, str]]:
     hits: list[tuple[Page, str]] = []
     for page in site.pages:
-        lowered = page.html.lower()
+        text = _page_text(page).lower()
         for pattern in patterns:
-            match = re.search(pattern, lowered)
+            match = re.search(pattern, text)
             if match:
                 start = max(0, match.start() - 60)
-                snippet = re.sub(r"\s+", " ", lowered[start:match.end() + 60]).strip()
-                hits.append((page, snippet))
+                snippet = text[start:match.end() + 60].strip()
+                hits.append((page, f"« …{snippet}… »"))
                 break
     return hits
 

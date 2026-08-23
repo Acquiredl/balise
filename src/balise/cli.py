@@ -7,9 +7,42 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 
 from . import external, fetcher, intake as intake_mod, report, semantic
+
+# Balise assesses the PRIVATE-sector regime (CQLR c. P-39.1). Public bodies
+# fall under the Loi sur l'accès instead — assessing them against the wrong
+# statute would be professionally embarrassing, so we warn loudly.
+_PUBLIC_BODY_PATTERNS = re.compile(
+    r"municipalit|\bville\b|\bcity of\b|gouvernement|minist[eè]re|"
+    r"commission scolaire|centre de services scolaire|\bcegep\b|c[ée]gep|"
+    r"universit[ée]|\bhôpital\b|hopital|\bciusss\b|\bcisss\b|organisme public",
+    re.IGNORECASE)
+_PUBLIC_DOMAIN_PATTERNS = re.compile(
+    r"\.gouv\.qc\.ca|\.canada\.ca|\.gc\.ca", re.IGNORECASE)
+
+_SCOPE_NOTICE = (
+    "Attention : cet organisme semble être un ORGANISME PUBLIC (municipalité, "
+    "ministère, réseau public). Balise évalue le régime du secteur PRIVÉ "
+    "(Loi sur le privé, RLRQ c. P-39.1). Les organismes publics relèvent "
+    "plutôt de la Loi sur l'accès (RLRQ c. A-2.1) : plusieurs obligations se "
+    "ressemblent, mais les articles cités ici ne s'appliquent pas tels quels.",
+    "Warning: this organization appears to be a PUBLIC BODY (municipality, "
+    "ministry, public network). Balise assesses the PRIVATE-sector regime "
+    "(Private Sector Act, CQLR c. P-39.1). Public bodies fall under the Act "
+    "respecting Access (CQLR c. A-2.1) instead: many obligations are similar, "
+    "but the sections cited here do not apply as written.",
+)
+
+
+def _scope_notices(url: str, intake_data: dict | None) -> list[tuple[str, str]]:
+    enterprise = (intake_data or {}).get("enterprise", {}) or {}
+    haystack = " ".join(str(enterprise.get(k, "")) for k in ("name", "sector"))
+    if _PUBLIC_BODY_PATTERNS.search(haystack) or _PUBLIC_DOMAIN_PATTERNS.search(url):
+        return [_SCOPE_NOTICE]
+    return []
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -36,7 +69,8 @@ def main(argv: list[str] | None = None) -> int:
     intake_data = intake_mod.load_intake(args.intake) if args.intake else None
     findings += intake_mod.run_intake_assessment(intake_data)
 
-    paths = report.write_report(findings, target=site.root_url, out_dir=args.out)
+    paths = report.write_report(findings, target=site.root_url, out_dir=args.out,
+                                notices=_scope_notices(site.root_url, intake_data))
     print(f"report:      {paths.report_md}")
     print(f"audit trail: {paths.audit_jsonl}")
     return 0

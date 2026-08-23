@@ -73,6 +73,7 @@ answers:
     answer: unknown
     details: ""
   B6:
+    applicable: unknown   # oui/non — la pratique visee existe-t-elle chez vous? / does the practice exist at all?
     question_fr: >-
       Utilisez-vous des systèmes biométriques (horodateurs à empreinte,
       reconnaissance faciale)? Si oui: consentement exprès obtenu, la
@@ -89,6 +90,7 @@ answers:
     answer: unknown
     details: ""
   B7:
+    applicable: unknown   # oui/non — la pratique visee existe-t-elle chez vous? / does the practice exist at all?
     question_fr: >-
       Prenez-vous des décisions fondées exclusivement sur un traitement
       automatisé de RP? Si oui: information de la personne et possibilité de
@@ -99,6 +101,7 @@ answers:
     answer: unknown
     details: ""
   B8:
+    applicable: unknown   # oui/non — la pratique visee existe-t-elle chez vous? / does the practice exist at all?
     question_fr: >-
       Recueillez-vous des RP de mineurs de moins de 14 ans? Si oui:
       consentement du titulaire de l'autorité parentale?
@@ -117,6 +120,7 @@ answers:
     answer: unknown
     details: ""
   B10:
+    applicable: unknown   # oui/non — la pratique visee existe-t-elle chez vous? / does the practice exist at all?
     question_fr: >-
       Traitez-vous des renseignements sensibles (santé, biométrie, autrement
       intimes)? Si oui: consentement exprès pour utilisation/communication?
@@ -163,14 +167,17 @@ answers:
     answer: unknown
     details: ""
   B15:
+    applicable: unknown   # oui/non — envoyez-vous des communications promotionnelles? / do you send promotional communications at all?
     question_fr: >-
-      Vos communications de prospection reposent-elles sur un consentement
-      (la prospection n'est jamais une « fin compatible », art. 12), avec
-      identification de l'entreprise et retrait honoré (art. 22)?
+      Quand vous envoyez des courriels promotionnels, des infolettres ou de la
+      publicité : les gens y ont-ils consenti (avoir déjà leur adresse ne
+      suffit pas, art. 12), votre entreprise s'identifie-t-elle clairement, et
+      arrêtez-vous dès qu'une personne se désabonne (art. 22)?
     question_en: >-
-      Is your marketing/prospection based on consent (prospection is never a
-      'consistent purpose', s. 12), with self-identification and honored
-      withdrawal (s. 22)?
+      When you send promotional emails, newsletters or ads: did people
+      consent to receive them (already having their address is not enough,
+      s. 12), does your business clearly identify itself, and do you stop as
+      soon as someone unsubscribes (s. 22)?
     answer: unknown
     details: ""
   B16:
@@ -200,6 +207,7 @@ answers:
     answer: unknown
     details: ""
   B18:
+    applicable: unknown   # oui/non — la pratique visee existe-t-elle chez vous? / does the practice exist at all?
     question_fr: >-
       Si vous utilisez la vidéosurveillance : nécessité documentée par des
       faits, affichage avec coordonnées, conservation limitée (~30 jours

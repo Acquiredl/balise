@@ -58,3 +58,33 @@ def test_answered_intake_maps_statuses():
     b6 = next(f for f in findings if f.check_id == "B6")
     assert b6.status is Status.NOT_MET
     assert any("time-clock" in item for item in b6.evidence)
+
+
+def test_intake_parses_natural_french_answers():
+    intake = {"answers": {
+        "B1": {"answer": "non, nous n'avons pas de registre, mais un processus existe."},
+        "B5": {"answer": "oui"},
+        "B9": {"answer": "incertain", "details": "besoin d'aide"},
+        "B4": {"answer": "Partiellement mis en place"},
+        "B18": {"answer": "pas de cameras", "applicable": "non"},
+    }}
+    findings = {f.check_id: f for f in run_intake_assessment(intake)}
+    assert findings["B1"].status is Status.NOT_MET
+    assert findings["B5"].status is Status.MET
+    assert findings["B9"].status is Status.UNKNOWN
+    assert findings["B4"].status is Status.PARTIAL
+    assert findings["B18"].status is Status.NOT_APPLICABLE
+    assert findings["B18"].reasoning_fr.startswith("Déclaré sans objet")
+
+
+def test_findings_sort_naturally_and_notices_render(tmp_path):
+    findings = [
+        Finding("A10", Status.UNKNOWN, reasoning="x", reasoning_fr="x"),
+        Finding("A2", Status.UNKNOWN, reasoning="x", reasoning_fr="x"),
+    ]
+    paths = write_report(findings, target="https://x.example", out_dir=tmp_path,
+                         notices=[("Organisme public détecté.", "Public body detected.")])
+    body = paths.report_md.read_text(encoding="utf-8")
+    assert body.index("### A2 ") < body.index("### A10 ")
+    assert "Organisme public détecté." in body
+    assert "Public body detected." in body

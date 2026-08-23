@@ -10,6 +10,7 @@ Security posture (see THREAT-MODEL.md):
 from __future__ import annotations
 
 import ipaddress
+import re
 import socket
 from dataclasses import dataclass, field
 from urllib.parse import urljoin, urlparse
@@ -77,28 +78,66 @@ def _fetch_page(client: httpx.Client, url: str) -> Page | None:
     return Page(url=str(response.url), status_code=response.status_code, html=body)
 
 
+LINK_TEXT_PATTERNS = re.compile(
+    r"confidentialit|vie[\s-]?priv|privacy|renseignements\s+personnels|"
+    r"conditions|mentions\s+l[ée]gales|terms", re.IGNORECASE)
+LINK_HREF_PATTERNS = re.compile(
+    r"confidentialite|declaration_confidentialite|privacy|vie-privee|"
+    r"conditions|mentions-legales|terms", re.IGNORECASE)
+MAX_DISCOVERED = 5
+
+
+def _discover_privacy_links(html: str, base_url: str) -> list[str]:
+    """Find privacy/terms links the site actually uses, whatever their URL
+    shape (portal query strings included) — conventional paths are not enough
+    in the wild."""
+    found: list[str] = []
+    for match in re.finditer(
+            r"<a\b[^>]*href=[\"']([^\"'#]+)[\"'][^>]*>(.*?)</a>",
+            html, re.IGNORECASE | re.DOTALL):
+        href, text = match.group(1), re.sub(r"<[^>]+>", " ", match.group(2))
+        if LINK_HREF_PATTERNS.search(href) or LINK_TEXT_PATTERNS.search(text):
+            absolute = urljoin(base_url, href.replace("&amp;", "&"))
+            if absolute.startswith(("http://", "https://")) and absolute not in found:
+                found.append(absolute)
+        if len(found) >= MAX_DISCOVERED:
+            break
+    return found
+
+
 def snapshot(root_url: str, extra_urls: tuple[str, ...] = ()) -> SiteSnapshot:
-    """Fetch the root page plus likely privacy-relevant pages."""
+    """Fetch the root page, likely privacy paths, and the privacy/terms links
+    the root page itself declares."""
     _assert_public(root_url)
     site = SiteSnapshot(root_url=root_url)
     seen: set[str] = set()
+
+    def fetch_into(client: httpx.Client, url: str) -> Page | None:
+        try:
+            _assert_public(url)
+        except ScanRefused:
+            return None
+        page = _fetch_page(client, url)
+        if page is None or page.url in seen:
+            return None
+        seen.add(page.url)
+        if page.status_code < 400:
+            site.pages.append(page)
+            return page
+        return None
+
     with httpx.Client(
         follow_redirects=True,
         timeout=TIMEOUT_S,
         headers={"User-Agent": USER_AGENT},
     ) as client:
-        candidates = [urljoin(root_url, path) for path in CANDIDATE_PATHS]
+        root_page = fetch_into(client, root_url)
+        discovered = (_discover_privacy_links(root_page.html, root_page.url)
+                      if root_page else [])
+        candidates = discovered + [urljoin(root_url, p) for p in CANDIDATE_PATHS]
         candidates.extend(extra_urls)
         for url in candidates:
             if len(site.pages) >= MAX_PAGES:
                 break
-            _assert_public(url)
-            page = _fetch_page(client, url)
-            if page is None:
-                continue
-            if page.url in seen:
-                continue
-            seen.add(page.url)
-            if page.status_code < 400:
-                site.pages.append(page)
+            fetch_into(client, url)
     return site

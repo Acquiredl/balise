@@ -6,6 +6,7 @@ to a B-check finding; unanswered items report `unknown` honestly.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 import yaml
@@ -14,12 +15,41 @@ from .external import Finding
 from .registry import Status, module_checks
 
 _ANSWER_TO_STATUS = {
+    # English enums
     "yes": Status.MET,
     "partial": Status.PARTIAL,
+    "partially": Status.PARTIAL,
     "no": Status.NOT_MET,
     "not_applicable": Status.NOT_APPLICABLE,
+    "na": Status.NOT_APPLICABLE,
+    "n/a": Status.NOT_APPLICABLE,
     "unknown": Status.UNKNOWN,
+    # French, as owners actually answer
+    "oui": Status.MET,
+    "non": Status.NOT_MET,
+    "partiel": Status.PARTIAL,
+    "partiellement": Status.PARTIAL,
+    "sans_objet": Status.NOT_APPLICABLE,
+    "sans objet": Status.NOT_APPLICABLE,
+    "incertain": Status.UNKNOWN,
+    "inconnu": Status.UNKNOWN,
 }
+
+_NO_TOKENS = {"no", "non", "false", "0"}
+
+
+def _parse_answer(raw: str) -> Status:
+    """Map a natural-language answer to a status via its leading token.
+
+    Owners answer in sentences ("non, nous n'avons pas de registre...");
+    the leading word carries the verdict, the rest is context kept as
+    evidence. Unrecognized answers degrade to UNKNOWN, never guessed.
+    """
+    text = raw.strip().lower().strip("\"'")
+    if text in _ANSWER_TO_STATUS:
+        return _ANSWER_TO_STATUS[text]
+    lead = re.split(r"[\s,.;:!]+", text, maxsplit=1)[0] if text else ""
+    return _ANSWER_TO_STATUS.get(lead, Status.UNKNOWN)
 
 
 def load_intake(path: str | Path) -> dict:
@@ -43,9 +73,20 @@ def run_intake_assessment(intake: dict | None) -> list[Finding]:
                 reasoning_fr="Sans réponse au questionnaire; les obligations "
                              "organisationnelles ne s'observent pas de l'extérieur."))
             continue
-        raw_answer = str(entry.get("answer", "unknown")).lower()
-        status = _ANSWER_TO_STATUS.get(raw_answer, Status.UNKNOWN)
+        raw_answer = str(entry.get("answer", "unknown"))
         note = str(entry.get("details", "")).strip()
+        applicable = str(entry.get("applicable", "")).strip().lower()
+        if applicable in _NO_TOKENS:
+            findings.append(Finding(
+                check.id, Status.NOT_APPLICABLE,
+                evidence=[f"réponse / answer: {raw_answer}"] + ([note] if note else []),
+                reasoning="Declared not applicable in the intake (the practice "
+                          "this check covers is not in use).",
+                reasoning_fr="Déclaré sans objet dans le questionnaire (la "
+                             "pratique visée par cette vérification n'est pas "
+                             "utilisée)."))
+            continue
+        status = _parse_answer(raw_answer)
         findings.append(Finding(
             check.id, status,
             evidence=[f"réponse / answer: {raw_answer}"] + ([note] if note else []),
