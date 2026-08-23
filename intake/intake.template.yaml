@@ -1,0 +1,120 @@
+# Balise — Questionnaire d'admission / Intake questionnaire
+# Répondez par: yes | partial | no | not_applicable | unknown
+# Answer with:  yes | partial | no | not_applicable | unknown
+#
+# Autoévaluation de préparation — ne constitue pas un avis juridique.
+# Readiness self-assessment — this is not legal advice.
+
+enterprise:
+  name: ""
+  website: ""
+  employees: 0
+  sector: ""
+  sells_outside_quebec: unknown   # PIPEDA dual-regime flag
+
+answers:
+  B1:
+    question_fr: >-
+      Tenez-vous un registre des incidents de confidentialité (8 éléments
+      prescrits, conservation 5 ans) et avez-vous un processus de réponse?
+      (Norme légale: notification « avec diligence » — il n'existe PAS de
+      délai de 72 heures au Québec.)
+    question_en: >-
+      Do you keep a confidentiality-incident register (8 prescribed elements,
+      5-year retention) and have a response process? (Legal standard:
+      notify "with diligence" — there is NO 72-hour deadline in Quebec.)
+    answer: unknown
+    details: ""
+  B2:
+    question_fr: >-
+      Réalisez-vous une ÉFVP pour tout système d'information acquis, développé
+      ou refondu qui implique des renseignements personnels?
+    question_en: >-
+      Do you conduct a PIA for any acquired, developed or overhauled
+      information system involving personal information?
+    answer: unknown
+    details: ""
+  B3:
+    question_fr: >-
+      Pour chaque communication de RP hors Québec (incluant chaque fournisseur
+      SaaS hébergé aux États-Unis), avez-vous une ÉFVP et une entente écrite?
+    question_en: >-
+      For each communication of PI outside Quebec (including every US-hosted
+      SaaS vendor), do you have a PIA and a written agreement?
+    answer: unknown
+    details: ""
+  B4:
+    question_fr: >-
+      Vos contrats avec mandataires et fournisseurs contiennent-ils des clauses
+      de confidentialité et de notification d'incident?
+    question_en: >-
+      Do your mandatary/vendor contracts contain confidentiality and
+      incident-notification clauses?
+    answer: unknown
+    details: ""
+  B5:
+    question_fr: >-
+      Avez-vous des politiques internes couvrant les rôles du cycle de vie des
+      RP, la conservation/destruction et le traitement des plaintes?
+    question_en: >-
+      Do you have internal policies covering PI lifecycle roles,
+      retention/destruction, and complaint handling?
+    answer: unknown
+    details: ""
+  B6:
+    question_fr: >-
+      Utilisez-vous des systèmes biométriques (horodateurs à empreinte,
+      reconnaissance faciale)? Si oui: consentement exprès obtenu et
+      déclaration à la CAI 60 jours avant la mise en service?
+    question_en: >-
+      Do you use biometric systems (fingerprint time-clocks, facial
+      recognition)? If so: express consent obtained and CAI declaration
+      filed 60 days before service?
+    answer: unknown
+    details: ""
+  B7:
+    question_fr: >-
+      Prenez-vous des décisions fondées exclusivement sur un traitement
+      automatisé de RP? Si oui: information de la personne et possibilité de
+      présenter des observations?
+    question_en: >-
+      Do you make decisions based exclusively on automated processing of PI?
+      If so: is the person informed and able to submit observations?
+    answer: unknown
+    details: ""
+  B8:
+    question_fr: >-
+      Recueillez-vous des RP de mineurs de moins de 14 ans? Si oui:
+      consentement du titulaire de l'autorité parentale?
+    question_en: >-
+      Do you collect PI from minors under 14? If so: consent of the holder
+      of parental authority?
+    answer: unknown
+    details: ""
+  B9:
+    question_fr: >-
+      Pouvez-vous répondre à une demande de portabilité (format technologique
+      structuré et couramment utilisé)?
+    question_en: >-
+      Can you fulfil a data-portability request (structured, commonly used
+      technological format)?
+    answer: unknown
+    details: ""
+  B10:
+    question_fr: >-
+      Traitez-vous des renseignements sensibles (santé, biométrie, autrement
+      intimes)? Si oui: consentement exprès pour utilisation/communication?
+    question_en: >-
+      Do you handle sensitive information (health, biometric, otherwise
+      intimate)? If so: express consent for use/communication?
+    answer: unknown
+    details: ""
+  B11:
+    question_fr: >-
+      Votre personnel reçoit-il une formation/sensibilisation à la protection
+      des RP? (Attente de la CAI — non exigée explicitement par la loi.)
+    question_en: >-
+      Does your staff receive privacy training/awareness? (CAI expectation —
+      not an explicit statutory mandate.)
+    answer: unknown
+    details: ""

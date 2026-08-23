@@ -1,0 +1,18 @@
+# engagements & client data — never committed
+balise-out/
+engagement-*/
+mandat-*/
+intake/*.yaml
+!intake/intake.template.yaml
+
+# python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# env / secrets
+.env
