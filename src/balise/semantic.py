@@ -142,6 +142,41 @@ def _parse_engine_response(raw: str) -> EngineResult:
     return EngineResult(Status(status), reasoning, reasoning_fr, evidence)
 
 
+def _normalize(text: str) -> str:
+    """Whitespace-collapsed, casefolded, typography-neutral form for
+    substring comparison (curly quotes/apostrophes vary between the model's
+    output and the fetched text)."""
+    text = (text.replace("’", "'").replace("‘", "'")
+                .replace("“", '"').replace("”", '"')
+                .replace(" ", " "))
+    return re.sub(r"\s+", " ", text).casefold().strip()
+
+
+_DROPPED_EN = ("[{n} quote(s) returned by the engine could not be found in "
+               "the fetched text and were removed.]")
+_DROPPED_FR = ("[{n} citation(s) retournée(s) par le moteur n'ont pas été "
+               "retrouvées dans le texte récupéré et ont été retirées.]")
+
+
+def verify_quotes(result: EngineResult, corpus: str) -> EngineResult:
+    """Keep only evidence quotes that actually appear in the corpus.
+
+    The registry structurally prevents hallucinated obligations (closed check
+    set, authored questions, hooks from the registry); this closes the last
+    gap — fabricated 'verbatim' quotes. Dropped quotes are disclosed in the
+    reasoning so the audit trail shows the correction."""
+    haystack = _normalize(corpus)
+    kept = [q for q in result.evidence if q and _normalize(q) in haystack]
+    dropped = len(result.evidence) - len(kept)
+    if not dropped:
+        return result
+    return EngineResult(
+        result.status,
+        (result.reasoning + " " + _DROPPED_EN.format(n=dropped)).strip(),
+        (result.reasoning_fr + " " + _DROPPED_FR.format(n=dropped)).strip(),
+        kept)
+
+
 def _visible_text(html: str) -> str:
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(html, "html.parser")
@@ -180,6 +215,7 @@ def run_semantic_checks(site: SiteSnapshot) -> list[Finding]:
         result = engine.assess(check_id, corpus)
         if result.status is Status.UNKNOWN and "JSON" in result.reasoning:
             result = engine.assess(check_id, corpus)  # one retry on glitch
+        result = verify_quotes(result, corpus)
         findings.append(Finding(check_id, result.status,
                                 evidence=result.evidence,
                                 reasoning=result.reasoning,
