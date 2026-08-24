@@ -181,6 +181,11 @@ def write_report(findings: list[Finding], target: str, out_dir: str | Path,
 
     audit_path = out / "audit-trail.jsonl"
     with audit_path.open("w", encoding="utf-8") as handle:
+        # Hash chain: each record carries the previous record's hash inside
+        # its own hashed content, so deleting or reordering ANY record breaks
+        # every hash after it. "Records are intact" becomes "the trail is
+        # intact" — the property the product's positioning rests on.
+        prev_hash = "genesis"
         for finding in sorted(findings, key=_check_order):
             record = {
                 "ts": datetime.now(timezone.utc).isoformat(),
@@ -192,12 +197,36 @@ def write_report(findings: list[Finding], target: str, out_dir: str | Path,
                 "evidence": finding.evidence,
                 "reasoning": finding.reasoning,
                 "reasoning_fr": finding.reasoning_fr,
+                "prev": prev_hash,
             }
             record["sha256"] = hashlib.sha256(
                 json.dumps(record, sort_keys=True, ensure_ascii=False).encode("utf-8")
             ).hexdigest()
+            prev_hash = record["sha256"]
             handle.write(json.dumps(record, ensure_ascii=False) + "\n")
 
     report_path = out / "rapport-balise.md"
     report_path.write_text(body, encoding="utf-8")
     return ReportPaths(report_md=report_path, audit_jsonl=audit_path)
+
+
+def verify_audit_trail(path: str | Path) -> bool:
+    """True iff every record's hash validates AND the prev-chain is unbroken.
+
+    A single edited field, a deleted record, or a reordering anywhere in the
+    file returns False."""
+    prev = "genesis"
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        record = json.loads(line)
+        claimed = record.pop("sha256", None)
+        if record.get("prev") != prev:
+            return False
+        recomputed = hashlib.sha256(
+            json.dumps(record, sort_keys=True, ensure_ascii=False).encode("utf-8")
+        ).hexdigest()
+        if recomputed != claimed:
+            return False
+        prev = claimed
+    return True

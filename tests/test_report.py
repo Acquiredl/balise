@@ -3,7 +3,7 @@ import json
 from balise.external import Finding
 from balise.intake import run_intake_assessment
 from balise.registry import Status
-from balise.report import write_report
+from balise.report import verify_audit_trail, write_report
 
 
 def test_report_is_bilingual_with_disclaimers_and_audit_trail(tmp_path):
@@ -94,6 +94,36 @@ def test_summary_orders_priorities_and_explains_unknown(tmp_path):
     assert "point de discussion, pas un échec" in body   # unknown explained
     assert "Avis public." in body and "Public notice." in body
     assert "Autodéclaré" not in body                     # report internals stay out
+
+
+def test_audit_trail_hash_chain_detects_tampering(tmp_path):
+    findings = [
+        Finding("A1", Status.MET, reasoning="x", reasoning_fr="x"),
+        Finding("A3", Status.NOT_MET, reasoning="x", reasoning_fr="x"),
+        Finding("B1", Status.PARTIAL, reasoning="x", reasoning_fr="x"),
+    ]
+    paths = write_report(findings, target="https://x.example", out_dir=tmp_path)
+    assert verify_audit_trail(paths.audit_jsonl)
+
+    lines = paths.audit_jsonl.read_text(encoding="utf-8").strip().splitlines()
+
+    # deleting a middle record breaks the chain
+    paths.audit_jsonl.write_text("\n".join([lines[0], lines[2]]) + "\n",
+                                 encoding="utf-8")
+    assert not verify_audit_trail(paths.audit_jsonl)
+
+    # editing one field breaks that record's own hash
+    tampered = json.loads(lines[1])
+    tampered["status"] = "met"
+    paths.audit_jsonl.write_text(
+        "\n".join([lines[0], json.dumps(tampered, ensure_ascii=False), lines[2]])
+        + "\n", encoding="utf-8")
+    assert not verify_audit_trail(paths.audit_jsonl)
+
+    # reordering breaks it even though every individual hash still matches
+    paths.audit_jsonl.write_text("\n".join([lines[1], lines[0], lines[2]]) + "\n",
+                                 encoding="utf-8")
+    assert not verify_audit_trail(paths.audit_jsonl)
 
 
 def test_exec_summary_opens_report_with_counts_and_top_priorities(tmp_path):

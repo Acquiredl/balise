@@ -39,6 +39,10 @@ def test_by_id_round_trip():
 
 def test_client_copy_covers_every_check():
     from balise.advice import CLIENT_COPY
+    # exact two-way match: a check without copy silently vanishes from the
+    # sommaire and exec opener; orphaned copy means a check was removed
+    # without cleaning its owner-voice text
+    assert set(CLIENT_COPY) == {c.id for c in CHECKS}
     for check in CHECKS:
         copy = CLIENT_COPY.get(check.id)
         assert copy is not None, f"{check.id} has no client copy"
