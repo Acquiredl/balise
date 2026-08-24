@@ -52,10 +52,14 @@ def main(argv: list[str] | None = None) -> int:
     scan.add_argument("url", help="Root URL of the site (https://...)")
     scan.add_argument("--intake", help="Path to a filled intake YAML (Module B)")
     scan.add_argument("--out", default="./balise-out", help="Output directory")
+    scan.add_argument("--also", action="append", default=[], metavar="URL",
+                      help="Extra page to include in the scan corpus (e.g. a "
+                           "contact or signup form the crawler would miss); "
+                           "repeatable")
     args = parser.parse_args(argv)
 
     try:
-        site = fetcher.snapshot(args.url)
+        site = fetcher.snapshot(args.url, extra_urls=tuple(args.also))
     except fetcher.ScanRefused as exc:
         print(f"scan refused: {exc}", file=sys.stderr)
         return 2
