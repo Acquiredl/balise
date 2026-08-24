@@ -57,6 +57,30 @@ def test_bare_english_tracker_site_scores_gaps():
     assert by_id(findings, "A7").status is Status.NOT_MET
 
 
+OFFICER_NO_CONTACT_POLICY = """
+<html lang="fr"><head><style>@media (max-width: 600px) { body { margin: 0; } }
+</style></head><body>
+<h1>Politique de confidentialité</h1>
+<p>La Direction agit comme Responsable de la protection des renseignements
+personnels. Remplissez le formulaire (champ Téléphone requis) pour nous
+joindre.</p>
+</body></html>
+"""
+
+
+def test_officer_without_real_contact_means_is_partial_despite_css_at_sign():
+    findings = run_external_scan(site_with([
+        ("https://exemple.example/", COMPLIANT_HOME),
+        ("https://exemple.example/politique-de-confidentialite",
+         OFFICER_NO_CONTACT_POLICY),
+    ]))
+    a3 = by_id(findings, "A3")
+    # @media's "@" and the word "Téléphone" are not contact means
+    assert a3.status is Status.PARTIAL
+    # evidence keeps the site's actual casing
+    assert any("Responsable" in item for item in a3.evidence)
+
+
 def test_every_finding_carries_reasoning():
     findings = run_external_scan(site_with([
         ("https://example.example/", BARE_ENGLISH_HOME),

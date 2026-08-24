@@ -33,6 +33,12 @@ OFFICER_PATTERNS = (
     r"responsable\s+de\s+l['’]accès\s+aux\s+documents",
 )
 
+# A reachable means, not vocabulary: an email address, a mailto link, or a
+# phone number. A bare "@" or the word "téléphone" is not contact information
+# (walk finding F13: @media in inline CSS was enough to fake reachability).
+EMAIL_PATTERN = r"[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[a-z]{2,}"
+PHONE_PATTERN = r"\(?\d{3}\)?[\s. -]?\d{3}[\s. -]?\d{4}"
+
 # Trackers observable in the initial HTML payload. Presence before any consent
 # interaction is an indicator, not proof of firing-without-consent — scored
 # accordingly (partial/unknown, never not_met on this evidence alone).
@@ -81,10 +87,13 @@ def _page_text(page: Page) -> str:
 def _search_pages(site: SiteSnapshot, patterns: tuple[str, ...]) -> list[tuple[Page, str]]:
     hits: list[tuple[Page, str]] = []
     for page in site.pages:
-        text = _page_text(page).lower()
+        text = _page_text(page)
+        lowered = text.lower()
         for pattern in patterns:
-            match = re.search(pattern, text)
+            match = re.search(pattern, lowered)
             if match:
+                # match on the lowered text, quote from the original — evidence
+                # snippets must keep the site's actual casing
                 start = max(0, match.start() - 60)
                 snippet = text[start:match.end() + 60].strip()
                 hits.append((page, f"« …{snippet}… »"))
@@ -139,7 +148,10 @@ def check_a3_officer(site: SiteSnapshot) -> Finding:
                          "(l'art. 3.1 exige la publication du titre et des "
                          "coordonnées).")
     page, snippet = hits[0]
-    has_contact = bool(re.search(r"mailto:|@|téléphone|telephone|phone", page.html.lower()))
+    text = _page_text(page)
+    has_contact = bool(re.search(r"mailto:", page.html, re.IGNORECASE)
+                       or re.search(EMAIL_PATTERN, text, re.IGNORECASE)
+                       or re.search(PHONE_PATTERN, text))
     if has_contact:
         return Finding(
             "A3", Status.MET, evidence=[page.url, snippet],
@@ -159,11 +171,11 @@ def check_a5_trackers(site: SiteSnapshot) -> Finding:
         return Finding("A5", Status.UNKNOWN,
                        reasoning="No pages retrieved.",
                        reasoning_fr="Aucune page récupérée.")
-    html = root.html.lower()
+    payload = root.html.lower()
     trackers = [name for name, sigs in TRACKER_SIGNATURES.items()
-                if any(re.search(s, html) for s in sigs)]
+                if any(re.search(s, payload) for s in sigs)]
     banners = [name for name, sigs in CONSENT_BANNER_SIGNATURES.items()
-               if any(re.search(s, html) for s in sigs)]
+               if any(re.search(s, payload) for s in sigs)]
     if not trackers:
         return Finding(
             "A5", Status.MET, evidence=[root.url],
@@ -202,11 +214,11 @@ def check_a7_french(site: SiteSnapshot) -> Finding:
         return Finding("A7", Status.UNKNOWN,
                        reasoning="No pages retrieved.",
                        reasoning_fr="Aucune page récupérée.")
-    html = root.html
-    lang_attr = re.search(r"<html[^>]*\blang=[\"']?([a-zA-Z-]+)", html)
+    markup = root.html
+    lang_attr = re.search(r"<html[^>]*\blang=[\"']?([a-zA-Z-]+)", markup)
     lang = (lang_attr.group(1).lower() if lang_attr else "")
-    has_fr_alternate = bool(re.search(r"hreflang=[\"']?fr", html.lower()))
-    looks_french = sum(1 for p in FRENCH_HINTS if re.search(p, html.lower())) >= 2
+    has_fr_alternate = bool(re.search(r"hreflang=[\"']?fr", markup.lower()))
+    looks_french = sum(1 for p in FRENCH_HINTS if re.search(p, markup.lower())) >= 2
     evidence = [root.url, f"html lang={lang or 'absent'}",
                 f"version fr / fr alternate: {'oui/yes' if has_fr_alternate else 'non/no'}"]
     if lang.startswith("fr") or looks_french:

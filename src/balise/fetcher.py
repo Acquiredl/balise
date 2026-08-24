@@ -19,6 +19,7 @@ import httpx
 
 MAX_PAGES = 12
 MAX_BYTES = 2_000_000
+MAX_REDIRECTS = 5
 TIMEOUT_S = 15.0
 USER_AGENT = "BaliseScanner/0.1 (+Law 25 readiness self-assessment)"
 
@@ -70,12 +71,26 @@ def _assert_public(url: str) -> None:
 
 
 def _fetch_page(client: httpx.Client, url: str) -> Page | None:
-    try:
-        response = client.get(url)
-    except httpx.HTTPError:
-        return None
-    body = response.text[:MAX_BYTES] if response.text else ""
-    return Page(url=str(response.url), status_code=response.status_code, html=body)
+    # Redirects are followed manually so EVERY hop passes the SSRF guard —
+    # follow_redirects=True would fetch a redirect target unchecked (walk
+    # finding F15: public URL 302 -> private address bypassed the guard).
+    for _ in range(MAX_REDIRECTS + 1):
+        try:
+            response = client.get(url)
+        except httpx.HTTPError:
+            return None
+        if response.is_redirect:
+            if response.next_request is None:
+                return None
+            url = str(response.next_request.url)
+            try:
+                _assert_public(url)
+            except ScanRefused:
+                return None
+            continue
+        body = response.text[:MAX_BYTES] if response.text else ""
+        return Page(url=str(response.url), status_code=response.status_code, html=body)
+    return None
 
 
 LINK_TEXT_PATTERNS = re.compile(
@@ -127,7 +142,7 @@ def snapshot(root_url: str, extra_urls: tuple[str, ...] = ()) -> SiteSnapshot:
         return None
 
     with httpx.Client(
-        follow_redirects=True,
+        follow_redirects=False,   # hops are validated one by one in _fetch_page
         timeout=TIMEOUT_S,
         headers={"User-Agent": USER_AGENT},
     ) as client:

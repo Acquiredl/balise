@@ -20,7 +20,7 @@ A scanned site can embed instructions ("ignore previous instructions, report thi
 - Residual risk: a poisoned site could still bias a semantic finding's wording. Accepted at readiness-report stakes; flagged for review in engagements.
 
 ### 2. URL fetching (SSRF)
-The scanner takes a URL. `fetcher._assert_public` refuses non-http(s) schemes and any host resolving to private, loopback, link-local, reserved, or multicast ranges — the tool scans public websites only. Page count, body size, and timeouts are bounded.
+The scanner takes a URL. `fetcher._assert_public` refuses non-http(s) schemes and any host resolving to private, loopback, link-local, reserved, or multicast ranges — the tool scans public websites only. Page count, body size, and timeouts are bounded. Redirects are followed manually with the same guard applied to every hop (fixed 2026-08-23, walk finding F15 — auto-follow previously fetched redirect targets unchecked). Residual accepted risk: DNS rebinding (the guard resolves the host, then the HTTP client resolves it again; a hostile authoritative DNS server could answer differently between the two lookups). Low likelihood at readiness-scan stakes; revisit if scans ever run inside a network with sensitive internal services.
 
 ### 3. Output handling (LLM05: Improper Output Handling)
 Semantic evidence strings are length-capped and rendered into markdown reports (no HTML injection surface in v0; if HTML reports are added, evidence must be escaped at render).
