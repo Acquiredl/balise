@@ -182,11 +182,26 @@ def _visible_text(html: str) -> str:
     soup = BeautifulSoup(html, "html.parser")
     for tag in soup(("script", "style", "noscript")):
         tag.decompose()
+    # Form controls carry evidence visible text loses (walk finding F17):
+    # required-ness, field names, placeholders. Render them compactly so
+    # A8/A10 can see what a form actually demands, not just its labels.
+    for control in soup(("input", "select", "textarea")):
+        if (control.get("type") or "").lower() == "hidden":
+            control.replace_with("")
+            continue
+        bits = [control.name]
+        for attr in ("name", "type", "placeholder"):
+            if control.get(attr):
+                bits.append(f"{attr}={control[attr]}")
+        if control.has_attr("required"):
+            bits.append("required")
+        control.replace_with(f"[{' '.join(bits)}]")
     return re.sub(r"\s+", " ", soup.get_text(" ")).strip()
 
 
 def run_semantic_checks(site: SiteSnapshot) -> list[Finding]:
-    """Run A2/A4/A6/A8/A9; honest `unknown` when the engine is absent."""
+    """Run every check in SEMANTIC_CHECK_IDS; honest `unknown` when the
+    engine is absent."""
     if not SemanticEngine.configured():
         return [
             Finding(check_id, Status.UNKNOWN,
