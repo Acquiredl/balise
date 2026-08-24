@@ -61,6 +61,9 @@ def main(argv: list[str] | None = None) -> int:
                            "only (no intake, no semantic engine), producing a "
                            "teaser summary instead of the full deliverables")
     args = parser.parse_args(argv)
+    if args.mini and args.intake:
+        parser.error("--mini runs the remote preview only and would ignore "
+                     "--intake; drop one of the two flags")
 
     try:
         site = fetcher.snapshot(args.url, extra_urls=tuple(args.also))

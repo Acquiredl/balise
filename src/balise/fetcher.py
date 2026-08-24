@@ -134,8 +134,10 @@ def snapshot(root_url: str, extra_urls: tuple[str, ...] = ()) -> SiteSnapshot:
         root_page = fetch_into(client, root_url)
         discovered = (_discover_privacy_links(root_page.html, root_page.url)
                       if root_page else [])
-        candidates = discovered + [urljoin(root_url, p) for p in CANDIDATE_PATHS]
-        candidates.extend(extra_urls)
+        # Operator-supplied pages outrank speculative conventional paths: the
+        # page cap must never drop a URL the operator explicitly asked for.
+        candidates = (discovered + list(extra_urls)
+                      + [urljoin(root_url, p) for p in CANDIDATE_PATHS])
         for url in candidates:
             if len(site.pages) >= MAX_PAGES:
                 break
