@@ -7,7 +7,7 @@
 
 ## Si vous ne lisez qu'un paragraphe
 
-**30 points vérifiés** : Atteint 3 · Partiel 7 · Non atteint 8 · Sans objet 4 · Indéterminé 8.
+**30 points vérifiés** : Atteint 3 · Partiel 10 · Non atteint 11 · Sans objet 4 · Indéterminé 2.
 
 **Priorités :**
 1. **La personne responsable, affichée et joignable.** Publier le titre et un moyen de contact du responsable sur le site.
@@ -18,8 +18,8 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 ## Posture par domaine
 
-- **Transparence** — Atteint: 2, Partiel: 2, Indéterminé: 5
-- **Gouvernance** — Partiel: 3, Indéterminé: 3, Non atteint: 6, Atteint: 1
+- **Transparence** — Atteint: 2, Partiel: 5, Non atteint: 2
+- **Gouvernance** — Partiel: 3, Non atteint: 7, Indéterminé: 2, Atteint: 1
 - **Incidents** — Non atteint: 1
 - **Fournisseurs et transferts** — Non atteint: 1, Partiel: 1
 - **Catégories particulières** — Sans objet: 4, Partiel: 1
@@ -36,9 +36,15 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 ### A2 — Politique en termes simples et clairs, couvrant fins, droits, tiers et communication hors Québec
 
-- **Statut:** Indéterminé
+- **Statut:** Partiel
 - **Base légale:** ss. 8, 8.2 + guide CAI [LOI]
-- **Raisonnement:** Moteur sémantique non configuré (clé ANTHROPIC_API_KEY absente); cette vérification de jugement n'a pas été évaluée.
+- **Éléments observés:**
+  - Dernière mise à jour : mars 2024
+  - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
+  - Nous utilisons des outils de commerce en ligne et d'envoi de courriels fournis par des entreprises situées à l'extérieur du Canada
+  - Vous pouvez vous désabonner de l'infolettre en tout temps grâce au lien présent dans chaque courriel.
+  - La direction de la pépinière agit comme responsable de la protection des renseignements personnels.
+- **Raisonnement:** La politique couvre certains éléments obligatoires comme les catégories de renseignements personnels, leurs finalités, la mention des témoins et la possibilité de transfert hors Québec, ainsi qu'une date de mise à jour, mais elle omet des éléments essentiels tels que les droits d'accès et de rectification, la procédure de plainte à la CAI, les catégories de personnel interne ayant accès aux données, les catégories précises de destinataires tiers, et les moyens de refuser certaines collectes avec leurs conséquences. La politique est bien distincte des conditions de vente, respectant la règle anti-fusion. Les éléments facultatifs (mesures de sécurité, nom du responsable, moyens technologiques d'exercice des droits) sont absents mais ne constituent que des recommandations.
 
 ### A3 — Titre et coordonnées du responsable de la protection des renseignements personnels publiés
 
@@ -51,9 +57,12 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 ### A4 — Information détaillée sur les politiques de gouvernance publiée
 
-- **Statut:** Indéterminé
+- **Statut:** Non atteint
 - **Base légale:** s. 3.2 [LOI]
-- **Raisonnement:** Moteur sémantique non configuré (clé ANTHROPIC_API_KEY absente); cette vérification de jugement n'a pas été évaluée.
+- **Éléments observés:**
+  - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
+  - La direction de la pépinière agit comme responsable de la protection des renseignements personnels. Pour toute question, écrivez-nous via le formulaire de la page Nous joindre.
+- **Raisonnement:** La politique de confidentialité publiée décrit les renseignements recueillis, leurs fins, leur partage avec des tiers et nomme un responsable de la protection des renseignements personnels, mais elle ne mentionne ni les règles de conservation ou de destruction, ni les rôles et responsabilités tout au long du cycle de vie des renseignements, ni un processus de traitement des plaintes. Ces éléments exigés par l'article 3.2 sont absents du texte fourni.
 
 ### A5 — Témoins non essentiels inactifs avant consentement; bannière avec refus accessible
 
@@ -66,9 +75,11 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 ### A6 — Technologies de repérage, localisation ou profilage divulguées, avec moyens d'activation
 
-- **Statut:** Indéterminé
+- **Statut:** Partiel
 - **Base légale:** s. 8.1 [LOI]
-- **Raisonnement:** Moteur sémantique non configuré (clé ANTHROPIC_API_KEY absente); cette vérification de jugement n'a pas été évaluée.
+- **Éléments observés:**
+  - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
+- **Raisonnement:** La politique de confidentialité mentionne l'utilisation de témoins (cookies) pour mesurer l'achalandage, ce qui constitue une technologie ayant une fonction de suivi ou de profilage, mais elle ne précise pas la nature exacte de cette fonction ni les moyens offerts pour l'activer ou la désactiver, comme les paramètres du navigateur ou un bandeau de consentement. Aucun mécanisme de gestion des témoins n'est décrit. La divulgation est donc partielle.
 
 ### A7 — Version française du site, de la politique et des conditions (français d'abord pour les contrats d'adhésion)
 
@@ -82,21 +93,35 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 ### A8 — Formulaires : consentement par finalité, en termes clairs, demandé distinctement
 
-- **Statut:** Indéterminé
+- **Statut:** Non atteint
 - **Base légale:** s. 14 [LOI]
-- **Raisonnement:** Moteur sémantique non configuré (clé ANTHROPIC_API_KEY absente); cette vérification de jugement n'a pas été évaluée.
+- **Éléments observés:**
+  - Courriel Nom complet Téléphone Je m'abonne
+  - Nom complet Courriel Téléphone Date de naissance Votre message Envoyer
+  - vous transmettre notre infolettre si vous y avez consenti
+- **Raisonnement:** Les formulaires d'infolettre et de contact ne présentent que des champs à remplir (nom, courriel, téléphone, date de naissance) suivis d'un bouton d'envoi, sans case à cocher ni mention de consentement distincte ou spécifique à chaque finalité. La politique évoque un consentement pour l'infolettre ('si vous y avez consenti'), mais rien dans le formulaire ne montre comment ni où ce consentement est recueilli, ni sa durée ou sa granularité. Cela suggère que le mécanisme de consentement, tel que présenté sur les formulaires, ne respecte pas les critères de distinction, de granularité et de caractère manifeste exigés.
 
 ### A9 — Pratique d'avis de modification de la politique
 
-- **Statut:** Indéterminé
+- **Statut:** Non atteint
 - **Base légale:** s. 8.2 [LOI]
-- **Raisonnement:** Moteur sémantique non configuré (clé ANTHROPIC_API_KEY absente); cette vérification de jugement n'a pas été évaluée.
+- **Éléments observés:**
+  - Dernière mise à jour : mars 2024
+  - Ce que nous recueillons
+  - Pourquoi nous les recueillons
+  - Avec qui nous les partageons
+  - Vos choix
+  - Responsable de la protection des renseignements personnels
+- **Raisonnement:** La politique de confidentialité fournie couvre la collecte, l'utilisation, le partage des données et les coordonnées du responsable, mais ne comporte aucune mention sur la façon dont les modifications futures de la politique seront annoncées aux utilisateurs. Aucune clause ne traite de l'avis de changement, exigence prévue à l'art. 8.2.
 
 ### A10 — Formulaires : aucun refus de biens ou services pour refus de fournir des RP non nécessaires
 
-- **Statut:** Indéterminé
+- **Statut:** Partiel
 - **Base légale:** s. 9 [LOI]
-- **Raisonnement:** Moteur sémantique non configuré (clé ANTHROPIC_API_KEY absente); cette vérification de jugement n'a pas été évaluée.
+- **Éléments observés:**
+  - Nom complet Courriel Téléphone Date de naissance Votre message Envoyer
+  - Courriel Nom complet Téléphone Je m'abonne
+- **Raisonnement:** Le formulaire de contact demande le nom, le courriel, le téléphone et la date de naissance, alors que son but déclaré est de répondre à des questions sur les commandes ou livraisons; la date de naissance ne semble pas nécessaire à cette fin. De même, le formulaire d'inscription à l'infolettre exige un numéro de téléphone, bien que l'objectif énoncé soit l'envoi de courriels, ce qui ne justifie pas clairement cette donnée. Ces éléments suggèrent une possible collecte excessive par rapport aux finalités indiquées, mais on ignore si ces champs sont obligatoires ou optionnels.
 
 ### B1 — Registre des incidents de confidentialité (8 éléments prescrits, conservation 5 ans) et processus de réponse
 
@@ -270,7 +295,7 @@ Les demandes d'assurance cyber s'ouvrent sur le chiffre d'affaires et le nombre 
 | Copies de sauvegarde hors ligne, testées | Question obligatoire des formulaires courts (condition d'admissibilité). | B20 : Non atteint |
 | Formation et sensibilisation du personnel | Question obligatoire ou à rabais sur la plupart des formulaires. | B11 : Non atteint |
 | Plan de réponse et registre des incidents | Tous les formulaires exigent l'historique des violations (3 à 5 ans); un registre d'incidents tenu à jour y répond directement. | B1 : Non atteint |
-| Politique de confidentialité documentée | Formulaires détaillés et suivis de souscription; l'assureur peut demander la politique elle-même. | A1 : Atteint · A2 : Indéterminé |
+| Politique de confidentialité documentée | Formulaires détaillés et suivis de souscription; l'assureur peut demander la politique elle-même. | A1 : Atteint · A2 : Partiel |
 | Responsable désigné (sécurité et vie privée) | Formulaires détaillés (personne désignée pour la vie privée). | A3 : Partiel |
 | Gestion des fournisseurs et des tiers | Formulaires courts (liste des fournisseurs TI critiques) et détaillés (revues annuelles, preuve d'assurance des fournisseurs). | B3 : Non atteint · B4 : Partiel |
 | Conservation, destruction et demandes d'accès | Formulaires détaillés (politique de conservation, destruction sécurisée, procédures de demandes d'accès). | B5 : Non atteint · B14 : Non atteint · B16 : Indéterminé |
@@ -290,7 +315,7 @@ Les demandes d'assurance cyber s'ouvrent sur le chiffre d'affaires et le nombre 
 
 ## If you read only one paragraph
 
-**30 points assessed** : Met 3 · Partial 7 · Not met 8 · Not applicable 4 · Unknown 8.
+**30 points assessed** : Met 3 · Partial 10 · Not met 11 · Not applicable 4 · Unknown 2.
 
 **Priorities:**
 1. **Your privacy officer, named and reachable.** Publish the officer's title and a contact means on the site.
@@ -301,8 +326,8 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 ## Posture by domain
 
-- **Transparency** — Met: 2, Partial: 2, Unknown: 5
-- **Governance** — Partial: 3, Unknown: 3, Not met: 6, Met: 1
+- **Transparency** — Met: 2, Partial: 5, Not met: 2
+- **Governance** — Partial: 3, Not met: 7, Unknown: 2, Met: 1
 - **Incidents** — Not met: 1
 - **Vendors & transfers** — Not met: 1, Partial: 1
 - **Special categories** — Not applicable: 4, Partial: 1
@@ -319,9 +344,15 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 ### A2 — Policy in clear and plain language, covering purposes, rights, third parties and communication outside Quebec
 
-- **Status:** Unknown
+- **Status:** Partial
 - **Legal basis:** ss. 8, 8.2 + guide CAI [STATUTE]
-- **Reasoning:** Semantic engine not configured (ANTHROPIC_API_KEY absent); this judgment-type check was not assessed.
+- **Evidence:**
+  - Dernière mise à jour : mars 2024
+  - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
+  - Nous utilisons des outils de commerce en ligne et d'envoi de courriels fournis par des entreprises situées à l'extérieur du Canada
+  - Vous pouvez vous désabonner de l'infolettre en tout temps grâce au lien présent dans chaque courriel.
+  - La direction de la pépinière agit comme responsable de la protection des renseignements personnels.
+- **Reasoning:** The policy includes required elements such as PI categories and purposes, cookie mention, cross-border transfer disclosure, and an update date, but it lacks explicit information on access/rectification rights, the CAI complaint process, categories of internal personnel with access, specific recipient categories for third-party transmissions, and a means to refuse certain collections with consequences. The policy is presented as a distinct page separate from the 'Conditions de vente', satisfying the anti-conflation rule. MAY elements (security measures, officer's name, technological rights-exercise tools) are absent but are only recommendations, not mandatory gaps.
 
 ### A3 — Privacy officer title and contact information published
 
@@ -334,9 +365,12 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 ### A4 — Detailed information about governance policies published
 
-- **Status:** Unknown
+- **Status:** Not met
 - **Legal basis:** s. 3.2 [STATUTE]
-- **Reasoning:** Semantic engine not configured (ANTHROPIC_API_KEY absent); this judgment-type check was not assessed.
+- **Evidence:**
+  - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
+  - La direction de la pépinière agit comme responsable de la protection des renseignements personnels. Pour toute question, écrivez-nous via le formulaire de la page Nous joindre.
+- **Reasoning:** The published privacy policy covers what data is collected, why, sharing with third parties, and identifies a privacy officer, but it contains no information about retention or destruction rules, no description of roles/responsibilities across the information lifecycle, and no complaint-handling process. These specific elements required by s. 3.2 are absent from the text.
 
 ### A5 — Non-essential trackers inactive before consent; banner with accessible refusal
 
@@ -349,9 +383,11 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 ### A6 — Tracking, locating or profiling technology disclosed, with means of activation
 
-- **Status:** Unknown
+- **Status:** Partial
 - **Legal basis:** s. 8.1 [STATUTE]
-- **Reasoning:** Semantic engine not configured (ANTHROPIC_API_KEY absent); this judgment-type check was not assessed.
+- **Evidence:**
+  - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
+- **Reasoning:** The privacy policy mentions the use of cookies to measure site traffic, which is a technology with tracking/profiling functions, but it does not identify the specific technology's purpose (identification, location, or profiling) in detail, nor does it describe the means available to activate or deactivate these functions, such as browser settings or a consent banner. There is no mention of any opt-out or configuration mechanism for cookies. Thus disclosure exists only partially.
 
 ### A7 — French version of site, policy and terms (French-first for adhesion contracts)
 
@@ -365,21 +401,35 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 ### A8 — Forms: purpose-granular consent, in clear language, requested separately
 
-- **Status:** Unknown
+- **Status:** Not met
 - **Legal basis:** s. 14 [STATUTE]
-- **Reasoning:** Semantic engine not configured (ANTHROPIC_API_KEY absent); this judgment-type check was not assessed.
+- **Evidence:**
+  - Courriel Nom complet Téléphone Je m'abonne
+  - Nom complet Courriel Téléphone Date de naissance Votre message Envoyer
+  - vous transmettre notre infolettre si vous y avez consenti
+- **Reasoning:** The newsletter and contact forms only display data fields (name, email, phone, date of birth) with a submission button, without any visible consent checkbox, purpose-specific request, or separate consent statement. The privacy policy mentions consent for the newsletter ('si vous y avez consenti') but the actual form does not show how or where that consent is captured, nor any granular or time-limited consent language. This indicates the consent mechanism, as presented on the forms, does not meet the distinct, granular, and explicit requirements described in the CAI's criteria.
 
 ### A9 — Policy amendment-notice practice
 
-- **Status:** Unknown
+- **Status:** Not met
 - **Legal basis:** s. 8.2 [STATUTE]
-- **Reasoning:** Semantic engine not configured (ANTHROPIC_API_KEY absent); this judgment-type check was not assessed.
+- **Evidence:**
+  - Dernière mise à jour : mars 2024
+  - Ce que nous recueillons
+  - Pourquoi nous les recueillons
+  - Avec qui nous les partageons
+  - Vos choix
+  - Responsable de la protection des renseignements personnels
+- **Reasoning:** The privacy policy text provided includes sections on data collection, purpose, sharing, and contact information, but contains no statement about how future amendments to the policy will be announced or communicated to users. There is no clause addressing notice of changes, which is the requirement under s. 8.2.
 
 ### A10 — Forms: no refusal of goods or services over declining to provide unnecessary PI
 
-- **Status:** Unknown
+- **Status:** Partial
 - **Legal basis:** s. 9 [STATUTE]
-- **Reasoning:** Semantic engine not configured (ANTHROPIC_API_KEY absent); this judgment-type check was not assessed.
+- **Evidence:**
+  - Nom complet Courriel Téléphone Date de naissance Votre message Envoyer
+  - Courriel Nom complet Téléphone Je m'abonne
+- **Reasoning:** The contact form collects a full name, email, phone number, and date of birth, though its stated purpose is answering questions about products, orders, or deliveries; a birthdate does not appear necessary for that purpose. Similarly, the newsletter subscription form requests a phone number even though its stated purpose is sending email newsletters, which does not obviously require a phone contact. These fields suggest possible over-collection relative to the stated purposes, though it is unclear whether these fields are marked mandatory or optional.
 
 ### B1 — Confidentiality-incident register (8 prescribed elements, 5-year retention) and response process
 
@@ -553,7 +603,7 @@ Cyber-insurance applications open with revenue and employee count; the controls 
 | Offline, tested backups | Mandatory question on short-form applications (eligibility condition). | B20 : Not met |
 | Staff security and privacy training | Mandatory or discount-earning question on most applications. | B11 : Not met |
 | Incident response plan and register | Every form requires 3-5 years of breach history; a maintained incident register answers it directly. | B1 : Not met |
-| Documented privacy policy | Fuller applications and underwriting follow-ups; the insurer may request the policy itself. | A1 : Met · A2 : Unknown |
+| Documented privacy policy | Fuller applications and underwriting follow-ups; the insurer may request the policy itself. | A1 : Met · A2 : Partial |
 | Designated individual (security and privacy) | Fuller applications (designated privacy individual). | A3 : Partial |
 | Vendor and third-party management | Short forms (critical IT vendor list) and fuller forms (annual reviews, proof of vendors' own coverage). | B3 : Not met · B4 : Partial |
 | Retention, disposal and access requests | Fuller applications (retention policy, secure disposal, access-request procedures). | B5 : Not met · B14 : Not met · B16 : Unknown |
