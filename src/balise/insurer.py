@@ -13,15 +13,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from .external import Finding
-from .registry import Status
-
-_STATUS_LABELS = {
-    Status.MET: ("Atteint", "Met"),
-    Status.PARTIAL: ("Partiel", "Partial"),
-    Status.NOT_MET: ("Non atteint", "Not met"),
-    Status.NOT_APPLICABLE: ("Sans objet", "Not applicable"),
-    Status.UNKNOWN: ("Indéterminé", "Unknown"),
-}
+from .registry import STATUS_LABELS as _STATUS_LABELS
 
 
 @dataclass(frozen=True)

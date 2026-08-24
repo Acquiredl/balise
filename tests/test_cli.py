@@ -24,6 +24,18 @@ def test_mini_scan_writes_teaser_only(tmp_path, monkeypatch, capsys):
     assert "art." in body or "s. " in body
 
 
+def test_malformed_intake_yaml_fails_cleanly(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(cli.fetcher, "snapshot",
+                        lambda url, extra_urls=(): _fixture_snapshot(url))
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    bad = tmp_path / "intake.yaml"
+    bad.write_text("answers: [not, a, mapping", encoding="utf-8")
+    code = cli.main(["scan", "https://x.example",
+                     "--intake", str(bad), "--out", str(tmp_path)])
+    assert code == 2
+    assert "intake file invalid" in capsys.readouterr().err
+
+
 def test_also_flag_feeds_extra_urls_into_the_corpus(tmp_path, monkeypatch, capsys):
     captured = {}
 

@@ -14,16 +14,19 @@ from pathlib import Path
 
 from .advice import CLIENT_COPY
 from .external import Finding
-from .registry import CHECKS, Domain, Status
+from .registry import CHECKS, STATUS_LABELS, Domain, Status
 from .report import DOMAIN_LABELS, TIER_LABELS_FR, _check_order
 
-STATUS_META = {
-    Status.MET:            ("#177a4c", "✓", "Atteint", "Met"),
-    Status.PARTIAL:        ("#b0790a", "◐", "Partiel", "Partial"),
-    Status.NOT_MET:        ("#9d3511", "✗", "Non atteint", "Not met"),
-    Status.NOT_APPLICABLE: ("#5b7285", "—", "Sans objet", "Not applicable"),
-    Status.UNKNOWN:        ("#8a8f98", "?", "Indéterminé", "Unknown"),
+# color + icon are presentation, owned here; wording comes from the registry
+_STATUS_STYLE = {
+    Status.MET:            ("#177a4c", "✓"),
+    Status.PARTIAL:        ("#b0790a", "◐"),
+    Status.NOT_MET:        ("#9d3511", "✗"),
+    Status.NOT_APPLICABLE: ("#5b7285", "—"),
+    Status.UNKNOWN:        ("#8a8f98", "?"),
 }
+STATUS_META = {status: (*style, *STATUS_LABELS[status])
+               for status, style in _STATUS_STYLE.items()}
 
 _CSS = """
 *{box-sizing:border-box;margin:0;padding:0}
@@ -92,7 +95,7 @@ def _lang_section(findings: list[Finding], target: str, lang: str,
                   notices: list[tuple[str, str]]) -> str:
     fr = lang == "fr"
     idx = 0 if fr else 1
-    copy = {cid: c for cid, c in CLIENT_COPY.items()}
+    copy = CLIENT_COPY
 
     priorities = sorted(
         (f for f in findings if f.status in (Status.NOT_MET, Status.PARTIAL)),

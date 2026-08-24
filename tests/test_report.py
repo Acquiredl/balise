@@ -60,6 +60,20 @@ def test_answered_intake_maps_statuses():
     assert any("time-clock" in item for item in b6.evidence)
 
 
+def test_emphatic_negation_leads_parse_as_not_met():
+    intake = {"answers": {
+        "B14": {"answer": "jamais, on garde tout."},
+        "B17": {"answer": "aucun inventaire n'existe."},
+        "B5": {"answer": "rien d'écrit chez nous."},
+        "B11": {"answer": "pas encore"},          # "pas" stays ambiguous
+    }}
+    findings = {f.check_id: f for f in run_intake_assessment(intake)}
+    assert findings["B14"].status is Status.NOT_MET
+    assert findings["B17"].status is Status.NOT_MET
+    assert findings["B5"].status is Status.NOT_MET
+    assert findings["B11"].status is Status.UNKNOWN
+
+
 def test_intake_parses_natural_french_answers():
     intake = {"answers": {
         "B1": {"answer": "non, nous n'avons pas de registre, mais un processus existe."},

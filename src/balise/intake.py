@@ -33,6 +33,13 @@ _ANSWER_TO_STATUS = {
     "sans objet": Status.NOT_APPLICABLE,
     "incertain": Status.UNKNOWN,
     "inconnu": Status.UNKNOWN,
+    # unambiguous negation leads (walk finding F18): "jamais, on garde tout"
+    # is an emphatic no, not an unknown. "pas" stays out — too ambiguous
+    # ("pas de problème, oui on a ça").
+    "jamais": Status.NOT_MET,
+    "aucun": Status.NOT_MET,
+    "aucune": Status.NOT_MET,
+    "rien": Status.NOT_MET,
 }
 
 _NO_TOKENS = {"no", "non", "false", "0"}
@@ -53,7 +60,12 @@ def _parse_answer(raw: str) -> Status:
 
 
 def load_intake(path: str | Path) -> dict:
-    data = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
+    try:
+        data = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
+    except yaml.YAMLError as exc:
+        raise ValueError(f"not valid YAML: {exc}") from exc
+    if not isinstance(data, dict):
+        raise ValueError("intake file must be a YAML mapping")
     answers = data.get("answers", {})
     if not isinstance(answers, dict):
         raise ValueError("intake file must contain an 'answers' mapping")

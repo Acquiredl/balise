@@ -84,7 +84,11 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     findings += semantic.run_semantic_checks(site)
-    intake_data = intake_mod.load_intake(args.intake) if args.intake else None
+    try:
+        intake_data = intake_mod.load_intake(args.intake) if args.intake else None
+    except (OSError, ValueError) as exc:
+        print(f"intake file invalid: {exc}", file=sys.stderr)
+        return 2
     findings += intake_mod.run_intake_assessment(intake_data)
 
     notices = _scope_notices(site.root_url, intake_data)

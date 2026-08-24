@@ -16,7 +16,7 @@ from pathlib import Path
 from .advice import CLIENT_COPY
 from .external import Finding
 from .insurer import render_appendix
-from .registry import Domain, Status
+from .registry import STATUS_LABELS, Domain, Status
 
 DISCLAIMER_FR = (
     "> **Avis important** — Ce rapport est une autoévaluation de préparation "
@@ -32,14 +32,6 @@ DISCLAIMER_EN = (
     "professional. Every finding states the authority tier of its legal "
     "basis (STATUTE / CAI / FIRM)."
 )
-
-STATUS_LABELS = {
-    Status.MET: ("Atteint", "Met"),
-    Status.PARTIAL: ("Partiel", "Partial"),
-    Status.NOT_MET: ("Non atteint", "Not met"),
-    Status.NOT_APPLICABLE: ("Sans objet", "Not applicable"),
-    Status.UNKNOWN: ("Indéterminé", "Unknown"),
-}
 
 DOMAIN_LABELS = {
     Domain.TRANSPARENCY: ("Transparence", "Transparency"),

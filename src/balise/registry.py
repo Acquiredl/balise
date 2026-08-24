@@ -37,6 +37,17 @@ class Status(str, Enum):
     UNKNOWN = "unknown"
 
 
+# Client-facing status wording, (FR, EN) — single source for every renderer
+# (walk finding F22: report, summary, and insurer each carried their own copy).
+STATUS_LABELS = {
+    Status.MET: ("Atteint", "Met"),
+    Status.PARTIAL: ("Partiel", "Partial"),
+    Status.NOT_MET: ("Non atteint", "Not met"),
+    Status.NOT_APPLICABLE: ("Sans objet", "Not applicable"),
+    Status.UNKNOWN: ("Indéterminé", "Unknown"),
+}
+
+
 @dataclass(frozen=True)
 class Check:
     id: str
