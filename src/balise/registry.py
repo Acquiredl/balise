@@ -131,7 +131,14 @@ CHECKS: tuple[Check, ...] = (
                "and CAI notification is never deferred (s. 3.5). CAI expectation "
                "(prevention checklist p. 8): an incident-MANAGEMENT policy/procedures "
                "(detect, record, report, respond) as a governance artifact distinct "
-               "from the register itself."),
+               "from the register itself. "
+               "Walk finding F6 (2026-08-23): the uncited third sanction layer — "
+               "punitive damages of at least $1,000 per person for intentional or "
+               "gross-fault breaches, expressly combinable into class actions "
+               "(McCarthy toolkit table 2). Also honest-broker framing: the CAI must "
+               "weigh remediation measures, cooperation, and compensation offered when "
+               "setting an AMP — the response to an incident materially changes the "
+               "sanction."),
     Check("B2", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 3.3",
           "EFVP pour tout système d'information acquis, développé ou refondu impliquant des RP",
           "PIA for any acquired, developed or overhauled information system involving PI",
@@ -153,7 +160,12 @@ CHECKS: tuple[Check, ...] = (
                "by the statute's own words. Cite CAI EFVP guide s. 7.1 (4 factors, 11 "
                "recognized principles as the adequacy rubric, refuse-if-inadequate) — NOT "
                "the 2015 infonuagique fiche (outdated 'equivalent' standard, marked en "
-               "cours de révision)."),
+               "cours de révision). "
+               "Walk finding F7 (2026-08-23): s. 17 catches INTERPROVINCIAL transfers "
+               "too, not only international ones ('hors Québec' means exactly that — "
+               "McCarthy toolkit s. 3C reads it as covering interprovincial and "
+               "cross-border alike). A Toronto-hosted SaaS needs the same EFVP + "
+               "written agreement as a US one; intake question updated to say so."),
     Check("B4", "B", Domain.VENDORS_TRANSFERS, Mode.INTAKE, Tier.STATUTE, "s. 18.3",
           "Contrats écrits avec les mandataires et fournisseurs de services",
           "Written contracts with mandataries and service providers",
@@ -161,7 +173,13 @@ CHECKS: tuple[Check, ...] = (
                "processor must notify the privacy officer without delay of violations "
                "AND attempted violations, and allow confidentiality verifications. "
                "Contract-content requirements waived for public bodies and members of "
-               "professional orders (s. 18.3 in fine)."),
+               "professional orders (s. 18.3 in fine). "
+               "Walk finding F4 (2026-08-23): the employer stays fully liable when "
+               "outsourcing (TCJ art. 968) — the sharpest client-facing point on this "
+               "check. Current probe (McCarthy toolkit table 4): standard AI-vendor "
+               "contracts with ML-training clauses let the vendor use client data "
+               "beyond the mandate, violating s. 12's use restrictions — ask about "
+               "AI tools specifically."),
     Check("B5", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 3.2",
           "Politiques internes : rôles du cycle de vie, conservation/destruction, traitement des plaintes",
           "Internal policies: lifecycle roles, retention/destruction, complaint handling"),
@@ -179,8 +197,14 @@ CHECKS: tuple[Check, ...] = (
                "11-item consent-disclosure list + the CAI's model consent form are "
                "the client pointers."),
     Check("B7", "B", Domain.SPECIAL_CATEGORIES, Mode.INTAKE, Tier.STATUTE, "s. 12.1",
-          "Décisions fondées exclusivement sur un traitement automatisé : information et droit de faire des observations",
-          "Decisions based exclusively on automated processing: disclosure and right to submit observations"),
+          "Décisions fondées exclusivement sur un traitement automatisé : information et observations auprès d'une personne en mesure de réviser la décision",
+          "Decisions based exclusively on automated processing: disclosure and observations to a staff member able to review the decision",
+          note="Walk finding F1 (2026-08-23): the s. 12.1 remedy is observations TO a "
+               "person in a position to review the decision — a review channel, not a "
+               "suggestion box. Both lawyer corpora (TCJ art. 984; McCarthy toolkit "
+               "s. 5B) frame it as a human-review right; the old title undersold it. "
+               "On request the person also gets: the PI used, the reasons and principal "
+               "factors/parameters, and the correction right."),
     Check("B8", "B", Domain.SPECIAL_CATEGORIES, Mode.INTAKE, Tier.STATUTE, "s. 4.1",
           "Mineurs de moins de 14 ans : consentement du titulaire de l'autorité parentale",
           "Minors under 14: consent of the holder of parental authority"),
@@ -210,7 +234,13 @@ CHECKS: tuple[Check, ...] = (
           "Destruction ou anonymisation des RP lorsque les fins sont accomplies",
           "Destruction or anonymization of PI once purposes are achieved",
           note="Anonymization must meet regulation-determined criteria and best practices "
-               "(see Regulation respecting the anonymization of personal information)."),
+               "(see Regulation respecting the anonymization of personal information). "
+               "Walk finding F2 (2026-08-23): penal exposure attaches (s. 91 regime; "
+               "s. 91(4) makes failure to take s. 10 measures a penal offence — see "
+               "VERIFICATION bonus row). CAI nuance via TCJ art. 968: in the recruitment "
+               "context the regulator steers toward destruction over anonymization. "
+               "Sharp intake probe from TCJ art. 983: backups are the classic "
+               "destruction blind spot — 'do your backups also honor destruction?'"),
     Check("B15", "B", Domain.TRANSPARENCY, Mode.INTAKE, Tier.STATUTE, "ss. 12, 22",
           "Prospection commerciale : consentement requis (jamais une « fin compatible »); identification et droit de retrait",
           "Commercial prospection: consent required (never a 'consistent purpose'); self-identification and withdrawal right",
@@ -218,7 +248,16 @@ CHECKS: tuple[Check, ...] = (
                "not be considered a consistent purpose — marketing reuse always needs "
                "consent; s. 22 adds identify-yourself and stop-on-withdrawal duties. "
                "Statute-only sourcing: no current CAI guide addresses prospection "
-               "(the 2013 profilage fiche predates these provisions)."),
+               "(the 2013 profilage fiche predates these provisions). "
+               "Walk finding F3 (2026-08-23): dual federal exposure — CASL/LCAP "
+               "requires express consent + functional unsubscribe for commercial "
+               "electronic messages, penalties to $10M (TCJ art. 970); flag alongside "
+               "the Law 25 analysis the way A7 flags OQLF. Calming nuance (McCarthy): "
+               "consents validly obtained before Law 25 remain valid — no re-consent "
+               "campaign needed; and s. 12 lists narrow no-consent exceptions "
+               "(compatible purposes with a direct-and-relevant link, manifest benefit, "
+               "fraud prevention, service delivery, depersonalized research) — "
+               "prospection is expressly excluded from 'compatible'."),
     Check("B16", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "ss. 27-34",
           "Traitement des demandes d'accès et de rectification : réponse écrite sous 30 jours, gratuité, refus motivés",
           "Access/rectification request handling: written reply within 30 days, free access, reasoned refusals",
@@ -229,7 +268,15 @@ CHECKS: tuple[Check, ...] = (
                "real 30-day one. Covers the CAI's full four-rights frame: access, "
                "rectification, portability (see B9), and cessation of dissemination / "
                "de-indexing (s. 28.1). Duty of complete-and-serious search extends to "
-               "email, messaging, and PI held by third parties/processors."),
+               "email, messaging, and PI held by third parties/processors. "
+               "Walk finding F9 (2026-08-23), procedural mechanics from the McCarthy "
+               "toolkit: the enterprise may ask the CAI to extend the 30-day window "
+               "within the initial period (s. 46); refusals must also state the "
+               "requester's right to a CAI examen de mésentente within 30 days "
+               "(s. 43) and help understanding the refusal on request (s. 34); "
+               "s. 28.1 de-indexing requests weigh prescribed factors (public-figure "
+               "status, minority, accuracy, sensitivity, context, elapsed time, "
+               "criminal matter/pardon)."),
     # ---- added from CAI corpus triple-check 2026-08-23 ----
     Check("B17", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.CAI,
           "pratique-phare de la CAI (aide-mémoire; guide prévention, étape 2; guide EFVP, étape 3)",

@@ -43,10 +43,13 @@ answers:
   B3:
     question_fr: >-
       Pour chaque communication de RP hors Québec (incluant chaque fournisseur
-      SaaS hébergé aux États-Unis), avez-vous une ÉFVP et une entente écrite?
+      SaaS hébergé aux États-Unis — ou ailleurs au Canada : « hors Québec »
+      couvre aussi les autres provinces), avez-vous une ÉFVP et une entente
+      écrite?
     question_en: >-
       For each communication of PI outside Quebec (including every US-hosted
-      SaaS vendor), do you have a PIA and a written agreement?
+      SaaS vendor — or one hosted elsewhere in Canada: "outside Quebec" covers
+      the other provinces too), do you have a PIA and a written agreement?
     answer: unknown
     details: ""
   B4:
