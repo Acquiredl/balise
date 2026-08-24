@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .advice import CLIENT_COPY
 from .external import Finding
 from .registry import Domain, Status
 
@@ -74,6 +75,47 @@ def _posture_line(findings: list[Finding], domain: Domain, lang: str) -> str:
     return f"**{DOMAIN_LABELS[domain][idx]}** — " + ", ".join(parts)
 
 
+def _exec_summary(findings: list[Finding], lang: str) -> list[str]:
+    """The 'if you read one paragraph' opener: status counts and the top
+    priorities, in the owner's language. Derived from the same authored copy
+    as the visual summary so the two never disagree."""
+    idx = 0 if lang == "fr" else 1
+    title = ("Si vous ne lisez qu'un paragraphe" if lang == "fr"
+             else "If you read only one paragraph")
+    counts = {status: sum(1 for f in findings if f.status is status)
+              for status in Status}
+    total = len(findings)
+    count_parts = [f"{STATUS_LABELS[status][idx]} {n}"
+                   for status, n in counts.items() if n]
+    points_label = ("points vérifiés" if lang == "fr" else "points assessed")
+    lines = [f"## {title}", "",
+             f"**{total} {points_label}** : " + " · ".join(count_parts) + ".", ""]
+
+    gaps = [f for f in findings
+            if f.status in (Status.NOT_MET, Status.PARTIAL)
+            and f.check_id in CLIENT_COPY]
+    gaps.sort(key=lambda f: (CLIENT_COPY[f.check_id].priority, _check_order(f)))
+    if gaps:
+        lines.append("**Priorités :**" if lang == "fr" else "**Priorities:**")
+        for rank, finding in enumerate(gaps[:3], start=1):
+            copy = CLIENT_COPY[finding.check_id]
+            plain = copy.plain_fr if lang == "fr" else copy.plain_en
+            action = copy.action_fr if lang == "fr" else copy.action_en
+            lines.append(f"{rank}. **{plain}.** {action}")
+        lines.append("")
+    else:
+        lines.extend([("Aucune lacune prioritaire relevée par cette évaluation."
+                       if lang == "fr"
+                       else "No priority gap identified by this assessment."), ""])
+
+    if counts.get(Status.UNKNOWN):
+        lines.extend([("Un constat « Indéterminé » est un point à clarifier "
+                       "ensemble, pas un échec." if lang == "fr"
+                       else "An 'Unknown' finding is a point to clarify "
+                       "together, not a failure."), ""])
+    return lines
+
+
 def _render_finding(finding: Finding, lang: str) -> str:
     check = finding.check
     idx = 0 if lang == "fr" else 1
@@ -114,6 +156,7 @@ def _render_language_section(findings: list[Finding], target: str, lang: str,
              disclaimer, ""]
     for notice_fr, notice_en in notices:
         lines.extend([f"> ⚠️ **{notice_fr if lang == 'fr' else notice_en}**", ""])
+    lines.extend(_exec_summary(findings, lang))
     lines.extend([f"## {posture_title}", ""])
     for domain in Domain:
         line = _posture_line(findings, domain, lang)

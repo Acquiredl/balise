@@ -96,6 +96,32 @@ def test_summary_orders_priorities_and_explains_unknown(tmp_path):
     assert "Autodéclaré" not in body                     # report internals stay out
 
 
+def test_exec_summary_opens_report_with_counts_and_top_priorities(tmp_path):
+    findings = [
+        Finding("A9", Status.NOT_MET, reasoning="x", reasoning_fr="x"),   # priority 3
+        Finding("B1", Status.NOT_MET, reasoning="x", reasoning_fr="x"),   # priority 1
+        Finding("B9", Status.UNKNOWN, reasoning="x", reasoning_fr="x"),
+        Finding("A1", Status.MET, reasoning="x", reasoning_fr="x"),
+    ]
+    paths = write_report(findings, target="https://x.example", out_dir=tmp_path)
+    body = paths.report_md.read_text(encoding="utf-8")
+
+    fr_section = body.split("Law 25 Readiness Report")[0]
+    assert "Si vous ne lisez qu'un paragraphe" in fr_section
+    assert "If you read only one paragraph" in body
+    assert "**4 points vérifiés**" in fr_section
+    # opener renders before the posture table and the findings detail
+    assert (fr_section.index("Si vous ne lisez qu'un paragraphe")
+            < fr_section.index("Posture par domaine"))
+    # priority-1 gap (B1) listed before priority-3 gap (A9)
+    assert fr_section.index("1. **") < fr_section.index("2. **")
+    b1_title = fr_section.index("registre des incidents")
+    a9_title = fr_section.index("changements de politique")
+    assert b1_title < a9_title
+    # unknowns present -> the reassurance line renders
+    assert "pas un échec" in fr_section
+
+
 def test_findings_sort_naturally_and_notices_render(tmp_path):
     findings = [
         Finding("A10", Status.UNKNOWN, reasoning="x", reasoning_fr="x"),
