@@ -7,7 +7,7 @@
 
 ## Si vous ne lisez qu'un paragraphe
 
-**30 points vérifiés** : Atteint 3 · Partiel 9 · Non atteint 12 · Sans objet 4 · Indéterminé 2.
+**32 points vérifiés** : Atteint 3 · Partiel 9 · Non atteint 13 · Sans objet 5 · Indéterminé 2.
 
 **Priorités :**
 1. **La personne responsable, affichée et joignable.** Publier le titre et un moyen de contact du responsable sur le site.
@@ -19,10 +19,10 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 ## Posture par domaine
 
 - **Transparence** — Atteint: 2, Partiel: 4, Non atteint: 3
-- **Gouvernance** — Partiel: 3, Non atteint: 7, Indéterminé: 2, Atteint: 1
+- **Gouvernance** — Partiel: 3, Non atteint: 7, Indéterminé: 2, Atteint: 1, Sans objet: 1
 - **Incidents** — Non atteint: 1
 - **Fournisseurs et transferts** — Non atteint: 1, Partiel: 1
-- **Catégories particulières** — Sans objet: 4, Partiel: 1
+- **Catégories particulières** — Sans objet: 4, Partiel: 1, Non atteint: 1
 
 ## Constats
 
@@ -40,12 +40,12 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 - **Base légale:** ss. 8, 8.2 + guide CAI [LOI]
 - **Éléments observés:**
   - Dernière mise à jour : mars 2024
+  - nous recueillons votre nom, votre adresse, votre numéro de carte-cadeau le cas échéant, ainsi que vos coordonnées
   - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
-  - Nous utilisons des outils de commerce en ligne et d'envoi de courriels fournis par des entreprises situées à l'extérieur du Canada pour exploiter notre boutique et notre infolettre.
+  - Nous utilisons des outils de commerce en ligne et d'envoi de courriels fournis par des entreprises situées à l'extérieur du Canada
   - Vous pouvez vous désabonner de l'infolettre en tout temps grâce au lien présent dans chaque courriel.
   - La direction de la pépinière agit comme responsable de la protection des renseignements personnels.
-  - Politique de confidentialité · Conditions de vente
-- **Raisonnement:** La politique indique la date de mise à jour, décrit les renseignements recueillis et leurs finalités, mentionne les témoins pour mesurer l'achalandage, et précise que des fournisseurs tiers sont situés hors Canada, ce qui couvre plusieurs éléments obligatoires. Toutefois, elle ne traite pas des droits d'accès et de rectification, du retrait du consentement au-delà de l'infolettre, d'un mécanisme de plainte, des catégories de personnel interne ayant accès aux données, ni des moyens de refuser certaines collectes et de leurs conséquences — des éléments requis par les articles 8 et 8.2. La politique demeure une page distincte des « Conditions de vente », ce qui respecte la règle anti-fusion.
+- **Raisonnement:** La politique couvre une partie des éléments obligatoires : langage clair, date de mise à jour, description des renseignements recueillis et de leurs finalités, mention des témoins et indication que certaines données sont transmises à des fournisseurs hors Canada. Toutefois, elle ne traite pas des droits d'accès, de rectification, de retrait du consentement ni du processus de plainte (seul le désabonnement à l'infolettre est prévu), n'indique pas les catégories de personnel interne ayant accès aux données, ne précise pas les catégories de destinataires et les finalités pour chaque transmission à des tiers, et ne mentionne aucun moyen de refuser certaines collectes ni les conséquences d'un tel refus. Les éléments facultatifs (mesures de sécurité, nom du responsable, moyens technologiques d'exercice des droits) sont aussi absents, mais cela ne constitue qu'une suggestion, pas une lacune. La politique demeure une page distincte des conditions de vente, respectant ainsi la règle anti-fusion.
 
 ### A3 — Titre et coordonnées du responsable de la protection des renseignements personnels publiés
 
@@ -63,7 +63,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 - **Éléments observés:**
   - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
   - La direction de la pépinière agit comme responsable de la protection des renseignements personnels. Pour toute question, écrivez-nous via le formulaire de la page Nous joindre.
-- **Raisonnement:** La politique de confidentialité explique la collecte, les finalités, le partage avec des tiers et nomme un responsable, mais elle ne mentionne ni les règles de conservation ou de destruction, ni les rôles et responsabilités liés au cycle de vie des renseignements, ni un processus de traitement des plaintes. Ces éléments essentiels sont absents du contenu fourni.
+- **Raisonnement:** La politique de confidentialité aborde la collecte, les finalités, le partage avec des tiers et désigne un responsable, mais elle ne fournit aucune information sur les règles de conservation/destruction, les rôles et responsabilités liés au cycle de vie des renseignements, ni sur un processus de traitement des plaintes. Seul un formulaire de contact générique est offert, sans précision sur la gestion des plaintes en matière de vie privée.
 
 ### A5 — Témoins non essentiels inactifs avant consentement; bannière avec refus accessible
 
@@ -80,7 +80,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 - **Base légale:** s. 8.1 [LOI]
 - **Éléments observés:**
   - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
-- **Raisonnement:** La politique mentionne l'utilisation de témoins pour mesurer l'achalandage, ce qui constitue une technologie de suivi, mais elle ne précise pas si ces témoins servent à l'identification, à la localisation ou au profilage, ni les moyens permettant de les activer ou désactiver. Aucune information sur des paramètres, bandeaux de consentement ou options de refus n'est fournie.
+- **Raisonnement:** La politique mentionne l'utilisation de témoins pour mesurer l'achalandage, ce qui constitue une technologie de suivi, mais elle ne précise pas les fonctions d'identification, de localisation ou de profilage de ces témoins ni les moyens offerts pour les activer ou les désactiver. Aucun mécanisme de gestion des cookies ou de consentement spécifique n'est décrit dans le texte fourni.
 
 ### A7 — Version française du site, de la politique et des conditions (français d'abord pour les contrats d'adhésion)
 
@@ -98,9 +98,9 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 - **Base légale:** s. 14 [LOI]
 - **Éléments observés:**
   - Courriel [input name=courriel type=email required] Nom complet [input name=nom type=text required] Téléphone [input name=telephone type=tel required] Je m'abonne
+  - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
   - Nom complet [input name=nom type=text required] Courriel [input name=courriel type=email required] Téléphone [input name=telephone type=tel required] Date de naissance [input name=naissance type=date required] Votre message [textarea name=message required] Envoyer
-  - Politique de confidentialité · Conditions de vente
-- **Raisonnement:** Les formulaires d'infolettre et de contact n'affichent que des champs de collecte (nom, courriel, téléphone, date de naissance, message) suivis d'un bouton d'envoi, sans case à cocher de consentement, sans énoncé de consentement propre à chaque finalité, et sans séparation visible entre le consentement et les autres conditions comme les conditions de vente. Aucun texte clair et distinct ne demande le consentement pour chaque finalité (infolettre, contact, témoins) tel qu'exigé par les critères de granularité et de distinction.
+- **Raisonnement:** Le formulaire d'infolettre ne comporte qu'un champ courriel, nom, téléphone et un bouton 'Je m'abonne', sans case à cocher ni mention de consentement distincte ou spécifique à une finalité, et rien ne le sépare des conditions de vente. Le formulaire de contact ne présente non plus aucun mécanisme de consentement, seulement des champs à remplir. La politique de confidentialité évoque un consentement ('si vous y avez consenti') mais les formulaires eux-mêmes ne montrent pas de consentement granulaire, distinct ou explicite tel qu'exigé.
 
 ### A9 — Pratique d'avis de modification de la politique
 
@@ -108,7 +108,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 - **Base légale:** s. 8.2 [LOI]
 - **Éléments observés:**
   - Dernière mise à jour : mars 2024
-- **Raisonnement:** Le texte de la politique de confidentialité fournie couvre la collecte, l'utilisation, le partage des données et les coordonnées du responsable, mais ne comporte aucune clause précisant comment les modifications futures seraient annoncées aux utilisateurs. La mention d'une date de mise à jour ne constitue pas un mécanisme d'avis.
+- **Raisonnement:** Le texte de la politique fourni ne mentionne aucune façon dont les modifications futures seraient annoncées aux utilisateurs. On y voit seulement une date de 'Dernière mise à jour', sans procédure d'avis décrite. Aucune preuve d'un mécanisme de notification des changements n'apparaît dans le contenu fourni.
 
 ### A10 — Formulaires : aucun refus de biens ou services pour refus de fournir des RP non nécessaires
 
@@ -117,8 +117,9 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 - **Éléments observés:**
   - Date de naissance [input name=naissance type=date required]
   - Téléphone [input name=telephone type=tel required]
-  - Téléphone [input name=telephone type=tel required] Je m'abonne
-- **Raisonnement:** Le formulaire de contact exige une date de naissance et un numéro de téléphone obligatoires pour simplement poser une question, ce qui semble excessif par rapport à l'objectif visé. De même, le formulaire d'inscription à l'infolettre rend le téléphone obligatoire alors que l'objectif est uniquement de recevoir des courriels. Ces champs obligatoires dépassent apparemment ce qui est nécessaire pour les finalités énoncées.
+  - Une question sur une variété, une commande ou une livraison? Remplissez le formulaire et nous vous répondrons rapidement.
+  - Recevez nos conseils de saison et nos offres exclusives.
+- **Raisonnement:** Le formulaire de contact exige un numéro de téléphone et une date de naissance comme champs obligatoires, alors que le but énoncé est simplement de répondre à une question sur une variété, une commande ou une livraison, ce qui ne semble pas requérir une date de naissance. De même, le formulaire d'infolettre rend le téléphone obligatoire, bien que cela ne paraisse pas nécessaire pour l'envoi de courriels. Ces champs obligatoires semblent dépasser ce qui est nécessaire aux fins déclarées des formulaires.
 
 ### B1 — Registre des incidents de confidentialité (8 éléments prescrits, conservation 5 ans) et processus de réponse
 
@@ -281,6 +282,22 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
   - réponse / answer: non, la sauvegarde est sur un disque branché en permanence à l'ordinateur du bureau.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
 
+### B21 — Paramètres de confidentialité par défaut au plus haut niveau (produits et services technologiques)
+
+- **Statut:** Sans objet
+- **Base légale:** s. 9.1 [LOI]
+- **Éléments observés:**
+  - réponse / answer: notre boutique en ligne n'offre pas de comptes clients avec des réglages de confidentialité.
+- **Raisonnement:** Déclaré sans objet dans le questionnaire (la pratique visée par cette vérification n'est pas utilisée).
+
+### B22 — Recrutement : collecte limitée au nécessaire à chaque étape, destruction en fin de processus
+
+- **Statut:** Non atteint
+- **Base légale:** s. 5 + lignes directrices CAI recrutement (2025-03-17) [CAI]
+- **Éléments observés:**
+  - réponse / answer: non. On photocopie le permis de conduire en entrevue et on garde tous les CV reçus « au cas où ».
+- **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
+
 
 ## Annexe — Préparer une demande d'assurance cyber
 
@@ -303,6 +320,11 @@ Les demandes d'assurance cyber s'ouvrent sur le chiffre d'affaires et le nombre 
 
 ---
 
+**Intégrité** : cette évaluation est scellée par une piste d'audit chaînée (chaque enregistrement contient l'empreinte du précédent). Empreinte finale (SHA-256) : `15be6ef91697516e655dfcc61a9c1efbd720246636779f119e3efb6f070a2620`. Une piste dont l'empreinte finale diffère ne correspond pas à ce rapport.
+
+
+---
+
 # Law 25 Readiness Report
 
 **Site:** https://pepiniere-renard-bleu.example
@@ -312,7 +334,7 @@ Les demandes d'assurance cyber s'ouvrent sur le chiffre d'affaires et le nombre 
 
 ## If you read only one paragraph
 
-**30 points assessed** : Met 3 · Partial 9 · Not met 12 · Not applicable 4 · Unknown 2.
+**32 points assessed** : Met 3 · Partial 9 · Not met 13 · Not applicable 5 · Unknown 2.
 
 **Priorities:**
 1. **Your privacy officer, named and reachable.** Publish the officer's title and a contact means on the site.
@@ -324,10 +346,10 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 ## Posture by domain
 
 - **Transparency** — Met: 2, Partial: 4, Not met: 3
-- **Governance** — Partial: 3, Not met: 7, Unknown: 2, Met: 1
+- **Governance** — Partial: 3, Not met: 7, Unknown: 2, Met: 1, Not applicable: 1
 - **Incidents** — Not met: 1
 - **Vendors & transfers** — Not met: 1, Partial: 1
-- **Special categories** — Not applicable: 4, Partial: 1
+- **Special categories** — Not applicable: 4, Partial: 1, Not met: 1
 
 ## Findings
 
@@ -345,12 +367,12 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 - **Legal basis:** ss. 8, 8.2 + guide CAI [STATUTE]
 - **Evidence:**
   - Dernière mise à jour : mars 2024
+  - nous recueillons votre nom, votre adresse, votre numéro de carte-cadeau le cas échéant, ainsi que vos coordonnées
   - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
-  - Nous utilisons des outils de commerce en ligne et d'envoi de courriels fournis par des entreprises situées à l'extérieur du Canada pour exploiter notre boutique et notre infolettre.
+  - Nous utilisons des outils de commerce en ligne et d'envoi de courriels fournis par des entreprises situées à l'extérieur du Canada
   - Vous pouvez vous désabonner de l'infolettre en tout temps grâce au lien présent dans chaque courriel.
   - La direction de la pépinière agit comme responsable de la protection des renseignements personnels.
-  - Politique de confidentialité · Conditions de vente
-- **Reasoning:** The policy states the update date, describes PI collected and purposes, mentions cookies for traffic measurement, and discloses that third-party service providers are located outside Canada, covering several MUST elements. However, it omits the rights of access/rectification, the process for withdrawing consent to processing beyond the newsletter, any complaint mechanism, the categories of internal personnel with access, and any means to refuse specific collection along with consequences of refusal — all of which are statutory MUST elements under ss. 8/8.2. The policy is kept as a distinct page separate from the 'Conditions de vente', so the anti-conflation rule appears respected.
+- **Reasoning:** The policy addresses several MUST elements: it is written in plain language, states an effective/update date, describes the personal information collected and its purposes, mentions cookies, and notes that some data is sent to service providers outside Canada. However, it does not describe rights of access/rectification, consent withdrawal or the CAI complaint process (only newsletter unsubscription is covered), does not identify categories of internal personnel with access, does not specify the categories/purposes tied to each external recipient, and does not describe any means to refuse certain collections or their consequences. The MAY elements (security measures, named officer, technological rights-exercise tools) are also absent, but their absence is only a recommendation gap, not a compliance gap. The policy is kept as a distinct page separate from the sales conditions, satisfying the anti-conflation rule.
 
 ### A3 — Privacy officer title and contact information published
 
@@ -368,7 +390,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 - **Evidence:**
   - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
   - La direction de la pépinière agit comme responsable de la protection des renseignements personnels. Pour toute question, écrivez-nous via le formulaire de la page Nous joindre.
-- **Reasoning:** The privacy policy covers what data is collected, why, sharing with third parties, and identifies a privacy officer, but it contains no information about retention or destruction rules, no description of roles/responsibilities across the information lifecycle, and no complaint-handling process. These are core elements required to be addressed in plain terms, and none appear in the provided text.
+- **Reasoning:** The privacy policy covers what data is collected, why, sharing with third parties, and identifies a privacy officer, but it contains no information about retention/destruction rules, roles and responsibilities across the information lifecycle, or a complaint-handling process. There is only a generic contact form with no mention of how privacy complaints are received or processed.
 
 ### A5 — Non-essential trackers inactive before consent; banner with accessible refusal
 
@@ -385,7 +407,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 - **Legal basis:** s. 8.1 [STATUTE]
 - **Evidence:**
   - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
-- **Reasoning:** The privacy policy mentions the use of cookies ('témoins') to measure site traffic, which is a technology with tracking functions, but it does not specify whether these cookies serve identification, location, or profiling purposes, nor does it describe any means to activate or deactivate them. There is no mention of settings, consent banners, or opt-out mechanisms for these cookies.
+- **Reasoning:** The privacy policy mentions the use of cookies ('témoins') to measure traffic, which is a profiling/tracking technology, but it does not specify the identification, location or profiling functions of these cookies, nor does it describe the means available to activate or deactivate them (e.g., browser settings, consent banner). No cookie consent mechanism or opt-out tool is described anywhere in the text.
 
 ### A7 — French version of site, policy and terms (French-first for adhesion contracts)
 
@@ -403,9 +425,9 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 - **Legal basis:** s. 14 [STATUTE]
 - **Evidence:**
   - Courriel [input name=courriel type=email required] Nom complet [input name=nom type=text required] Téléphone [input name=telephone type=tel required] Je m'abonne
+  - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
   - Nom complet [input name=nom type=text required] Courriel [input name=courriel type=email required] Téléphone [input name=telephone type=tel required] Date de naissance [input name=naissance type=date required] Votre message [textarea name=message required] Envoyer
-  - Politique de confidentialité · Conditions de vente
-- **Reasoning:** The newsletter and contact forms only display data fields (name, email, phone, birth date, message) followed by a submit button, with no visible consent checkbox, no purpose-specific consent statement, and no indication that consent is separated from other terms like the sale conditions. There is no plain-language consent request tied to each specific purpose (newsletter vs. contact vs. cookies) as required by the granularity and distinctness criteria.
+- **Reasoning:** The newsletter signup form only collects email, name, and phone with a single 'Je m'abonne' submit button, with no visible checkbox or explicit consent statement tied to a specific purpose, and no separation from other terms like the sales conditions. The contact form similarly has no consent mechanism at all, just data fields and a send button. The privacy policy mentions consent ('si vous y avez consenti') but the actual forms shown do not implement granular, distinct, or explicit consent capture as described.
 
 ### A9 — Policy amendment-notice practice
 
@@ -413,7 +435,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 - **Legal basis:** s. 8.2 [STATUTE]
 - **Evidence:**
   - Dernière mise à jour : mars 2024
-- **Reasoning:** The privacy policy text provided includes sections on data collection, purpose, sharing, and contact information for the privacy officer, but contains no clause describing how policy amendments will be announced to users. There is a 'Dernière mise à jour' date, but no statement of a notice mechanism for future changes.
+- **Reasoning:** The privacy policy text provided does not contain any statement about how future amendments to the policy will be announced or communicated to users. Only a 'Dernière mise à jour' date is shown, with no notice mechanism described. No evidence of an amendment notification process is present in the supplied content.
 
 ### A10 — Forms: no refusal of goods or services over declining to provide unnecessary PI
 
@@ -422,8 +444,9 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 - **Evidence:**
   - Date de naissance [input name=naissance type=date required]
   - Téléphone [input name=telephone type=tel required]
-  - Téléphone [input name=telephone type=tel required] Je m'abonne
-- **Reasoning:** The contact form requires a mandatory birthdate and phone number simply to send a message or ask a question, which appears unnecessary for that stated purpose. Similarly, the newsletter subscription form mandates a phone number even though the purpose is only to receive email communications. These mandatory fields exceed what seems needed for the forms' stated purposes.
+  - Une question sur une variété, une commande ou une livraison? Remplissez le formulaire et nous vous répondrons rapidement.
+  - Recevez nos conseils de saison et nos offres exclusives.
+- **Reasoning:** The contact form marks phone number and date of birth as required fields, even though the stated purpose is only to answer a question about a variety, order, or delivery, which does not appear to necessitate a birthdate. Similarly, the newsletter subscription form requires a phone number, which is not evidently necessary for sending email communications. These mandatory fields exceed what appears necessary for the stated purposes of the forms.
 
 ### B1 — Confidentiality-incident register (8 prescribed elements, 5-year retention) and response process
 
@@ -586,6 +609,22 @@ An 'Unknown' finding is a point to clarify together, not a failure.
   - réponse / answer: non, la sauvegarde est sur un disque branché en permanence à l'ordinateur du bureau.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
 
+### B21 — Privacy settings default to the highest level (technological products and services)
+
+- **Status:** Not applicable
+- **Legal basis:** s. 9.1 [STATUTE]
+- **Evidence:**
+  - réponse / answer: notre boutique en ligne n'offre pas de comptes clients avec des réglages de confidentialité.
+- **Reasoning:** Declared not applicable in the intake (the practice this check covers is not in use).
+
+### B22 — Recruitment: collection limited to what each stage requires, destruction when the process ends
+
+- **Status:** Not met
+- **Legal basis:** s. 5 + lignes directrices CAI recrutement (2025-03-17) [CAI]
+- **Evidence:**
+  - réponse / answer: non. On photocopie le permis de conduire en entrevue et on garde tous les CV reçus « au cas où ».
+- **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
+
 
 ## Appendix — Preparing a cyber-insurance application
 
@@ -604,3 +643,8 @@ Cyber-insurance applications open with revenue and employee count; the controls 
 | General security safeguards (s. 10) | The backdrop of every technical question on the forms. | B12 : Partial |
 
 > Balise does not assess the purely technical controls fuller applications may also ask about (encryption, EDR, patch management, penetration testing, etc.): mark those "not assessed by this tool" and answer them with your IT provider.
+
+
+---
+
+**Integrity**: this assessment is sealed by a hash-chained audit trail (each record contains the previous record's fingerprint). Final fingerprint (SHA-256): `15be6ef91697516e655dfcc61a9c1efbd720246636779f119e3efb6f070a2620`. A trail whose final fingerprint differs does not correspond to this report.
