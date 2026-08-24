@@ -56,6 +56,10 @@ def main(argv: list[str] | None = None) -> int:
                       help="Extra page to include in the scan corpus (e.g. a "
                            "contact or signup form the crawler would miss); "
                            "repeatable")
+    scan.add_argument("--mini", action="store_true",
+                      help="Free-preview mode: deterministic remote checks "
+                           "only (no intake, no semantic engine), producing a "
+                           "teaser summary instead of the full deliverables")
     args = parser.parse_args(argv)
 
     try:
@@ -69,6 +73,13 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     findings = external.run_external_scan(site)
+
+    if args.mini:
+        teaser_path = summary.write_teaser(findings, target=site.root_url,
+                                           out_dir=args.out)
+        print(f"preview: {teaser_path}")
+        return 0
+
     findings += semantic.run_semantic_checks(site)
     intake_data = intake_mod.load_intake(args.intake) if args.intake else None
     findings += intake_mod.run_intake_assessment(intake_data)

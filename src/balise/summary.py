@@ -14,7 +14,7 @@ from pathlib import Path
 
 from .advice import CLIENT_COPY
 from .external import Finding
-from .registry import Domain, Status
+from .registry import CHECKS, Domain, Status
 from .report import DOMAIN_LABELS, TIER_LABELS_FR, _check_order
 
 STATUS_META = {
@@ -185,6 +185,95 @@ def _lang_section(findings: list[Finding], target: str, lang: str,
             if fr else
             f"{len(na)} checks not applicable to your organization (practices not in use).") + "</p>")
     return "\n".join(out)
+
+
+def _teaser_section(findings: list[Finding], target: str, lang: str) -> str:
+    """Free-preview page: the deterministic remote findings with full evidence
+    treatment (the differentiator, visible at first touch), then an honest
+    account of what the complete assessment adds."""
+    fr = lang == "fr"
+    total = len(CHECKS)
+    remaining = total - len(findings)
+    gaps = sorted((f for f in findings
+                   if f.status in (Status.NOT_MET, Status.PARTIAL)),
+                  key=lambda f: (CLIENT_COPY[f.check_id].priority
+                                 if f.check_id in CLIENT_COPY else 3,
+                                 _check_order(f)))
+    solid = [f for f in findings if f.status is Status.MET]
+
+    out = []
+    out.append(f"<h1>{'Aperçu gratuit — Loi 25' if fr else 'Free preview — Law 25'}</h1>")
+    out.append(f'<p class="meta">{target} · {datetime.now(timezone.utc).date().isoformat()}</p>')
+    out.append('<div class="disclaimer">' + (
+        "Aperçu produit par une analyse automatisée du site public seulement. "
+        "Ce n'est pas un avis juridique et aucun verdict de conformité n'est "
+        "rendu. Chaque constat montre sa preuve et sa base légale — c'est la "
+        "même rigueur que l'évaluation complète." if fr else
+        "Preview produced by an automated analysis of the public website only. "
+        "This is not legal advice and no compliance verdict is rendered. Every "
+        "finding shows its evidence and legal basis — the same rigour as the "
+        "complete assessment.") + "</div>")
+
+    out.append('<div class="tiles">')
+    for n, t_fr, t_en in ((len(gaps), "écarts observés à distance", "gaps observed remotely"),
+                          (len(solid), "points en place", "in place"),
+                          (remaining, "vérifications supplémentaires dans l'évaluation complète",
+                           "additional checks in the complete assessment")):
+        out.append(f'<div class="tile"><div class="n">{n}</div>'
+                   f'<div class="t">{t_fr if fr else t_en}</div></div>')
+    out.append("</div>")
+
+    out.append(f"<h2>{'Ce que votre site montre déjà' if fr else 'What your site already shows'}</h2>")
+    if not gaps:
+        out.append(f'<p class="small">{"Aucun écart relevé par l’analyse à distance." if fr else "No gaps found by the remote analysis."}</p>')
+    for f in gaps:
+        c = CLIENT_COPY.get(f.check_id)
+        if c is None:
+            continue
+        color = STATUS_META[f.status][0]
+        tier = TIER_LABELS_FR[f.check.tier.value] if fr else f.check.tier.value
+        proof = "".join(f'<li class="small">{e}</li>' for e in f.evidence[:3])
+        out.append(
+            f'<div class="card" style="border-left-color:{color}">'
+            f"<h3>{c.plain_fr if fr else c.plain_en}{_chip(f.status, lang)}</h3>"
+            f'<p class="why"><b>{"Pourquoi c’est important" if fr else "Why it matters"}</b>'
+            f"{c.risk_fr if fr else c.risk_en}</p>"
+            + (f'<p class="why"><b>{"Éléments observés" if fr else "Evidence"}</b></p><ul>{proof}</ul>' if proof else "")
+            + f'<p class="ref">{f.check.id} · {f.check.legal_hook} [{tier}]</p></div>')
+    if solid:
+        out.append('<ul class="oklist">' + "".join(
+            f"<li>{CLIENT_COPY[f.check_id].plain_fr if fr else CLIENT_COPY[f.check_id].plain_en}</li>"
+            for f in sorted(solid, key=_check_order) if f.check_id in CLIENT_COPY) + "</ul>")
+
+    out.append(f"<h2>{'Ce que l’évaluation complète ajoute' if fr else 'What the complete assessment adds'}</h2>")
+    out.append("<ul class=\"unklist\">" + "".join(f"<li>{item}</li>" for item in ((
+        f"{remaining} vérifications supplémentaires ({total} au total), dont les obligations internes que le site ne montre pas",
+        "L'analyse de jugement du contenu réel de votre politique et de vos formulaires",
+        "Le questionnaire guidé sur vos pratiques internes, en conversation",
+        "Le rapport complet avec preuve et base légale pour chaque constat, le sommaire visuel, et la piste d'audit vérifiable",
+        "L'annexe assurance cyber : vos constats reliés aux questions des assureurs") if fr else (
+        f"{remaining} additional checks ({total} in total), including the internal obligations a website cannot show",
+        "Judgment-level analysis of your policy's and forms' actual content",
+        "The guided questionnaire on your internal practices, in conversation",
+        "The full report with evidence and legal basis for every finding, the visual summary, and the verifiable audit trail",
+        "The cyber-insurance appendix: your findings mapped to insurers' questions"))) + "</ul>")
+    out.append(f'<p class="small">{"Évaluation complète offerte sur demande." if fr else "Complete assessment available on request."}</p>')
+    return "\n".join(out)
+
+
+def write_teaser(findings: list[Finding], target: str, out_dir: str | Path) -> Path:
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    html = ("<!DOCTYPE html>\n<html lang=\"fr\"><head><meta charset=\"UTF-8\">"
+            "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+            "<title>Aperçu Balise</title><style>" + _CSS + "</style></head><body>"
+            + _teaser_section(findings, target, "fr")
+            + '<div class="pagebreak"></div>'
+            + _teaser_section(findings, target, "en")
+            + "</body></html>")
+    path = out / "apercu-balise.html"
+    path.write_text(html, encoding="utf-8")
+    return path
 
 
 def write_summary(findings: list[Finding], target: str, out_dir: str | Path,
