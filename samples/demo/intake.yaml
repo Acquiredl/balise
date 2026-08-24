@@ -1,0 +1,78 @@
+# Balise — Intake rempli (démonstration)
+# Entreprise FICTIVE : toute ressemblance avec une entreprise réelle est fortuite.
+# Les réponses sont rédigées comme un propriétaire les donne en conversation.
+
+enterprise:
+  name: "Pépinière du Renard Bleu inc."
+  website: "https://pepiniere-renard-bleu.example"
+  employees: 9
+  sector: "Commerce de détail — horticulture"
+  sells_outside_quebec: non
+
+answers:
+  B1:
+    answer: "non, on note les pépins dans un cahier quand on y pense, mais il n'y a pas de registre officiel ni de marche à suivre."
+    details: ""
+  B2:
+    answer: "non, on n'a jamais fait ça. La boutique en ligne a été montée par notre neveu en 2021."
+    details: ""
+  B3:
+    answer: "non. On utilise Shopify pour la boutique et Mailchimp pour l'infolettre, mais personne n'a évalué ça ni signé d'entente particulière."
+    details: "Hébergement aux États-Unis pour les deux outils."
+  B4:
+    answer: "partiellement. On a les contrats standards des fournisseurs, mais on ne sait pas s'ils contiennent les clauses dont vous parlez."
+    details: ""
+  B5:
+    answer: "non, rien d'écrit. On garde les factures sept ans pour l'impôt, c'est pas mal tout."
+    details: ""
+  B6:
+    applicable: non
+    answer: "pas de biométrie ici."
+    details: ""
+  B7:
+    applicable: non
+    answer: "non, toutes les décisions passent par un humain."
+    details: ""
+  B8:
+    applicable: non
+    answer: "on ne vise pas les enfants, nos clients sont des adultes."
+    details: ""
+  B9:
+    answer: "incertain. Shopify doit bien pouvoir exporter quelque chose, mais on n'a jamais essayé."
+    details: ""
+  B10:
+    applicable: non
+    answer: "rien de sensible, des commandes de plantes."
+    details: ""
+  B11:
+    answer: "non, jamais eu de formation là-dessus."
+    details: ""
+  B12:
+    answer: "partiellement. Les mots de passe sont dans un cahier au bureau; l'ordinateur de la caisse a un antivirus."
+    details: ""
+  B13:
+    answer: "oui, les dossiers clients sont à jour dans Shopify."
+    details: ""
+  B14:
+    answer: "non, on n'efface jamais rien. Les anciennes listes de clients sont toutes gardées."
+    details: ""
+  B15:
+    applicable: oui
+    answer: "partiellement. Les gens s'abonnent eux-mêmes à l'infolettre, mais on a déjà ajouté des clients de la caisse sans leur demander."
+    details: ""
+  B16:
+    answer: "incertain. Personne n'a jamais demandé, on ne saurait pas trop comment répondre dans les délais."
+    details: ""
+  B17:
+    answer: "non, on n'a pas de liste de ce qu'on détient ni où c'est rendu."
+    details: ""
+  B18:
+    applicable: oui
+    answer: "partiellement. Il y a quatre caméras contre le vol, une affichette à l'entrée, mais on garde les images tant que le disque n'est pas plein."
+    details: ""
+  B19:
+    answer: "partiellement. La MFA est activée sur le courriel de la propriétaire, mais pas sur les deux autres comptes ni sur l'accès à distance de la caisse."
+    details: ""
+  B20:
+    answer: "non, la sauvegarde est sur un disque branché en permanence à l'ordinateur du bureau."
+    details: ""

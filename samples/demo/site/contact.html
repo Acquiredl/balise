@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Nous joindre — Pépinière du Renard Bleu</title>
+</head>
+<body>
+  <h1>Nous joindre</h1>
+  <p>Une question sur une variété, une commande ou une livraison? Remplissez le
+  formulaire et nous vous répondrons rapidement.</p>
+  <form action="/contact" method="post">
+    <label>Nom complet <input type="text" name="nom" required></label>
+    <label>Courriel <input type="email" name="courriel" required></label>
+    <label>Téléphone <input type="tel" name="telephone" required></label>
+    <label>Date de naissance <input type="date" name="naissance" required></label>
+    <label>Votre message <textarea name="message" required></textarea></label>
+    <button type="submit">Envoyer</button>
+  </form>
+</body>
+</html>
