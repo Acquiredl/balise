@@ -15,6 +15,7 @@ from pathlib import Path
 
 from .advice import CLIENT_COPY
 from .external import Finding
+from .insurer import render_appendix
 from .registry import Domain, Status
 
 DISCLAIMER_FR = (
@@ -165,6 +166,7 @@ def _render_language_section(findings: list[Finding], target: str, lang: str,
     lines.extend(["", f"## {findings_title}", ""])
     for finding in sorted(findings, key=_check_order):
         lines.append(_render_finding(finding, lang))
+    lines.extend(["", render_appendix(findings, lang)])
     return "\n".join(lines)
 
 
