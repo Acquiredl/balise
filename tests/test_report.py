@@ -36,11 +36,16 @@ def test_report_is_bilingual_with_disclaimers_and_audit_trail(tmp_path):
     assert "Verified 2026" not in body        # verification-history fragments
 
     lines = paths.audit_jsonl.read_text(encoding="utf-8").strip().splitlines()
-    assert len(lines) == len(findings)
-    for line in lines:
+    assert len(lines) == len(findings) + 1          # genesis + one per finding
+    genesis = json.loads(lines[0])
+    assert genesis["format"] == "balise-audit-trail/1"
+    assert genesis["records"] == len(findings)
+    for line in lines[1:]:
         record = json.loads(line)
         assert {"check", "legal_hook", "tier", "status", "reasoning",
-                "reasoning_fr", "sha256"} <= set(record)
+                "reasoning_fr", "prev", "sha256"} <= set(record)
+    # the head is printed in the report body — the deliverable is the head record
+    assert paths.head in body
 
 
 def test_unanswered_intake_reports_unknown_not_failure():
@@ -118,26 +123,44 @@ def test_audit_trail_hash_chain_detects_tampering(tmp_path):
     ]
     paths = write_report(findings, target="https://x.example", out_dir=tmp_path)
     assert verify_audit_trail(paths.audit_jsonl)
+    assert verify_audit_trail(paths.audit_jsonl, expect_head=paths.head)
 
+    # lines[0] is genesis; lines[1..3] are the finding records
     lines = paths.audit_jsonl.read_text(encoding="utf-8").strip().splitlines()
 
     # deleting a middle record breaks the chain
-    paths.audit_jsonl.write_text("\n".join([lines[0], lines[2]]) + "\n",
-                                 encoding="utf-8")
+    paths.audit_jsonl.write_text(
+        "\n".join([lines[0], lines[1], lines[3]]) + "\n", encoding="utf-8")
+    assert not verify_audit_trail(paths.audit_jsonl)
+
+    # truncating the tail leaves a valid-looking chain — genesis count catches it
+    paths.audit_jsonl.write_text(
+        "\n".join([lines[0], lines[1], lines[2]]) + "\n", encoding="utf-8")
     assert not verify_audit_trail(paths.audit_jsonl)
 
     # editing one field breaks that record's own hash
-    tampered = json.loads(lines[1])
+    tampered = json.loads(lines[2])
     tampered["status"] = "met"
     paths.audit_jsonl.write_text(
-        "\n".join([lines[0], json.dumps(tampered, ensure_ascii=False), lines[2]])
+        "\n".join([lines[0], lines[1],
+                   json.dumps(tampered, ensure_ascii=False), lines[3]])
         + "\n", encoding="utf-8")
     assert not verify_audit_trail(paths.audit_jsonl)
 
     # reordering breaks it even though every individual hash still matches
-    paths.audit_jsonl.write_text("\n".join([lines[1], lines[0], lines[2]]) + "\n",
-                                 encoding="utf-8")
+    paths.audit_jsonl.write_text(
+        "\n".join([lines[0], lines[2], lines[1], lines[3]]) + "\n",
+        encoding="utf-8")
     assert not verify_audit_trail(paths.audit_jsonl)
+
+    # wholesale regeneration verifies internally — ONLY the external head
+    # (printed in the delivered report) catches it
+    regenerated = write_report(
+        [Finding("A1", Status.MET, reasoning="y", reasoning_fr="y")],
+        target="https://x.example", out_dir=tmp_path)
+    assert verify_audit_trail(regenerated.audit_jsonl)
+    assert not verify_audit_trail(regenerated.audit_jsonl,
+                                  expect_head=paths.head)
 
 
 def test_exec_summary_opens_report_with_counts_and_top_priorities(tmp_path):

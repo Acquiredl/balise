@@ -40,7 +40,8 @@ def main() -> int:
 
     out_dir = HERE / "out"
     paths = report.write_report(findings, target=BASE, out_dir=out_dir)
-    summary_path = summary.write_summary(findings, target=BASE, out_dir=out_dir)
+    summary_path = summary.write_summary(findings, target=BASE, out_dir=out_dir,
+                                         head=paths.head)
 
     if not semantic.SemanticEngine.configured():
         print("NOTE: ANTHROPIC_API_KEY absent — semantic checks reported as "

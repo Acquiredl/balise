@@ -92,7 +92,7 @@ def _chip(status: Status, lang: str) -> str:
 
 
 def _lang_section(findings: list[Finding], target: str, lang: str,
-                  notices: list[tuple[str, str]]) -> str:
+                  notices: list[tuple[str, str]], head: str = "") -> str:
     fr = lang == "fr"
     idx = 0 if fr else 1
     copy = CLIENT_COPY
@@ -187,6 +187,11 @@ def _lang_section(findings: list[Finding], target: str, lang: str,
             f"{len(na)} vérifications sans objet pour votre organisation (pratiques non utilisées)."
             if fr else
             f"{len(na)} checks not applicable to your organization (practices not in use).") + "</p>")
+    if head:
+        out.append('<p class="small" style="margin-top:16px">' + (
+            "Empreinte de la piste d'audit (SHA-256) : " if fr else
+            "Audit-trail fingerprint (SHA-256): ")
+            + f"<code>{head}</code></p>")
     return "\n".join(out)
 
 
@@ -280,16 +285,17 @@ def write_teaser(findings: list[Finding], target: str, out_dir: str | Path) -> P
 
 
 def write_summary(findings: list[Finding], target: str, out_dir: str | Path,
-                  notices: list[tuple[str, str]] | None = None) -> Path:
+                  notices: list[tuple[str, str]] | None = None,
+                  head: str = "") -> Path:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     notices = notices or []
     html = ("<!DOCTYPE html>\n<html lang=\"fr\"><head><meta charset=\"UTF-8\">"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
             "<title>Sommaire Balise</title><style>" + _CSS + "</style></head><body>"
-            + _lang_section(findings, target, "fr", notices)
+            + _lang_section(findings, target, "fr", notices, head)
             + '<div class="pagebreak"></div>'
-            + _lang_section(findings, target, "en", notices)
+            + _lang_section(findings, target, "en", notices, head)
             + "</body></html>")
     path = out / "sommaire-balise.html"
     path.write_text(html, encoding="utf-8")

@@ -48,6 +48,52 @@ TIER_LABELS_FR = {"STATUTE": "LOI", "CAI": "CAI", "FIRM": "INTERPRÉTATION"}
 class ReportPaths:
     report_md: Path
     audit_jsonl: Path
+    head: str = ""     # final chain hash; printed in the deliverables
+
+
+# Audit-trail format v1 — see docs/AUDIT-TRAIL.md. Field names and canonical
+# form are FROZEN: hashes cover the field-name bytes, so any rename orphans
+# every existing client trail.
+TRAIL_FORMAT = "balise-audit-trail/1"
+# Canonical form: sorted keys, compact separators, raw UTF-8, no floats
+# anywhere in the schema (timestamps are strings for exactly this reason).
+_CANONICAL = {"sort_keys": True, "separators": (",", ":"), "ensure_ascii": False}
+
+
+def _sealed(record: dict, prev: str | None) -> dict:
+    record = {**record, "prev": prev}
+    record["sha256"] = hashlib.sha256(
+        json.dumps(record, **_CANONICAL).encode("utf-8")).hexdigest()
+    return record
+
+
+def _build_trail(findings: list[Finding], target: str) -> list[dict]:
+    """Genesis + one sealed record per finding, hash-chained.
+
+    The genesis record binds the chain to its engagement (target, date, tool)
+    and declares the expected record count, so a truncated tail fails
+    verification on its own — not only against the head in the report."""
+    ordered = sorted(findings, key=_check_order)
+    records = [_sealed({
+        "format": TRAIL_FORMAT,
+        "ts": datetime.now(timezone.utc).isoformat(),
+        "target": target,
+        "tool": "balise 0.1.0",
+        "records": len(ordered),
+    }, prev=None)]
+    for finding in ordered:
+        records.append(_sealed({
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "check": finding.check_id,
+            "legal_hook": finding.check.legal_hook,
+            "tier": finding.check.tier.value,
+            "contested": finding.check.contested,
+            "status": finding.status.value,
+            "evidence": finding.evidence,
+            "reasoning": finding.reasoning,
+            "reasoning_fr": finding.reasoning_fr,
+        }, prev=records[-1]["sha256"]))
+    return records
 
 
 def _check_order(finding: Finding) -> tuple[str, int]:
@@ -137,8 +183,25 @@ def _render_finding(finding: Finding, lang: str) -> str:
     return "\n".join(lines)
 
 
+def _integrity_block(head: str, lang: str) -> list[str]:
+    if lang == "fr":
+        text = ("**Intégrité** : cette évaluation est scellée par une piste "
+                "d'audit chaînée (chaque enregistrement contient l'empreinte "
+                "du précédent). Empreinte finale (SHA-256) : `" + head + "`. "
+                "Une piste dont l'empreinte finale diffère ne correspond pas "
+                "à ce rapport.")
+    else:
+        text = ("**Integrity**: this assessment is sealed by a hash-chained "
+                "audit trail (each record contains the previous record's "
+                "fingerprint). Final fingerprint (SHA-256): `" + head + "`. "
+                "A trail whose final fingerprint differs does not correspond "
+                "to this report.")
+    return ["", "---", "", text, ""]
+
+
 def _render_language_section(findings: list[Finding], target: str, lang: str,
-                             notices: list[tuple[str, str]]) -> str:
+                             notices: list[tuple[str, str]],
+                             head: str = "") -> str:
     title = ("Rapport de préparation — Loi 25" if lang == "fr"
              else "Law 25 Readiness Report")
     disclaimer = DISCLAIMER_FR if lang == "fr" else DISCLAIMER_EN
@@ -159,6 +222,8 @@ def _render_language_section(findings: list[Finding], target: str, lang: str,
     for finding in sorted(findings, key=_check_order):
         lines.append(_render_finding(finding, lang))
     lines.extend(["", render_appendix(findings, lang)])
+    if head:
+        lines.extend(_integrity_block(head, lang))
     return "\n".join(lines)
 
 
@@ -167,58 +232,54 @@ def write_report(findings: list[Finding], target: str, out_dir: str | Path,
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     notices = notices or []
-    body = (_render_language_section(findings, target, "fr", notices)
-            + "\n\n---\n\n"
-            + _render_language_section(findings, target, "en", notices))
 
+    # Trail first: its head is printed in the report body, making the
+    # delivered document itself the head record — a truncated or regenerated
+    # trail contradicts the paper in the client's hands.
+    trail = _build_trail(findings, target)
+    head = trail[-1]["sha256"]
     audit_path = out / "audit-trail.jsonl"
     with audit_path.open("w", encoding="utf-8") as handle:
-        # Hash chain: each record carries the previous record's hash inside
-        # its own hashed content, so deleting or reordering ANY record breaks
-        # every hash after it. "Records are intact" becomes "the trail is
-        # intact" — the property the product's positioning rests on.
-        prev_hash = "genesis"
-        for finding in sorted(findings, key=_check_order):
-            record = {
-                "ts": datetime.now(timezone.utc).isoformat(),
-                "check": finding.check_id,
-                "legal_hook": finding.check.legal_hook,
-                "tier": finding.check.tier.value,
-                "contested": finding.check.contested,
-                "status": finding.status.value,
-                "evidence": finding.evidence,
-                "reasoning": finding.reasoning,
-                "reasoning_fr": finding.reasoning_fr,
-                "prev": prev_hash,
-            }
-            record["sha256"] = hashlib.sha256(
-                json.dumps(record, sort_keys=True, ensure_ascii=False).encode("utf-8")
-            ).hexdigest()
-            prev_hash = record["sha256"]
+        for record in trail:
             handle.write(json.dumps(record, ensure_ascii=False) + "\n")
 
+    body = (_render_language_section(findings, target, "fr", notices, head)
+            + "\n\n---\n\n"
+            + _render_language_section(findings, target, "en", notices, head))
     report_path = out / "rapport-balise.md"
     report_path.write_text(body, encoding="utf-8")
-    return ReportPaths(report_md=report_path, audit_jsonl=audit_path)
+    return ReportPaths(report_md=report_path, audit_jsonl=audit_path, head=head)
 
 
-def verify_audit_trail(path: str | Path) -> bool:
-    """True iff every record's hash validates AND the prev-chain is unbroken.
+def verify_audit_trail(path: str | Path, expect_head: str | None = None) -> bool:
+    """True iff the chain is internally intact AND complete.
 
-    A single edited field, a deleted record, or a reordering anywhere in the
-    file returns False."""
-    prev = "genesis"
-    for line in Path(path).read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        record = json.loads(line)
+    Catches (tier 1, unconditional): any edited field, deleted or reordered
+    record, and a truncated tail — the genesis record declares the expected
+    record count. Catches (tier 2): wholesale regeneration, but ONLY when
+    `expect_head` is supplied from outside the file — in practice, the
+    fingerprint printed in the delivered report. Without an external head or
+    anchor, a regenerated chain is indistinguishable from an honest one."""
+    records = [json.loads(line) for line
+               in Path(path).read_text(encoding="utf-8").splitlines()
+               if line.strip()]
+    if not records:
+        return False
+    prev = None
+    for record in records:
         claimed = record.pop("sha256", None)
         if record.get("prev") != prev:
             return False
         recomputed = hashlib.sha256(
-            json.dumps(record, sort_keys=True, ensure_ascii=False).encode("utf-8")
-        ).hexdigest()
+            json.dumps(record, **_CANONICAL).encode("utf-8")).hexdigest()
         if recomputed != claimed:
             return False
         prev = claimed
+    genesis = records[0]
+    if genesis.get("format") != TRAIL_FORMAT:
+        return False
+    if genesis.get("records") != len(records) - 1:
+        return False
+    if expect_head is not None and prev != expect_head:
+        return False
     return True

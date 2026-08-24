@@ -95,7 +95,8 @@ def main(argv: list[str] | None = None) -> int:
     paths = report.write_report(findings, target=site.root_url, out_dir=args.out,
                                 notices=notices)
     summary_path = summary.write_summary(findings, target=site.root_url,
-                                         out_dir=args.out, notices=notices)
+                                         out_dir=args.out, notices=notices,
+                                         head=paths.head)
     print(f"report:      {paths.report_md}")
     print(f"summary:     {summary_path}")
     print(f"audit trail: {paths.audit_jsonl}")
