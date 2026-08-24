@@ -248,8 +248,9 @@ CHECKS: tuple[Check, ...] = (
                "(see Regulation respecting the anonymization of personal information). "
                "Walk finding F2 (2026-08-23): penal exposure attaches (s. 91 regime; "
                "s. 91(4) makes failure to take s. 10 measures a penal offence — see "
-               "VERIFICATION bonus row). CAI nuance via TCJ art. 968: in the recruitment "
-               "context the regulator steers toward destruction over anonymization. "
+               "VERIFICATION bonus row). Primary-source (CAI recruitment page, read "
+               "2026-08-24): anonymization discouraged — 'quasi impossible de "
+               "certifier' irreversibility; destruction preferred. "
                "Sharp intake probe from TCJ art. 983: backups are the classic "
                "destruction blind spot — 'do your backups also honor destruction?'"),
     Check("B15", "B", Domain.TRANSPARENCY, Mode.INTAKE, Tier.STATUTE, "ss. 12, 22",
@@ -326,6 +327,33 @@ CHECKS: tuple[Check, ...] = (
                "2026-08-23: daily offline backups is a MANDATORY question on CFC's "
                "short form; Beazley requires compromise-isolated, tested backups. "
                "Self-reported; feeds the insurer appendix."),
+    # ---- added at gate re-opening 2026-08-24 (ratified in-session) ----
+    Check("B21", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.STATUTE, "s. 9.1",
+          "Paramètres de confidentialité par défaut au plus haut niveau (produits et services technologiques)",
+          "Privacy settings default to the highest level (technological products and services)",
+          note="Born-verified 2026-08-24 (official FR text read in browser): applies "
+               "when the enterprise OFFERS THE PUBLIC a technological product or "
+               "service with privacy settings; highest level by default, 'sans "
+               "aucune intervention'; connection cookies (témoins de connexion) "
+               "expressly excluded (al. 2). Distinct from A5: A5 is the CAI's "
+               "off-by-default cookie expectation; s. 9.1 is the statutory "
+               "product-default duty the cookie carve-out sits inside. Conditional "
+               "practice: applicable-gated (client portals, apps, member zones)."),
+    Check("B22", "B", Domain.SPECIAL_CATEGORIES, Mode.INTAKE, Tier.CAI,
+          "s. 5 + lignes directrices CAI recrutement (2025-03-17)",
+          "Recrutement : collecte limitée au nécessaire à chaque étape, destruction en fin de processus",
+          "Recruitment: collection limited to what each stage requires, destruction when the process ends",
+          note="Born-verified 2026-08-24: s. 5 necessity read verbatim on LegisQuébec; "
+               "the CAI guidelines (2025-03-17) read on the CAI's own page. Four "
+               "stages with per-stage permitted lists. Prohibited: photocopying or "
+               "recording identity documents; keeping judicial records unrelated to "
+               "the position or pardoned. Discouraged: social-media screening, credit "
+               "checks (prefer references), emotion-recognition AI ('un usage "
+               "inapproprié de l'IA'). SIN and banking only at hiring; destroy "
+               "candidate data once the purpose is met (anonymization discouraged: "
+               "'quasi impossible de certifier'). These guidelines POST-DATE the "
+               "original 2026-08-23 gate sweep — first gate re-opening event. "
+               "Career pages are also a Module A surface (future)."),
 )
 
 

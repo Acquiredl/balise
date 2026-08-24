@@ -248,3 +248,33 @@ answers:
       mandatory question on cyber-insurance application forms.)
     answer: unknown
     details: ""
+  B21:
+    applicable: unknown   # oui/non — offrez-vous un produit/service techno avec parametres de confidentialite? / do you offer a tech product/service with privacy settings?
+    question_fr: >-
+      Si vous offrez au public un produit ou service technologique disposant
+      de paramètres de confidentialité (portail client, application, espace
+      membre) : ces paramètres assurent-ils par défaut le plus haut niveau de
+      confidentialité, sans aucune intervention de l'utilisateur (art. 9.1)?
+      (Les témoins de connexion sont exclus.)
+    question_en: >-
+      If you offer the public a technological product or service with privacy
+      settings (client portal, app, member zone): do those settings default to
+      the highest level of privacy, with no user action required (s. 9.1)?
+      (Connection cookies are excluded.)
+    answer: unknown
+    details: ""
+  B22:
+    applicable: unknown   # oui/non — recrutez-vous du personnel? / do you recruit staff?
+    question_fr: >-
+      Lors d'un recrutement : recueillez-vous seulement le nécessaire à
+      chaque étape (jamais de photocopie de pièces d'identité; NAS et
+      coordonnées bancaires à l'embauche seulement), et détruisez-vous les
+      renseignements des candidats non retenus à la fin du processus?
+      (Art. 5 + lignes directrices de la CAI, mars 2025.)
+    question_en: >-
+      When recruiting: do you collect only what each stage requires (never
+      photocopying identity documents; SIN and banking details at hiring
+      only), and do you destroy unsuccessful candidates' information when the
+      process ends? (S. 5 + CAI guidelines, March 2025.)
+    answer: unknown
+    details: ""

@@ -4,7 +4,7 @@ Ubiquitous language for this repo. Terms are used exactly as defined here, in co
 
 | Term | Definition |
 |---|---|
-| **Check** | One assessable item with a stable id (`A1`–`A10`, `B1`–`B20`), a legal hook, an authority tier, and a mode (deterministic / semantic / intake). The check id is the foreign key of the whole system: intake, report, sommaire, advice copy, insurer appendix, and audit trail all key on it. |
+| **Check** | One assessable item with a stable id (`A1`–`A10`, `B1`–`B22`), a legal hook, an authority tier, and a mode (deterministic / semantic / intake). The check id is the foreign key of the whole system: intake, report, sommaire, advice copy, insurer appendix, and audit trail all key on it. |
 | **Module A** | External scan — checks assessable from the public website alone, no client input. |
 | **Module B** | Intake assessment — organizational checks answered through the questionnaire (`intake/`). |
 | **Authority tier** | Strength of a check's legal basis: `STATUTE` (explicit text of CQLR c. P-39.1 or LCCJTI), `CAI` (regulator guidance/expectation), `FIRM` (convergent law-firm interpretation, unsettled). Findings inherit the tier; contested points are never reported as settled law. |

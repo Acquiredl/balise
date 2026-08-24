@@ -76,3 +76,11 @@ answers:
   B20:
     answer: "non, la sauvegarde est sur un disque branché en permanence à l'ordinateur du bureau."
     details: ""
+  B21:
+    applicable: non
+    answer: "notre boutique en ligne n'offre pas de comptes clients avec des réglages de confidentialité."
+    details: ""
+  B22:
+    applicable: oui
+    answer: "non. On photocopie le permis de conduire en entrevue et on garde tous les CV reçus « au cas où »."
+    details: ""

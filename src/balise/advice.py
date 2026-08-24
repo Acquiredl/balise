@@ -262,4 +262,20 @@ CLIENT_COPY: dict[str, ClientCopy] = {
         "Mettre en place des sauvegardes hors ligne des données critiques et tester la restauration.",
         "Set up offline backups of critical data and test restoration.",
         3),
+    "B21": ClientCopy(
+        "Vos paramètres par défaut",
+        "Your default privacy settings",
+        "Si votre portail ou votre application offre des réglages de confidentialité, la loi exige que le niveau maximal soit déjà activé à l'arrivée. Un défaut trop bavard fait porter le fardeau au client — et la non-conformité à vous.",
+        "If your portal or app offers privacy settings, the law requires the maximum level to be on from the start. A chatty default shifts the burden to the client — and the non-compliance to you.",
+        "Vérifier chaque paramètre par défaut de vos produits et régler au niveau le plus protecteur.",
+        "Review every default setting in your products and set the most protective level.",
+        2),
+    "B22": ClientCopy(
+        "Le recrutement et vos candidats",
+        "Recruiting and your candidates",
+        "Le régulateur vient d'encadrer le recrutement : photocopier un permis, exiger le NAS trop tôt ou garder les CV des candidats non retenus sont des gestes courants — et non conformes. Un dossier de candidature est un renseignement personnel comme les autres.",
+        "The regulator has just framed recruiting: photocopying a licence, asking for the SIN too early, or keeping unsuccessful candidates' CVs are common practices — and non-compliant. An application file is personal information like any other.",
+        "Revoir l'embauche étape par étape et détruire les dossiers des candidats non retenus.",
+        "Review hiring stage by stage and destroy unsuccessful candidates' files.",
+        2),
 }
