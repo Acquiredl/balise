@@ -219,3 +219,29 @@ answers:
       restricted access, and a PIA conducted for the camera project?
     answer: unknown
     details: ""
+  B19:
+    question_fr: >-
+      L'authentification multifacteur (MFA) est-elle activée sur tous les
+      comptes courriel et tous les accès à distance de l'entreprise?
+      (Autodéclaré — la loi ne nomme pas la MFA, mais c'est la première
+      condition d'admissibilité des assureurs cyber, et une réclamation a
+      déjà été refusée pour MFA incomplète.)
+    question_en: >-
+      Is multi-factor authentication (MFA) enabled on all company email
+      accounts and all remote access? (Self-reported — the statute does not
+      name MFA, but it is cyber insurers' first eligibility condition, and a
+      claim has already been denied over incomplete MFA.)
+    answer: unknown
+    details: ""
+  B20:
+    question_fr: >-
+      Faites-vous des copies de sauvegarde hors ligne (ou isolées d'une
+      compromission) de vos données critiques, et testez-vous la restauration
+      régulièrement? (Autodéclaré — question obligatoire des formulaires
+      d'assurance cyber.)
+    question_en: >-
+      Do you keep offline (or compromise-isolated) backups of your critical
+      data, and do you test restoration regularly? (Self-reported — a
+      mandatory question on cyber-insurance application forms.)
+    answer: unknown
+    details: ""

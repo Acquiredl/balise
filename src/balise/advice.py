@@ -246,4 +246,20 @@ CLIENT_COPY: dict[str, ClientCopy] = {
         "Documenter la nécessité, afficher, limiter la conservation, restreindre l'accès.",
         "Document necessity, post signage, cap retention, restrict access.",
         2),
+    "B19": ClientCopy(
+        "L'authentification à deux facteurs (MFA)",
+        "Two-factor authentication (MFA)",
+        "La loi ne nomme pas la MFA, mais votre assureur, oui : c'est la première question des formulaires d'assurance cyber, et une réclamation de plusieurs millions a déjà été refusée parce que la MFA n'était pas complète.",
+        "The statute doesn't name MFA, but your insurer does: it's the first question on cyber-insurance forms, and a multi-million-dollar claim has already been denied because MFA wasn't fully in place.",
+        "Activer la MFA sur tous les comptes courriel et tous les accès à distance.",
+        "Enable MFA on every email account and all remote access.",
+        3),
+    "B20": ClientCopy(
+        "Vos copies de sauvegarde, hors ligne et testées",
+        "Your backups, offline and tested",
+        "Une sauvegarde branchée en permanence se chiffre avec le reste lors d'un rançongiciel. Les assureurs demandent des copies hors ligne testées; une restauration jamais essayée est un pari, pas un plan.",
+        "A permanently connected backup gets encrypted along with everything else in a ransomware attack. Insurers ask for tested offline copies; a never-attempted restore is a bet, not a plan.",
+        "Mettre en place des sauvegardes hors ligne des données critiques et tester la restauration.",
+        "Set up offline backups of critical data and test restoration.",
+        3),
 }

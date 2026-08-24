@@ -249,6 +249,25 @@ CHECKS: tuple[Check, ...] = (
                "recommended; camera projects trigger a mandatory PIA post-Loi 25 "
                "(named in EFVP guide s. 7.2). Fiche is 2019/pre-Loi 25 — necessity test "
                "is jurisprudence-grounded and current; procedural details are stale."),
+    # ---- added 2026-08-23: insurer-eligibility specifics (questionnaire research) ----
+    Check("B19", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.FIRM,
+          "s. 10 (application courante)",
+          "Authentification multifacteur (MFA) sur les courriels et les accès à distance",
+          "Multi-factor authentication (MFA) on email and remote access",
+          note="MFA is not named by the statute; it is the market's convergent reading "
+               "of a s. 10 proportionate measure and the #1 cyber-insurance eligibility "
+               "gate. Research 2026-08-23 (4 application forms read): MFA on email is a "
+               "MANDATORY question on CFC's and Beazley's short forms; City of Hamilton's "
+               "$18.3M ransomware claim was denied in 2025 over incomplete MFA. "
+               "Self-reported; feeds the insurer appendix."),
+    Check("B20", "B", Domain.GOVERNANCE, Mode.INTAKE, Tier.FIRM,
+          "s. 10 (application courante)",
+          "Copies de sauvegarde hors ligne des données critiques, testées régulièrement",
+          "Offline backups of critical data, regularly tested",
+          note="Same footing as B19: a s. 10 application, insurer-gated. Research "
+               "2026-08-23: daily offline backups is a MANDATORY question on CFC's "
+               "short form; Beazley requires compromise-isolated, tested backups. "
+               "Self-reported; feeds the insurer appendix."),
 )
 
 
