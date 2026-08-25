@@ -23,6 +23,7 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from . import seal as seal_mod
 from .report import MANIFEST_FORMAT, verify_audit_trail
 
 _LIMIT_NOTE = ("no seals declared: internal consistency only — "
@@ -148,20 +149,54 @@ def verify_package(package_dir: str | Path) -> PackageVerdict:
                             True, f"{len(expected)} file(s), exact set"))
 
     # 5. Declared seals: a declared-but-absent seal is a failure, never a
-    # silent downgrade. (No seal verifiers exist yet; any declaration is
-    # therefore missing by definition until the seal slices land.)
-    seal_missing = False
-    for seal in manifest.get("seals", []):
-        checks.append(Check(f"seal {seal}", False,
-                            "declared but not present"))
-        seal_missing = True
-    if not manifest.get("seals", []):
+    # silent downgrade. Each valid seal adds its rung to the verdict; a
+    # pending anchor is judged honestly (submitted, not yet attested) and
+    # earns no rung. The signature rung prints the key's fingerprint and
+    # never a name: comparing it against an out-of-band channel is the
+    # recipient's job.
+    seal_missing = seal_invalid = False
+    rungs = []
+    declared = manifest.get("seals", [])
+    for kind in declared:
+        if kind == "ed25519":
+            state, detail = seal_mod.judge_signature(package)
+            if state == "valid":
+                checks.append(Check("seal ed25519", True,
+                                    f"key {detail[:16]}…"))
+                rungs.append(f"SIGNED (key: {detail[:16]}…)")
+            elif state == "missing":
+                checks.append(Check("seal ed25519", False, detail))
+                seal_missing = True
+            else:
+                checks.append(Check("seal ed25519", False, detail))
+                seal_invalid = True
+        elif kind == "anchor":
+            state, detail = seal_mod.judge_anchors(package)
+            if state == "bitcoin":
+                checks.append(Check("seal anchor", True, detail))
+                rungs.append(f"ANCHORED ({detail})")
+            elif state == "pending":
+                checks.append(Check("seal anchor", True, detail))
+            elif state == "missing":
+                checks.append(Check("seal anchor", False, detail))
+                seal_missing = True
+            else:
+                checks.append(Check("seal anchor", False, detail))
+                seal_invalid = True
+        else:
+            checks.append(Check(f"seal {kind}", False,
+                                "unknown seal kind — cannot judge"))
+            seal_invalid = True
+    if not declared:
         checks.append(Check("seals", True, _LIMIT_NOTE))
 
     if chain_broken:
         return PackageVerdict("CHAIN-BROKEN", 1, checks)
     if diverged:
         return PackageVerdict("ARTIFACT-DIVERGED", 2, checks)
+    if seal_invalid:
+        return PackageVerdict("SEAL-INVALID", 3, checks)
     if seal_missing:
         return PackageVerdict("SEAL-MISSING", 3, checks)
-    return PackageVerdict("SELF-CONSISTENT", 0, checks)
+    verdict = " + ".join(["SELF-CONSISTENT", *rungs])
+    return PackageVerdict(verdict, 0, checks)

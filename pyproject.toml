@@ -1,7 +1,7 @@
 [project]
 name = "balise"
 version = "0.1.0"
-description = "Law 25 compliance-readiness assessor for Quebec SMBs - bilingual reports with a legible audit trail"
+description = "Law 25 compliance-readiness assessor for Quebec SMBs - bilingual reports with a legible verification trail"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -9,6 +9,10 @@ dependencies = [
     "httpx>=0.27",
     "beautifulsoup4>=4.12",
     "PyYAML>=6.0",
+    # hard dependency, not an extra: every install must be able to verify
+    # every seal kind, or a declared seal becomes unjudgeable on the
+    # recipient's machine - the exact hole the seal declaration closes
+    "cryptography>=42.0",
 ]
 
 [project.optional-dependencies]
