@@ -158,3 +158,12 @@ def test_keygen_writes_nothing(tmp_path, capsys, monkeypatch):
     assert "private key" in out
     assert "fingerprint" in out
     assert list(tmp_path.iterdir()) == []
+
+
+def test_checklist_shows_the_full_fingerprint(tmp_path, monkeypatch):
+    build_package(tmp_path)
+    _, fingerprint = seal_it(tmp_path, monkeypatch)
+    rendered = verify_package(tmp_path).render()
+    # the full value is what recipients compare out-of-band; a truncated
+    # prefix would leave room for a collided key
+    assert fingerprint in rendered

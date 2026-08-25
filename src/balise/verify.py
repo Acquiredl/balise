@@ -120,13 +120,22 @@ def verify_package(package_dir: str | Path) -> PackageVerdict:
             checks.append(Check("trail head vs manifest", True))
 
     # 4. The chain is the evidence index: the archive must contain exactly
-    # the referenced set, each file matching the name it carries.
-    expected = {ref["sha256"] for record in records
-                for ref in record.get("sources", [])}
-    evidence_dir = package / "evidence"
-    actual = ({p.name: p for p in evidence_dir.iterdir()}
-              if evidence_dir.is_dir() else {})
-    evidence_ok = True
+    # the referenced set, each file matching the name it carries. A broken
+    # chain means there is no index to judge against — say so instead of
+    # flagging every archived file as smuggled.
+    if chain_broken:
+        checks.append(Check("evidence archive", False,
+                            "not judged — the chain is the index and the "
+                            "chain is unusable"))
+        expected: set[str] = set()
+        actual: dict = {}
+    else:
+        expected = {ref["sha256"] for record in records
+                    for ref in record.get("sources", [])}
+        evidence_dir = package / "evidence"
+        actual = ({p.name: p for p in evidence_dir.iterdir()}
+                  if evidence_dir.is_dir() else {})
+    evidence_ok = not chain_broken
     for digest in sorted(expected):
         name = f"{digest}.html"
         if name not in actual:
@@ -161,8 +170,11 @@ def verify_package(package_dir: str | Path) -> PackageVerdict:
         if kind == "ed25519":
             state, detail = seal_mod.judge_signature(package)
             if state == "valid":
-                checks.append(Check("seal ed25519", True,
-                                    f"key {detail[:16]}…"))
+                # full fingerprint in the checklist: recipients compare the
+                # whole value against the out-of-band channel — a truncated
+                # prefix would leave room for a collided key. The verdict
+                # rung stays short for readability.
+                checks.append(Check("seal ed25519", True, f"key {detail}"))
                 rungs.append(f"SIGNED (key: {detail[:16]}…)")
             elif state == "missing":
                 checks.append(Check("seal ed25519", False, detail))

@@ -294,9 +294,15 @@ def _write_evidence_archive(findings: list[Finding], snapshot,
     evidence_dir.mkdir(parents=True, exist_ok=True)
     for digest in sorted(referenced):
         page = by_hash.get(digest)
-        if page is not None:
-            (evidence_dir / f"{digest}.html").write_bytes(
-                page.html.encode("utf-8"))
+        if page is None:
+            # a referenced artifact the snapshot no longer holds cannot be
+            # archived — the package will fail verification on this, so say
+            # it now instead of shipping the gap silently
+            print(f"warning: referenced source {digest[:12]}… is not in the "
+                  "snapshot; evidence archive is incomplete")
+            continue
+        (evidence_dir / f"{digest}.html").write_bytes(
+            page.html.encode("utf-8"))
 
 
 def write_report(findings: list[Finding], target: str, out_dir: str | Path,
@@ -308,9 +314,10 @@ def write_report(findings: list[Finding], target: str, out_dir: str | Path,
     if snapshot is not None:
         _write_evidence_archive(findings, snapshot, out)
 
-    # Trail first: its head is printed in the report body, making the
-    # delivered document itself the head record — a truncated or regenerated
-    # trail contradicts the paper in the client's hands.
+    # Trail first: its head is printed in the report body, so the client's
+    # copy serves as their head record — a truncated or regenerated trail
+    # contradicts the paper in the client's hands (consistency between the
+    # two artifacts; provenance is the seals' job).
     assessment_id = str(uuid.uuid4())
     trail = _build_trail(findings, target, assessment_id)
     head = trail[-1]["sha256"]

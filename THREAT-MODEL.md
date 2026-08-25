@@ -4,7 +4,7 @@ Security posture for an agentic assessment tool that ingests untrusted websites 
 
 ## Assets
 
-1. **Report integrity** — a finding a client acts on must reflect the evidence; the audit trail must be tamper-evident.
+1. **Report integrity** — a finding a client acts on must reflect the evidence; the verification trail must be tamper-evident.
 2. **Client data** — intake answers describe an enterprise's internal gaps; that is sensitive information about their exposure.
 3. **The operator's API credentials.**
 4. **The tool's honesty guarantees** — the authority-tier and no-verdict rules are part of the security posture, not just product design.
@@ -34,7 +34,7 @@ Semantic evidence strings are length-capped and rendered into markdown reports (
 Each JSONL record embeds a SHA256 of its own canonical content — edits after the fact are detectable by recomputation. (Chain-hashing across records is a v2 candidate if engagements demand stronger tamper evidence.)
 
 ### 6. Credential handling
-`ANTHROPIC_API_KEY` is read from the environment, never stored, never logged, never written into reports or the audit trail.
+`ANTHROPIC_API_KEY` is read from the environment, never stored, never logged, never written into reports or the verification trail.
 
 ### 7. Misrepresentation as legal advice (product-level threat)
 The most damaging failure is a report being treated as a legal verdict. Controls: the non-removable bilingual disclaimer, the no-verdict rule (ADR 0002), authority tiers on every finding (ADR 0001), and the VERIFICATION gate (`docs/VERIFICATION.md`) blocking client-facing use until statutory references are human-verified.
