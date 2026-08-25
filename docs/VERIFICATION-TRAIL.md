@@ -68,4 +68,11 @@ A full engagement ships as a **package**: the trail, the rapport, the sommaire, 
 | `SEAL-MISSING` / `SEAL-INVALID` | 3 | A declared seal is absent or fails. A stripped seal is a failure, never a silent downgrade. |
 | `UNSUPPORTED-FORMAT` | 4 | Refusal to judge, not a verdict: no readable manifest of a known format. |
 
-Sealing the manifest (an OpenTimestamps anchor for *when*; an issuer signature for *who*) is the planned closure of tier 3; the declared-seal mechanism and verdict rungs are already in place.
+## Seals: closing tier 3
+
+`balise seal <package-dir>` applies two seals to the manifest's exact shipped bytes, answering orthogonal questions:
+
+- **The anchor** (OpenTimestamps) says *when*: the manifest digest is committed to Bitcoin via free public calendar servers — no wallet, no account, no service to operate. The proof starts *pending* and completes with `balise seal --upgrade` a few hours later, once Bitcoin has it (only the seals sidecar changes; the manifest is frozen from the first seal). A completed proof earns the `+ ANCHORED (block N)` rung. The anchor is the only seal the issuer cannot forge later, which is what finally closes tier 3: a regenerated package can only carry a *young* anchor.
+- **The issuer signature** (Ed25519, detached) says *who*: the holder of the key issued this package, unchanged since signing. The verdict prints `+ SIGNED (key: <fingerprint>)` — the fingerprint, never a name: the key ships inside the package and is testimony; the recipient compares the printed fingerprint against [docs/SIGNING.md](SIGNING.md) and the engagement letter, the channels the package cannot rewrite. Neither seal replaces the other: a signature has no clock and can be redone by whoever holds the key; nobody can anchor a forgery into the past.
+
+The seal declaration is written into the manifest before the first seal is applied (the declaration is part of the sealed bytes), so the declared set is frozen with everything else: stripping a seal yields `SEAL-MISSING`, and re-sealing under a substituted key changes the printed fingerprint. Key custody and the signing ritual are in [docs/SIGNING.md](SIGNING.md).
