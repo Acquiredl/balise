@@ -4,11 +4,9 @@ This page is the canonical out-of-band channel for the Balise issuer key: the on
 
 ## Current fingerprint
 
-*No key has been issued yet. The first fingerprint will be published here before the first signed engagement ships.*
-
 | Fingerprint (SHA-256 of the public key) | In service since | Status |
 |---|---|---|
-| — | — | — |
+| `81cf985bb660ed055dbed21f9d0ab7877910190945b7d7d4d63124651108e6b3` | 2026-08-25 | active |
 
 Fingerprints are **never removed** from this table: packages outlive keys, and a package from year one must still be checkable against year one's fingerprint. Rotation happens on need (compromise or loss), not on a calendar. A compromise notice, if ever needed, appears here with a date fence: packages carrying an anchor from before that date remain defensible — a stolen key can sign a forgery, but no one can anchor a forgery into the past.
 
