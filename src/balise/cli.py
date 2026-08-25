@@ -12,6 +12,7 @@ import sys
 
 from . import external, fetcher, report, semantic, summary
 from . import intake as intake_mod
+from . import verify as verify_mod
 
 # Balise assesses the PRIVATE-sector regime (CQLR c. P-39.1). Public bodies
 # fall under the Loi sur l'accès instead — assessing them against the wrong
@@ -61,7 +62,15 @@ def main(argv: list[str] | None = None) -> int:
                       help="Free-preview mode: deterministic remote checks "
                            "only (no intake, no semantic engine), producing a "
                            "teaser summary instead of the full deliverables")
+    verify_cmd = sub.add_parser(
+        "verify", help="Verify a delivered assessment package offline")
+    verify_cmd.add_argument("package", help="Path to the package directory")
     args = parser.parse_args(argv)
+
+    if args.command == "verify":
+        result = verify_mod.verify_package(args.package)
+        print(result.render())
+        return result.exit_code
     if args.mini and args.intake:
         parser.error("--mini runs the remote preview only and would ignore "
                      "--intake; drop one of the two flags")

@@ -51,3 +51,19 @@ Walks the file once and checks: each record's recomputed canonical hash equals i
 3. **Not provided (yet):** proof against a party who controls *both* the trail and the delivered documents before delivery. Closing that requires anchoring the head in an external, append-only system at delivery time (e.g., an OpenTimestamps commitment). Deliberately deferred; revisit when a client dispute scenario makes it worth the operational cost.
 
 Two scope notes. The trail proves the **integrity of the record**, not the correctness of the findings: a finding wrong at write time is faithfully chained wrong. And the chain cannot prove a check was *never* recorded beyond the genesis count — completeness within a run is the genesis record's job; completeness across runs is the operator's.
+
+## The package: manifest and `balise verify`
+
+A full engagement ships as a **package**: the trail, the rapport, the sommaire, the `evidence/` archive, and `manifest.json` (`balise-assessment/1`) — the packing list, **written last**. The manifest carries the trail head and the SHA-256 of each post-close artifact's shipped bytes, plus a declared seal set. It lists the trail by head only (a file hash would be a second commitment to the same fact) and does not list `evidence/` (the chain is the index). It has no self-hash, and no artifact may reference it: the manifest's own hash is the package's single sealing surface, computed from its bytes by whatever seals or verifies it. The rapport prints the assessment id and the trail head; it never prints the manifest hash.
+
+`balise verify <package-dir>` checks the whole package offline, outward-in: manifest → artifacts against their hashes → chain walk → trail head against the manifest → evidence archive against the chain-derived index → declared seals. Verdicts name the mechanism, never the conclusion:
+
+| Verdict | Exit | Meaning |
+|---|---|---|
+| `SELF-CONSISTENT` | 0 | Every internal check passed. Printed with its stated limit: with no seals, indistinguishable from a wholesale regeneration. |
+| `CHAIN-BROKEN` | 1 | The trail's integrity failed. |
+| `ARTIFACT-DIVERGED` | 2 | An artifact does not match its commitment (report, sommaire, evidence file, or a trail that is not the listed one). |
+| `SEAL-MISSING` / `SEAL-INVALID` | 3 | A declared seal is absent or fails. A stripped seal is a failure, never a silent downgrade. |
+| `UNSUPPORTED-FORMAT` | 4 | Refusal to judge, not a verdict: no readable manifest of a known format. |
+
+Sealing the manifest (an OpenTimestamps anchor for *when*; an issuer signature for *who*) is the planned closure of tier 3; the declared-seal mechanism and verdict rungs are already in place.
