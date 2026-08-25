@@ -9,9 +9,11 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+from pathlib import Path
 
 from . import external, fetcher, report, semantic, summary
 from . import intake as intake_mod
+from . import seal as seal_mod
 from . import verify as verify_mod
 
 # Balise assesses the PRIVATE-sector regime (CQLR c. P-39.1). Public bodies
@@ -65,12 +67,50 @@ def main(argv: list[str] | None = None) -> int:
     verify_cmd = sub.add_parser(
         "verify", help="Verify a delivered assessment package offline")
     verify_cmd.add_argument("package", help="Path to the package directory")
+    seal_cmd = sub.add_parser(
+        "seal", help="Seal a completed package: anchor the manifest to "
+                     "Bitcoin (OpenTimestamps) and apply the issuer "
+                     "signature. Declares both seals up front — the "
+                     "declaration is part of the sealed bytes.")
+    seal_cmd.add_argument("package", help="Path to the package directory")
+    seal_cmd.add_argument("--upgrade", action="store_true",
+                          help="Complete pending anchor proofs once Bitcoin "
+                               "has them (touches only the seals sidecar)")
+    seal_cmd.add_argument("--anchor-only", action="store_true",
+                          help="Anchor without signing (no key involved)")
+    seal_cmd.add_argument("--sign-only", action="store_true",
+                          help="Sign without anchoring")
+    sub.add_parser(
+        "keygen", help="Generate an issuer keypair. The private key is "
+                       "printed once and never written: store it in your "
+                       "password manager, out of the writer's reach "
+                       "(docs/SIGNING.md)")
     args = parser.parse_args(argv)
 
     if args.command == "verify":
         result = verify_mod.verify_package(args.package)
         print(result.render())
         return result.exit_code
+
+    if args.command == "keygen":
+        private_hex, public_hex, fingerprint = seal_mod.generate_keypair()
+        print("issuer keypair generated — nothing was written to disk\n")
+        print(f"private key (store in your password manager, then close "
+              f"this terminal):\n  {private_hex}\n")
+        print(f"public key:\n  {public_hex}\n")
+        print(f"fingerprint (publish in docs/SIGNING.md and engagement "
+              f"letters):\n  {fingerprint}")
+        return 0
+
+    if args.command == "seal":
+        if args.upgrade:
+            seal_mod.upgrade_anchors(Path(args.package))
+            return 0
+        if args.anchor_only and args.sign_only:
+            parser.error("--anchor-only and --sign-only exclude each other")
+        return seal_mod.seal_package(args.package,
+                                     sign=not args.anchor_only,
+                                     anchor=not args.sign_only)
     if args.mini and args.intake:
         parser.error("--mini runs the remote preview only and would ignore "
                      "--intake; drop one of the two flags")
