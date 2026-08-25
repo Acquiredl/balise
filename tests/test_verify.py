@@ -146,3 +146,21 @@ def test_cli_verify_prints_checklist_and_exits_by_verdict(tmp_path, capsys):
 
     (tmp_path / "rapport-balise.md").write_text("tampered", encoding="utf-8")
     assert main(["verify", str(tmp_path)]) == 2
+
+
+def test_broken_chain_does_not_flag_the_archive_as_smuggled(tmp_path):
+    build_package(tmp_path)
+    trail = tmp_path / "audit-trail.jsonl"
+    lines = trail.read_text(encoding="utf-8").splitlines()
+    record = json.loads(lines[1])
+    record["status"] = "met" if record["status"] != "met" else "not_met"
+    lines[1] = json.dumps(record, ensure_ascii=False)
+    trail.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    verdict = verify_package(tmp_path)
+    assert verdict.verdict == "CHAIN-BROKEN"
+    rendered = verdict.render()
+    # the chain is the index; with no usable index the archive is not
+    # judged, not accused
+    assert "not referenced by any finding" not in rendered
+    assert "not judged" in rendered

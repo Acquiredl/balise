@@ -61,7 +61,7 @@ Some things this version does not do yet, so you don't find out the hard way:
 
 ## Security posture
 
-See [THREAT-MODEL.md](THREAT-MODEL.md): SSRF-guarded fetching, prompt-injection containment for untrusted site content, local-only client data, tamper-evident audit records.
+See [THREAT-MODEL.md](THREAT-MODEL.md): SSRF-guarded fetching, prompt-injection containment for untrusted site content, local-only client data, tamper-evident verification trail.
 
 ## Status
 
