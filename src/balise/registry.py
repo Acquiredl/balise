@@ -5,6 +5,8 @@ Statutory references are triangulated, not yet human-verified against
 LegisQuebec: docs/VERIFICATION.md gates client-facing use.
 """
 
+import hashlib
+import json
 from dataclasses import dataclass
 from enum import Enum
 
@@ -45,6 +47,39 @@ STATUS_LABELS = {
     Status.NOT_MET: ("Non atteint", "Not met"),
     Status.NOT_APPLICABLE: ("Sans objet", "Not applicable"),
     Status.UNKNOWN: ("Indéterminé", "Unknown"),
+}
+
+
+class EvidenceGrade(str, Enum):
+    """What kind of evidence backs a finding — orthogonal to its status.
+
+    A grade qualifies a status, never changes it: it measures the
+    independence of the evidence, not the correctness of the conclusion.
+    Grading table with examples: docs/AUDIT-TRAIL.md."""
+    SELF_REPORTED = "self_reported"              # subject testimony, unexamined
+    DOCUMENT_EVIDENCED = "document_evidenced"    # a supporting document was received
+    ARTIFACT_INSPECTED = "artifact_inspected"    # the artifact itself was examined
+    INDEPENDENTLY_OBSERVED = "independently_observed"  # recomputable by the verifier
+
+
+# Client-facing evidence-grade wording, (FR, EN) — single source, like STATUS_LABELS.
+EVIDENCE_GRADE_LABELS = {
+    EvidenceGrade.SELF_REPORTED: ("Déclaré par l'entreprise, non vérifié",
+                                  "Self-reported, unverified"),
+    EvidenceGrade.DOCUMENT_EVIDENCED: ("Document fourni", "Document provided"),
+    EvidenceGrade.ARTIFACT_INSPECTED: ("Observé sur le site", "Observed on the site"),
+    EvidenceGrade.INDEPENDENTLY_OBSERVED: ("Vérifiable indépendamment",
+                                           "Independently verifiable"),
+}
+
+# v0.1 grades derive from the check's mode: both deterministic detectors and
+# semantic checks examine the fetched site (the artifact); intake answers are
+# the subject's word. document_evidenced and independently_observed are
+# reserved for future evidence sources (client documents; anchored facts).
+MODE_EVIDENCE_GRADE = {
+    Mode.DETERMINISTIC: EvidenceGrade.ARTIFACT_INSPECTED,
+    Mode.SEMANTIC: EvidenceGrade.ARTIFACT_INSPECTED,
+    Mode.INTAKE: EvidenceGrade.SELF_REPORTED,
 }
 
 
@@ -355,6 +390,21 @@ CHECKS: tuple[Check, ...] = (
                "original 2026-08-23 gate sweep — first gate re-opening event. "
                "Career pages are also a Module A surface (future)."),
 )
+
+
+def catalog_fingerprint() -> str:
+    """SHA-256 over the canonical serialization of the whole check catalog.
+
+    Recorded in each trail's genesis so 'why did this assessment change' has
+    an answer: a changed hook, tier, title or note changes the fingerprint.
+    Canonical form mirrors the trail's rules (sorted keys, compact
+    separators, raw UTF-8)."""
+    payload = [[c.id, c.module, c.domain.value, c.mode.value, c.tier.value,
+                c.legal_hook, c.title_fr, c.title_en, c.contested, c.note]
+               for c in CHECKS]
+    return hashlib.sha256(json.dumps(
+        payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+    ).encode("utf-8")).hexdigest()
 
 
 def by_id(check_id: str) -> Check:

@@ -9,6 +9,7 @@ construction of the prompt and, failing that, caught by schema validation.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -75,6 +76,17 @@ _QUESTIONS = {
 }
 
 _VALID_STATUSES = {s.value for s in Status}
+
+
+def prompt_fingerprint() -> str:
+    """SHA-256 over the system prompt and every authored question.
+
+    Recorded in each trail's genesis: a reworded question or system prompt
+    changes semantic judgments, so it must be visible in the record."""
+    payload = json.dumps({"system": _SYSTEM, "questions": _QUESTIONS},
+                         sort_keys=True, separators=(",", ":"),
+                         ensure_ascii=False)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 @dataclass

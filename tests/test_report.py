@@ -48,6 +48,56 @@ def test_report_is_bilingual_with_disclaimers_and_audit_trail(tmp_path):
     assert paths.head in body
 
 
+def test_trail_carries_evidence_grade_and_provenance(tmp_path):
+    findings = [
+        Finding("A1", Status.MET, reasoning="x", reasoning_fr="x"),   # deterministic
+        Finding("A2", Status.PARTIAL, reasoning="x", reasoning_fr="x"),  # semantic
+        Finding("B6", Status.NOT_MET, reasoning="x", reasoning_fr="x"),  # intake
+    ]
+    paths = write_report(findings, target="https://x.example", out_dir=tmp_path)
+    lines = paths.audit_jsonl.read_text(encoding="utf-8").strip().splitlines()
+
+    # genesis commits every output-determining ingredient
+    genesis = json.loads(lines[0])
+    for field in ("prompt_sha256", "catalog_sha256"):
+        assert len(genesis[field]) == 64 and int(genesis[field], 16) >= 0
+    assert genesis["eval_suite"] == "none" or len(genesis["eval_suite"]) == 64
+
+    # the grade derives from the check's mode: site checks are observations
+    # of the artifact, intake answers are the subject's word
+    grades = {json.loads(line)["check"]: json.loads(line)["evidence_grade"]
+              for line in lines[1:]}
+    assert grades == {"A1": "artifact_inspected", "A2": "artifact_inspected",
+                      "B6": "self_reported"}
+
+    # the report shows the reader which findings rest on the client's word
+    body = paths.report_md.read_text(encoding="utf-8")
+    assert "Nature de la preuve" in body
+    assert "Déclaré par l'entreprise, non vérifié" in body
+    assert "Self-reported, unverified" in body
+    assert "Observed on the site" in body
+
+
+def test_pre_existing_trail_without_new_fields_still_verifies(tmp_path):
+    """Trails sealed before evidence_grade / provenance existed must keep
+    verifying: the new fields are additive, never required."""
+    from balise.report import TRAIL_FORMAT, _sealed
+    genesis = _sealed({"format": TRAIL_FORMAT, "ts": "2026-08-24T00:00:00+00:00",
+                       "target": "https://x.example", "tool": "balise 0.1.0",
+                       "engine": "none", "records": 1}, prev=None)
+    finding = _sealed({"ts": "2026-08-24T00:00:01+00:00", "check": "A1",
+                       "legal_hook": "s. 8.2", "tier": "STATUTE",
+                       "contested": False, "status": "met", "evidence": [],
+                       "reasoning": "x", "reasoning_fr": "x"},
+                      prev=genesis["sha256"])
+    path = tmp_path / "audit-trail.jsonl"
+    path.write_text(json.dumps(genesis, ensure_ascii=False) + "\n"
+                    + json.dumps(finding, ensure_ascii=False) + "\n",
+                    encoding="utf-8")
+    assert verify_audit_trail(path)
+    assert verify_audit_trail(path, expect_head=finding["sha256"])
+
+
 def test_unanswered_intake_reports_unknown_not_failure():
     findings = run_intake_assessment(None)
     assert findings, "intake assessment must cover all B checks"

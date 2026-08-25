@@ -6,9 +6,9 @@ The audit trail is the engagement's machine-readable record: one JSONL file, has
 
 Line 1 is the **genesis record**; every following line is one **finding record**. Field names are **frozen**: hashes cover the field-name bytes, so renaming any field orphans every existing trail.
 
-Genesis record fields: `format`, `ts`, `target`, `tool`, `engine` (the semantic model configured for the run, or `none`; added 2026-08-25 — verifiers must not require it, so pre-existing trails stay valid), `records` (the exact number of finding records that follow), `prev` (always `null`), `sha256`. The freeze rule bars renaming or removing fields; additive genesis metadata is permitted precisely because verification never depends on optional fields.
+Genesis record fields: `format`, `ts`, `target`, `tool`, `engine` (the semantic model configured for the run, or `none`; added 2026-08-25 — verifiers must not require it, so pre-existing trails stay valid), `prompt_sha256` (fingerprint of the system prompt and authored questions), `catalog_sha256` (fingerprint of the full check catalog), `eval_suite` (fingerprint of the eval fixture pack the tool was held to, or `none` outside the repo) — the three fingerprints added 2026-08-25 under the same rule: verifiers must not require them — `records` (the exact number of finding records that follow), `prev` (always `null`), `sha256`. Together, `tool`, `engine` and the fingerprints answer "why did this assessment change": any change to the model, the prompts or the catalog is visible in the genesis of the trail it produced. The freeze rule bars renaming or removing fields; additive genesis metadata is permitted precisely because verification never depends on optional fields.
 
-Finding record fields: `ts`, `check`, `legal_hook`, `tier`, `contested`, `status`, `evidence`, `reasoning`, `reasoning_fr`, `prev` (the previous record's `sha256`), `sha256`.
+Finding record fields: `ts`, `check`, `legal_hook`, `tier`, `contested`, `status`, `evidence_grade` (added 2026-08-25; additive, verifiers must not require it — absent from pre-existing trails), `evidence`, `reasoning`, `reasoning_fr`, `prev` (the previous record's `sha256`), `sha256`.
 
 ## Canonical form
 
@@ -20,6 +20,19 @@ Finding record fields: `ts`, `check`, `legal_hook`, `tier`, `contested`, `status
 4. No floats anywhere in the schema — timestamps are strings for exactly this reason (float serialization is not portable).
 
 In Python: `json.dumps(record, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")`. The rules are normative; the Python idiom is not.
+
+## Evidence grades
+
+Each finding record carries an `evidence_grade` saying what kind of evidence backs it. The grade qualifies the status, never changes it: it measures how independent the evidence is, not how correct the conclusion is. A grade-3 observation can still be misread; a grade-0 answer can still be true.
+
+| Grade | Meaning | In Balise v0.1 |
+|---|---|---|
+| `self_reported` | The subject's word, unexamined | Every Module B finding: intake answers are recorded, not checked |
+| `document_evidenced` | A supporting document was received | Not yet produced; reserved for client-document review |
+| `artifact_inspected` | The artifact itself was examined | Every Module A finding: the fetched site is the artifact, whether a deterministic detector or a semantic check examined it |
+| `independently_observed` | Recomputable by the verifier without trusting anyone | Not attached to findings; this is the grade of the chain-integrity claims themselves |
+
+The report renders the grade on every finding ("Nature de la preuve" / "Evidence basis") so a reader sees at a glance which findings rest on the enterprise's word and which were observed.
 
 ## Verification (`report.verify_audit_trail`)
 

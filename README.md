@@ -1,6 +1,6 @@
 # Balise
 
-**Law 25 readiness assessment for Quebec SMBs, with reasoning you can actually read.**
+**Evidence-based Law 25 readiness assessment for Quebec SMBs, with reasoning you can actually read.**
 
 *[Version française : README.fr.md](README.fr.md)*
 

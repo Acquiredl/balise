@@ -16,8 +16,15 @@ from pathlib import Path
 from .advice import CLIENT_COPY
 from .external import Finding
 from .insurer import render_appendix
-from .registry import STATUS_LABELS, Domain, Status
-from .semantic import SemanticEngine
+from .registry import (
+    EVIDENCE_GRADE_LABELS,
+    MODE_EVIDENCE_GRADE,
+    STATUS_LABELS,
+    Domain,
+    Status,
+    catalog_fingerprint,
+)
+from .semantic import SemanticEngine, prompt_fingerprint
 
 DISCLAIMER_FR = (
     "> **Avis important** — Ce rapport est une autoévaluation de préparation "
@@ -61,6 +68,22 @@ TRAIL_FORMAT = "balise-audit-trail/1"
 _CANONICAL = {"sort_keys": True, "separators": (",", ":"), "ensure_ascii": False}
 
 
+def _eval_suite_fingerprint() -> str:
+    """SHA-256 over the eval fixture pack and labels, or "none" when the
+    suite is not alongside the package (installed outside the repo). The
+    suite does not alter output, but genesis records which quality bar the
+    producing tool was held to."""
+    evals = Path(__file__).resolve().parents[2] / "evals"
+    if not evals.is_dir():
+        return "none"
+    digest = hashlib.sha256()
+    for path in sorted(p for p in evals.rglob("*")
+                       if p.is_file() and "__pycache__" not in p.parts):
+        digest.update(path.relative_to(evals).as_posix().encode("utf-8"))
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
 def _sealed(record: dict, prev: str | None) -> dict:
     record = {**record, "prev": prev}
     record["sha256"] = hashlib.sha256(
@@ -80,9 +103,13 @@ def _build_trail(findings: list[Finding], target: str) -> list[dict]:
         "ts": datetime.now(UTC).isoformat(),
         "target": target,
         "tool": "balise 0.1.0",
-        # which judgment engine produced the semantic findings: a silent
-        # model change must be visible in the record it produced
+        # producer provenance: every ingredient whose change alters output
+        # must be visible in the record it produced — a silent model, prompt
+        # or catalog change is otherwise indistinguishable from drift
         "engine": SemanticEngine.MODEL if SemanticEngine.configured() else "none",
+        "prompt_sha256": prompt_fingerprint(),
+        "catalog_sha256": catalog_fingerprint(),
+        "eval_suite": _eval_suite_fingerprint(),
         "records": len(ordered),
     }, prev=None)]
     for finding in ordered:
@@ -93,6 +120,7 @@ def _build_trail(findings: list[Finding], target: str) -> list[dict]:
             "tier": finding.check.tier.value,
             "contested": finding.check.contested,
             "status": finding.status.value,
+            "evidence_grade": MODE_EVIDENCE_GRADE[finding.check.mode].value,
             "evidence": finding.evidence,
             "reasoning": finding.reasoning,
             "reasoning_fr": finding.reasoning_fr,
@@ -171,6 +199,8 @@ def _render_finding(finding: Finding, lang: str) -> str:
         f"- **{'Base légale' if lang == 'fr' else 'Legal basis'}:** {check.legal_hook} "
         f"[{tier}]" + (" *(interprétation contestée)*" if check.contested and lang == "fr"
                        else " *(contested interpretation)*" if check.contested else ""),
+        f"- **{'Nature de la preuve' if lang == 'fr' else 'Evidence basis'}:** "
+        f"{EVIDENCE_GRADE_LABELS[MODE_EVIDENCE_GRADE[check.mode]][idx]}",
     ]
     if finding.evidence:
         label = "Éléments observés" if lang == "fr" else "Evidence"

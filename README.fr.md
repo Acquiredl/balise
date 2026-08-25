@@ -1,6 +1,6 @@
 # Balise
 
-**Évaluation de préparation à la Loi 25 pour les PME québécoises, avec un raisonnement qu'on peut vraiment lire.**
+**Évaluation de préparation à la Loi 25 fondée sur la preuve, pour les PME québécoises, avec un raisonnement qu'on peut vraiment lire.**
 
 *[English version: README.md](README.md)*
 
