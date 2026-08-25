@@ -330,6 +330,49 @@ def write_report(findings: list[Finding], target: str, out_dir: str | Path,
                        head=head, assessment_id=assessment_id)
 
 
+# Manifest format — the package's sidecar list, written LAST. It lists the
+# post-close artifacts by the hash of their shipped bytes and carries the
+# trail head, which commits the whole chain (and, through the finding
+# records' source references, the evidence archive) transitively. It has no
+# self-hash and nothing may reference it: seals (anchor, signature) apply to
+# the manifest file's bytes from outside. assessment_id/target/created_at
+# are display copies; their committed truth lives in the trail genesis.
+MANIFEST_FORMAT = "balise-assessment/1"
+
+# Deliverables the manifest lists when present beside it. The trail is
+# deliberately absent: its head is the commitment, a file hash would be a
+# second source of truth for the same fact.
+_MANIFEST_ARTIFACTS = ("rapport-balise.md", "sommaire-balise.html",
+                       "apercu-balise.html")
+
+
+def write_manifest(out_dir: str | Path, *, assessment_id: str, target: str,
+                   trail_head: str) -> Path:
+    """Write the package manifest. Must be the last write in the package:
+    it hashes the artifacts' shipped bytes, so anything written after it
+    would diverge from its listing."""
+    out = Path(out_dir)
+    artifacts = {}
+    for name in _MANIFEST_ARTIFACTS:
+        path = out / name
+        if path.is_file():
+            artifacts[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest = {
+        "format": MANIFEST_FORMAT,
+        "assessment_id": assessment_id,
+        "target": target,
+        "created_at": datetime.now(UTC).isoformat(),
+        "trail_head": trail_head,
+        "artifacts": artifacts,
+        "seals": [],
+    }
+    manifest_path = out / "manifest.json"
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8")
+    return manifest_path
+
+
 def verify_audit_trail(path: str | Path, expect_head: str | None = None) -> bool:
     """True iff the chain is internally intact AND complete.
 

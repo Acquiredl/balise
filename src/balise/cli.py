@@ -98,9 +98,16 @@ def main(argv: list[str] | None = None) -> int:
     summary_path = summary.write_summary(findings, target=site.root_url,
                                          out_dir=args.out, notices=notices,
                                          head=paths.head)
+    # The manifest is the package's last write: it hashes every artifact
+    # already on disk, so nothing may be written to the package after it.
+    manifest_path = report.write_manifest(args.out,
+                                          assessment_id=paths.assessment_id,
+                                          target=site.root_url,
+                                          trail_head=paths.head)
     print(f"report:      {paths.report_md}")
     print(f"summary:     {summary_path}")
-    print(f"audit trail: {paths.audit_jsonl}")
+    print(f"trail:       {paths.audit_jsonl}")
+    print(f"manifest:    {manifest_path}")
     return 0
 
 

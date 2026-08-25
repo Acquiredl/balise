@@ -315,3 +315,38 @@ def test_trail_records_sources_and_archive_is_exactly_the_referenced_set(tmp_pat
     assert hashlib.sha256(content).hexdigest() == expected_hash
 
     assert verify_audit_trail(paths.audit_jsonl, expect_head=paths.head)
+
+
+def test_manifest_is_written_last_and_lists_artifacts_by_hash(tmp_path):
+    import hashlib
+
+    from balise.report import write_manifest
+
+    findings = [Finding("A1", Status.MET, reasoning="x", reasoning_fr="x")]
+    paths = write_report(findings, target="https://x.example", out_dir=tmp_path)
+    # stand-in for the sommaire the CLI writes after the report
+    (tmp_path / "sommaire-balise.html").write_text("<html>s</html>",
+                                                   encoding="utf-8")
+
+    manifest_path = write_manifest(tmp_path, assessment_id=paths.assessment_id,
+                                   target="https://x.example",
+                                   trail_head=paths.head)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+
+    assert manifest["format"] == "balise-assessment/1"
+    assert manifest["assessment_id"] == paths.assessment_id
+    assert manifest["trail_head"] == paths.head
+    assert manifest["seals"] == []          # declared seal set; none yet
+
+    # artifacts listed by the hash of their shipped bytes
+    for name, digest in manifest["artifacts"].items():
+        assert hashlib.sha256(
+            (tmp_path / name).read_bytes()).hexdigest() == digest
+    assert "rapport-balise.md" in manifest["artifacts"]
+    assert "sommaire-balise.html" in manifest["artifacts"]
+    assert "audit-trail.jsonl" not in manifest["artifacts"]  # the head commits it
+
+    # no self-hash and no cycle: the report must not mention the manifest
+    assert "sha256" not in manifest
+    body = paths.report_md.read_text(encoding="utf-8")
+    assert "manifest" not in body.lower()
