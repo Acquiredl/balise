@@ -81,6 +81,6 @@ Market: $150 DIY kit → Conformité PME $299/$690/$1,290 + $49/mo → consultan
 
 ## Outcomes / Decisions
 
-- v0.1 drafted from Stage 1 research, 2026-08-22. Pending steph's ratification.
+- v0.1 drafted from Stage 1 research, 2026-08-22. Ratified by the operator.
 - Pre-ship hard gate recorded: human verification of statutory references against LegisQuébec.
 - On ratification → Stage 2: repo scaffold (`balise` on Acquiredl), `/kickoff` + METACOG.md, build.
