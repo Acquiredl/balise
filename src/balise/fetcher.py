@@ -9,10 +9,12 @@ Security posture (see THREAT-MODEL.md):
 
 from __future__ import annotations
 
+import hashlib
 import ipaddress
 import re
 import socket
 from dataclasses import dataclass, field
+from datetime import UTC, datetime
 from urllib.parse import urljoin, urlparse
 
 import httpx
@@ -40,6 +42,19 @@ class Page:
     url: str
     status_code: int
     html: str
+    fetched_at: str = ""      # ISO UTC, stamped at retrieval
+
+    def source_ref(self) -> dict:
+        """Source reference for this page as an examined artifact.
+
+        The url and retrieved_at are testimony; the sha256 binds the
+        archived copy written at report time, never the live site."""
+        return {
+            "url": self.url,
+            "retrieved_at": self.fetched_at,
+            "sha256": hashlib.sha256(self.html.encode("utf-8")).hexdigest(),
+            "content_type": "text/html",
+        }
 
 
 @dataclass
@@ -89,7 +104,8 @@ def _fetch_page(client: httpx.Client, url: str) -> Page | None:
                 return None
             continue
         body = response.text[:MAX_BYTES] if response.text else ""
-        return Page(url=str(response.url), status_code=response.status_code, html=body)
+        return Page(url=str(response.url), status_code=response.status_code,
+                    html=body, fetched_at=datetime.now(UTC).isoformat())
     return None
 
 
