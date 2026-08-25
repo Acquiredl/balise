@@ -250,3 +250,27 @@ def test_findings_sort_naturally_and_notices_render(tmp_path):
     assert body.index("### A2 ") < body.index("### A10 ")
     assert "Organisme public détecté." in body
     assert "Public body detected." in body
+
+
+def test_genesis_carries_assessment_id_displayed_in_both_languages(tmp_path):
+    findings = [Finding("A1", Status.MET, reasoning="x", reasoning_fr="x")]
+    paths = write_report(findings, target="https://x.example", out_dir=tmp_path)
+
+    genesis = json.loads(
+        paths.audit_jsonl.read_text(encoding="utf-8").splitlines()[0])
+    assert genesis["assessment_id"] == paths.assessment_id
+    assert paths.assessment_id  # nonempty
+
+    # printed in the report header of each language section, beside the head
+    body = paths.report_md.read_text(encoding="utf-8")
+    assert body.count(paths.assessment_id) >= 2
+    assert verify_audit_trail(paths.audit_jsonl, expect_head=paths.head)
+
+
+def test_assessment_ids_are_unique_per_run(tmp_path):
+    findings = [Finding("A1", Status.MET, reasoning="x", reasoning_fr="x")]
+    first = write_report(findings, target="https://x.example",
+                         out_dir=tmp_path / "a")
+    second = write_report(findings, target="https://x.example",
+                          out_dir=tmp_path / "b")
+    assert first.assessment_id != second.assessment_id

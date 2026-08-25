@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -57,6 +58,7 @@ class ReportPaths:
     report_md: Path
     audit_jsonl: Path
     head: str = ""     # final chain hash; printed in the deliverables
+    assessment_id: str = ""   # permanent engagement id, minted at run start
 
 
 # Audit-trail format v1 — see docs/AUDIT-TRAIL.md. Field names and canonical
@@ -91,7 +93,8 @@ def _sealed(record: dict, prev: str | None) -> dict:
     return record
 
 
-def _build_trail(findings: list[Finding], target: str) -> list[dict]:
+def _build_trail(findings: list[Finding], target: str,
+                 assessment_id: str) -> list[dict]:
     """Genesis + one sealed record per finding, hash-chained.
 
     The genesis record binds the chain to its engagement (target, date, tool)
@@ -102,6 +105,9 @@ def _build_trail(findings: list[Finding], target: str) -> list[dict]:
         "format": TRAIL_FORMAT,
         "ts": datetime.now(UTC).isoformat(),
         "target": target,
+        # additive 2026-08-25; verifiers must not require it, so
+        # pre-existing trails stay valid
+        "assessment_id": assessment_id,
         "tool": "balise 0.1.0",
         # producer provenance: every ingredient whose change alters output
         # must be visible in the record it produced — a silent model, prompt
@@ -235,15 +241,18 @@ def _integrity_block(head: str, lang: str) -> list[str]:
 
 def _render_language_section(findings: list[Finding], target: str, lang: str,
                              notices: list[tuple[str, str]],
-                             head: str = "") -> str:
+                             head: str = "", assessment_id: str = "") -> str:
     title = ("Rapport de préparation — Loi 25" if lang == "fr"
              else "Law 25 Readiness Report")
     disclaimer = DISCLAIMER_FR if lang == "fr" else DISCLAIMER_EN
     posture_title = "Posture par domaine" if lang == "fr" else "Posture by domain"
     findings_title = "Constats" if lang == "fr" else "Findings"
     lines = [f"# {title}", "", f"**Site:** {target}",
-             f"**Date:** {datetime.now(UTC).date().isoformat()}", "",
-             disclaimer, ""]
+             f"**Date:** {datetime.now(UTC).date().isoformat()}"]
+    if assessment_id:
+        id_label = "Évaluation" if lang == "fr" else "Assessment"
+        lines.append(f"**{id_label}:** `{assessment_id}`")
+    lines.extend(["", disclaimer, ""])
     for notice_fr, notice_en in notices:
         lines.extend([f"> ⚠️ **{notice_fr if lang == 'fr' else notice_en}**", ""])
     lines.extend(_exec_summary(findings, lang))
@@ -270,19 +279,23 @@ def write_report(findings: list[Finding], target: str, out_dir: str | Path,
     # Trail first: its head is printed in the report body, making the
     # delivered document itself the head record — a truncated or regenerated
     # trail contradicts the paper in the client's hands.
-    trail = _build_trail(findings, target)
+    assessment_id = str(uuid.uuid4())
+    trail = _build_trail(findings, target, assessment_id)
     head = trail[-1]["sha256"]
     audit_path = out / "audit-trail.jsonl"
     with audit_path.open("w", encoding="utf-8") as handle:
         for record in trail:
             handle.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-    body = (_render_language_section(findings, target, "fr", notices, head)
+    body = (_render_language_section(findings, target, "fr", notices, head,
+                                     assessment_id)
             + "\n\n---\n\n"
-            + _render_language_section(findings, target, "en", notices, head))
+            + _render_language_section(findings, target, "en", notices, head,
+                                       assessment_id))
     report_path = out / "rapport-balise.md"
     report_path.write_text(body, encoding="utf-8")
-    return ReportPaths(report_md=report_path, audit_jsonl=audit_path, head=head)
+    return ReportPaths(report_md=report_path, audit_jsonl=audit_path,
+                       head=head, assessment_id=assessment_id)
 
 
 def verify_audit_trail(path: str | Path, expect_head: str | None = None) -> bool:
