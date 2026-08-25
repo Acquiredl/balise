@@ -119,7 +119,7 @@ def _build_trail(findings: list[Finding], target: str,
         "records": len(ordered),
     }, prev=None)]
     for finding in ordered:
-        records.append(_sealed({
+        record = {
             "ts": datetime.now(UTC).isoformat(),
             "check": finding.check_id,
             "legal_hook": finding.check.legal_hook,
@@ -130,7 +130,13 @@ def _build_trail(findings: list[Finding], target: str,
             "evidence": finding.evidence,
             "reasoning": finding.reasoning,
             "reasoning_fr": finding.reasoning_fr,
-        }, prev=records[-1]["sha256"]))
+        }
+        # additive 2026-08-25; absent when the finding examined no artifact
+        # (intake answers are testimony, not examined artifacts), and
+        # verifiers must not require it
+        if finding.sources:
+            record["sources"] = finding.sources
+        records.append(_sealed(record, prev=records[-1]["sha256"]))
     return records
 
 
@@ -270,11 +276,37 @@ def _render_language_section(findings: list[Finding], target: str, lang: str,
     return "\n".join(lines)
 
 
+def _write_evidence_archive(findings: list[Finding], snapshot,
+                            out: Path) -> None:
+    """Archive every page the findings reference — and only those.
+
+    The chain is the index: the expected archive contents are derived by
+    collecting source references from the findings, so the archive holds
+    exactly the referenced set. Files are content-addressed (named by
+    their sha256), which makes deduplication automatic and lets a
+    verifier check each file against its name."""
+    referenced = {ref["sha256"]
+                  for finding in findings for ref in finding.sources}
+    if not referenced:
+        return
+    by_hash = {page.source_ref()["sha256"]: page for page in snapshot.pages}
+    evidence_dir = out / "evidence"
+    evidence_dir.mkdir(parents=True, exist_ok=True)
+    for digest in sorted(referenced):
+        page = by_hash.get(digest)
+        if page is not None:
+            (evidence_dir / f"{digest}.html").write_bytes(
+                page.html.encode("utf-8"))
+
+
 def write_report(findings: list[Finding], target: str, out_dir: str | Path,
-                 notices: list[tuple[str, str]] | None = None) -> ReportPaths:
+                 notices: list[tuple[str, str]] | None = None,
+                 snapshot=None) -> ReportPaths:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     notices = notices or []
+    if snapshot is not None:
+        _write_evidence_archive(findings, snapshot, out)
 
     # Trail first: its head is printed in the report body, making the
     # delivered document itself the head record — a truncated or regenerated

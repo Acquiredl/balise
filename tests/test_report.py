@@ -274,3 +274,44 @@ def test_assessment_ids_are_unique_per_run(tmp_path):
     second = write_report(findings, target="https://x.example",
                           out_dir=tmp_path / "b")
     assert first.assessment_id != second.assessment_id
+
+
+def test_trail_records_sources_and_archive_is_exactly_the_referenced_set(tmp_path):
+    import hashlib
+
+    from balise.fetcher import Page, SiteSnapshot
+
+    page = Page(url="https://x.example/politique", status_code=200,
+                html="<html><body>politique</body></html>",
+                fetched_at="2026-08-25T00:00:00+00:00")
+    extra = Page(url="https://x.example/jamais-cite", status_code=200,
+                 html="<html><body>unreferenced</body></html>",
+                 fetched_at="2026-08-25T00:00:00+00:00")
+    site = SiteSnapshot(root_url="https://x.example")
+    site.pages = [page, extra]
+
+    findings = [
+        Finding("A1", Status.MET, evidence=[page.url],
+                reasoning="x", reasoning_fr="x",
+                sources=[page.source_ref()]),
+        Finding("B6", Status.NOT_MET, evidence=["réponse / answer: no"],
+                reasoning="x", reasoning_fr="x"),   # intake: no sources
+    ]
+    paths = write_report(findings, target="https://x.example",
+                         out_dir=tmp_path, snapshot=site)
+
+    lines = paths.audit_jsonl.read_text(encoding="utf-8").strip().splitlines()
+    a1_record = json.loads(lines[1])
+    assert a1_record["sources"][0]["sha256"] == page.source_ref()["sha256"]
+    b6_record = json.loads(lines[2])
+    assert "sources" not in b6_record       # additive: absent when empty
+
+    # the chain is the index: the archive holds exactly the referenced set
+    evidence_dir = tmp_path / "evidence"
+    archived = sorted(p.name for p in evidence_dir.iterdir())
+    expected_hash = page.source_ref()["sha256"]
+    assert archived == [f"{expected_hash}.html"]
+    content = (evidence_dir / f"{expected_hash}.html").read_bytes()
+    assert hashlib.sha256(content).hexdigest() == expected_hash
+
+    assert verify_audit_trail(paths.audit_jsonl, expect_head=paths.head)

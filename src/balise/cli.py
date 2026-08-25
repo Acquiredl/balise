@@ -94,7 +94,7 @@ def main(argv: list[str] | None = None) -> int:
 
     notices = _scope_notices(site.root_url, intake_data)
     paths = report.write_report(findings, target=site.root_url, out_dir=args.out,
-                                notices=notices)
+                                notices=notices, snapshot=site)
     summary_path = summary.write_summary(findings, target=site.root_url,
                                          out_dir=args.out, notices=notices,
                                          head=paths.head)

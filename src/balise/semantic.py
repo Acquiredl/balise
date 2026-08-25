@@ -256,5 +256,8 @@ def run_semantic_checks(site: SiteSnapshot) -> list[Finding]:
         findings.append(Finding(check_id, result.status,
                                 evidence=result.evidence,
                                 reasoning=result.reasoning,
-                                reasoning_fr=result.reasoning_fr))
+                                reasoning_fr=result.reasoning_fr,
+                                # the corpus is every retrieved page, so every
+                                # page is an examined artifact for these checks
+                                sources=[p.source_ref() for p in ordered]))
     return findings

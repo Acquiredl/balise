@@ -70,6 +70,9 @@ class Finding:
     evidence: list[str] = field(default_factory=list)
     reasoning: str = ""        # English
     reasoning_fr: str = ""     # French (canonical report language)
+    # Source references for the pages this check examined (Page.source_ref).
+    # Empty for intake findings: the subject's word has no examined artifact.
+    sources: list[dict] = field(default_factory=list)
 
     @property
     def check(self):
@@ -255,5 +258,19 @@ DETERMINISTIC_CHECKS = {
 }
 
 
+def attach_sources(finding: Finding, site: SiteSnapshot) -> Finding:
+    """Source references for the pages a finding cites as evidence.
+
+    Every check names the URL of each page it examined in `evidence`
+    (including the all-pages case for absence findings — examining
+    everything is the evidence). That convention is the join key here;
+    a check that stops citing its page loses its source references."""
+    by_url = {p.url: p for p in site.pages}
+    finding.sources = [by_url[item].source_ref() for item in finding.evidence
+                       if item in by_url]
+    return finding
+
+
 def run_external_scan(site: SiteSnapshot) -> list[Finding]:
-    return [fn(site) for fn in DETERMINISTIC_CHECKS.values()]
+    return [attach_sources(fn(site), site)
+            for fn in DETERMINISTIC_CHECKS.values()]
