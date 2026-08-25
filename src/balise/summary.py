@@ -9,7 +9,7 @@ labels and gaps as secondary encoding).
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from .advice import CLIENT_COPY
@@ -114,7 +114,7 @@ def _lang_section(findings: list[Finding], target: str, lang: str,
 
     out = []
     out.append(f"<h1>{'Sommaire de préparation — Loi 25' if fr else 'Law 25 Readiness Summary'}</h1>")
-    out.append(f'<p class="meta">{target} · {datetime.now(timezone.utc).date().isoformat()}</p>')
+    out.append(f'<p class="meta">{target} · {datetime.now(UTC).date().isoformat()}</p>')
     out.append('<div class="disclaimer">' + (
         "Autoévaluation de préparation produite par un outil automatisé. Ce n'est pas un avis "
         "juridique et aucun verdict de conformité n'est rendu. Le rapport détaillé qui accompagne "
@@ -183,7 +183,7 @@ def _lang_section(findings: list[Finding], target: str, lang: str,
             for f in sorted(unknown, key=_check_order) if f.check_id in copy) + "</ul>")
 
     if na:
-        out.append(f'<p class="small" style="margin-top:16px">' + (
+        out.append('<p class="small" style="margin-top:16px">' + (
             f"{len(na)} vérifications sans objet pour votre organisation (pratiques non utilisées)."
             if fr else
             f"{len(na)} checks not applicable to your organization (practices not in use).") + "</p>")
@@ -211,7 +211,7 @@ def _teaser_section(findings: list[Finding], target: str, lang: str) -> str:
 
     out = []
     out.append(f"<h1>{'Aperçu gratuit — Loi 25' if fr else 'Free preview — Law 25'}</h1>")
-    out.append(f'<p class="meta">{target} · {datetime.now(timezone.utc).date().isoformat()}</p>')
+    out.append(f'<p class="meta">{target} · {datetime.now(UTC).date().isoformat()}</p>')
     out.append('<div class="disclaimer">' + (
         "Aperçu produit par une analyse automatisée du site public seulement. "
         "Ce n'est pas un avis juridique et aucun verdict de conformité n'est "

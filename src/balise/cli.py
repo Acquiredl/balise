@@ -10,7 +10,8 @@ import argparse
 import re
 import sys
 
-from . import external, fetcher, intake as intake_mod, report, semantic, summary
+from . import external, fetcher, report, semantic, summary
+from . import intake as intake_mod
 
 # Balise assesses the PRIVATE-sector regime (CQLR c. P-39.1). Public bodies
 # fall under the Loi sur l'accès instead — assessing them against the wrong

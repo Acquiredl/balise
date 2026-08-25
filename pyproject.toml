@@ -13,7 +13,7 @@ dependencies = [
 
 [project.optional-dependencies]
 semantic = ["anthropic>=0.40"]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8.0", "ruff>=0.6"]
 
 [project.scripts]
 balise = "balise.cli:main"
@@ -24,3 +24,10 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff.lint]
+# Pinned so local runs and CI agree regardless of machine-level ruff config.
+select = ["E4", "E7", "E9", "F", "I", "UP"]
+# UP042 wants StrEnum; the (str, Enum) registry spine works identically and
+# is not worth churning for a lint aesthetic.
+ignore = ["UP042"]

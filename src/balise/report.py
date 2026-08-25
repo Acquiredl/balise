@@ -10,7 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from .advice import CLIENT_COPY
@@ -76,14 +76,14 @@ def _build_trail(findings: list[Finding], target: str) -> list[dict]:
     ordered = sorted(findings, key=_check_order)
     records = [_sealed({
         "format": TRAIL_FORMAT,
-        "ts": datetime.now(timezone.utc).isoformat(),
+        "ts": datetime.now(UTC).isoformat(),
         "target": target,
         "tool": "balise 0.1.0",
         "records": len(ordered),
     }, prev=None)]
     for finding in ordered:
         records.append(_sealed({
-            "ts": datetime.now(timezone.utc).isoformat(),
+            "ts": datetime.now(UTC).isoformat(),
             "check": finding.check_id,
             "legal_hook": finding.check.legal_hook,
             "tier": finding.check.tier.value,
@@ -207,8 +207,8 @@ def _render_language_section(findings: list[Finding], target: str, lang: str,
     disclaimer = DISCLAIMER_FR if lang == "fr" else DISCLAIMER_EN
     posture_title = "Posture par domaine" if lang == "fr" else "Posture by domain"
     findings_title = "Constats" if lang == "fr" else "Findings"
-    lines = [f"# {title}", "", f"**{'Site' if lang == 'fr' else 'Site'}:** {target}",
-             f"**Date:** {datetime.now(timezone.utc).date().isoformat()}", "",
+    lines = [f"# {title}", "", f"**Site:** {target}",
+             f"**Date:** {datetime.now(UTC).date().isoformat()}", "",
              disclaimer, ""]
     for notice_fr, notice_en in notices:
         lines.extend([f"> ⚠️ **{notice_fr if lang == 'fr' else notice_en}**", ""])

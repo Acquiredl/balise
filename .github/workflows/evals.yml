@@ -1,0 +1,22 @@
+name: Eval and red-team suite
+
+# Manual trigger only: this run calls the real semantic engine (paid API,
+# roughly $0.50 per full run). Run before releases, after prompt changes,
+# and after model updates. Requires the ANTHROPIC_API_KEY repository secret.
+on:
+  workflow_dispatch:
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e ".[semantic,dev]"
+      - name: Run eval harness
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python evals/run_evals.py
