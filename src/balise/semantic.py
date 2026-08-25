@@ -186,7 +186,7 @@ def verify_quotes(result: EngineResult, corpus: str) -> EngineResult:
     The registry structurally prevents hallucinated obligations (closed check
     set, authored questions, hooks from the registry); this closes the last
     gap — fabricated 'verbatim' quotes. Dropped quotes are disclosed in the
-    reasoning so the audit trail shows the correction."""
+    reasoning so the verification trail shows the correction."""
     haystack = _normalize(corpus)
     kept = [q for q in result.evidence if q and _normalize(q) in haystack]
     dropped = len(result.evidence) - len(kept)

@@ -189,7 +189,7 @@ def _lang_section(findings: list[Finding], target: str, lang: str,
             f"{len(na)} checks not applicable to your organization (practices not in use).") + "</p>")
     if head:
         out.append('<p class="small" style="margin-top:16px">' + (
-            "Empreinte de la piste d'audit (SHA-256) : " if fr else
+            "Empreinte de la piste de vérification (SHA-256) : " if fr else
             "Audit-trail fingerprint (SHA-256): ")
             + f"<code>{head}</code></p>")
     return "\n".join(out)
@@ -258,12 +258,12 @@ def _teaser_section(findings: list[Finding], target: str, lang: str) -> str:
         f"{remaining} vérifications supplémentaires ({total} au total), dont les obligations internes que le site ne montre pas",
         "L'analyse de jugement du contenu réel de votre politique et de vos formulaires",
         "Le questionnaire guidé sur vos pratiques internes, en conversation",
-        "Le rapport complet avec preuve et base légale pour chaque constat, le sommaire visuel, et la piste d'audit vérifiable",
+        "Le rapport complet avec preuve et base légale pour chaque constat, le sommaire visuel, et la piste de vérification",
         "L'annexe assurance cyber : vos constats reliés aux questions des assureurs") if fr else (
         f"{remaining} additional checks ({total} in total), including the internal obligations a website cannot show",
         "Judgment-level analysis of your policy's and forms' actual content",
         "The guided questionnaire on your internal practices, in conversation",
-        "The full report with evidence and legal basis for every finding, the visual summary, and the verifiable audit trail",
+        "The full report with evidence and legal basis for every finding, the visual summary, and the verifiable trail",
         "The cyber-insurance appendix: your findings mapped to insurers' questions"))) + "</ul>")
     out.append(f'<p class="small">{"Évaluation complète offerte sur demande." if fr else "Complete assessment available on request."}</p>')
     return "\n".join(out)

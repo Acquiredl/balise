@@ -1,4 +1,4 @@
-"""Bilingual report builder + audit trail (the signature feature).
+"""Bilingual report builder + verification trail (the signature feature).
 
 Every finding is rendered with its status, authority tier, legal hook,
 evidence and reasoning — and the full machine-readable trail is written as
@@ -61,7 +61,7 @@ class ReportPaths:
     assessment_id: str = ""   # permanent engagement id, minted at run start
 
 
-# Audit-trail format v1 — see docs/AUDIT-TRAIL.md. Field names and canonical
+# Verification-trail format v1 — see docs/VERIFICATION-TRAIL.md. Field names and canonical
 # form are FROZEN: hashes cover the field-name bytes, so any rename orphans
 # every existing client trail.
 TRAIL_FORMAT = "balise-audit-trail/1"
@@ -232,13 +232,13 @@ def _render_finding(finding: Finding, lang: str) -> str:
 def _integrity_block(head: str, lang: str) -> list[str]:
     if lang == "fr":
         text = ("**Intégrité** : cette évaluation est scellée par une piste "
-                "d'audit chaînée (chaque enregistrement contient l'empreinte "
+                "de vérification chaînée (chaque enregistrement contient l'empreinte "
                 "du précédent). Empreinte finale (SHA-256) : `" + head + "`. "
                 "Une piste dont l'empreinte finale diffère ne correspond pas "
                 "à ce rapport.")
     else:
         text = ("**Integrity**: this assessment is sealed by a hash-chained "
-                "audit trail (each record contains the previous record's "
+                "verification trail (each record contains the previous record's "
                 "fingerprint). Final fingerprint (SHA-256): `" + head + "`. "
                 "A trail whose final fingerprint differs does not correspond "
                 "to this report.")

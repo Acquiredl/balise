@@ -1,8 +1,10 @@
-# Audit trail — format and guarantees (v1)
+# Verification trail (piste de vérification) — format and guarantees (v1)
 
-The audit trail is the engagement's machine-readable record: one JSONL file, hash-chained, from which the rapport and sommaire can be regenerated without rescanning. This document freezes the format and states exactly what verification does and does not prove.
+The verification trail is the engagement's machine-readable record: one JSONL file, hash-chained, from which the rapport and sommaire can be regenerated without rescanning. This document freezes the format and states exactly what verification does and does not prove.
 
 ## Format: `balise-audit-trail/1`
+
+The format identifier keeps its original name: it is frozen (hashes cover its bytes in every existing genesis record), and renaming it would orphan every trail issued before the public name changed to *verification trail*.
 
 Line 1 is the **genesis record**; every following line is one **finding record**. Field names are **frozen**: hashes cover the field-name bytes, so renaming any field orphans every existing trail.
 

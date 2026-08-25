@@ -4,7 +4,7 @@
 
 *[Version française : README.fr.md](README.fr.md)*
 
-Balise scans a company's public website and pairs it with a short intake questionnaire to assess readiness against Quebec's Law 25 privacy obligations. It produces a bilingual report (FR/EN) where every finding shows its evidence, its legal basis, and how strong that basis actually is. The whole assessment is also recorded in a machine-readable audit trail.
+Balise scans a company's public website and pairs it with a short intake questionnaire to assess readiness against Quebec's Law 25 privacy obligations. It produces a bilingual report (FR/EN) where every finding shows its evidence, its legal basis, and how strong that basis actually is. The whole assessment is also recorded in a machine-readable verification trail.
 
 > Balise is a readiness self-assessment tool. It is not legal advice, and it never renders a compliance verdict.
 
@@ -21,7 +21,7 @@ Three design rules we hold ourselves to:
 
 1. **Authority tiers.** Every check is tagged by the strength of its legal basis: `STATUTE` (explicit legal text), `CAI` (regulator expectation) or `FIRM` (convergent interpretation). Contested points get reported at their true strength, never inflated. The compliance market is full of confident claims that don't survive a read of the actual law, and we would rather be precise than loud. The receipts are in [docs/methodology.md](docs/methodology.md).
 2. **No compliance score.** Reports show readiness posture by domain, never a single percentage. The reasoning behind that refusal is in the docs too.
-3. **A legible audit trail.** If your business automates decisions, Law 25 expects you to be able to explain them. Balise is itself an automated assessor, so it has the same problem, and it ships with the answer built in: every finding's evidence and reasoning is recorded in a hash-chained JSONL trail whose final fingerprint is printed in the report itself, so the report and the trail can be checked for consistency against each other. That establishes integrity between the two artifacts, not which version was originally issued ([docs/AUDIT-TRAIL.md](docs/AUDIT-TRAIL.md) states exactly what that guarantees, in tiers, without inflation). The tool is a working example of the traceability it asks about.
+3. **A legible verification trail.** If your business automates decisions, Law 25 expects you to be able to explain them. Balise is itself an automated assessor, so it has the same problem, and it ships with the answer built in: every finding's evidence and reasoning is recorded in a hash-chained JSONL trail whose final fingerprint is printed in the report itself, so the report and the trail can be checked for consistency against each other. That establishes integrity between the two artifacts, not which version was originally issued ([docs/VERIFICATION-TRAIL.md](docs/VERIFICATION-TRAIL.md) states exactly what that guarantees, in tiers, without inflation). The tool is a working example of the traceability it asks about.
 
 ## Usage
 
