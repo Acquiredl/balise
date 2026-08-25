@@ -1,4 +1,4 @@
-"""Bilingual report builder + audit trail (the signature feature).
+"""Bilingual report builder + verification trail (the signature feature).
 
 Every finding is rendered with its status, authority tier, legal hook,
 evidence and reasoning — and the full machine-readable trail is written as
@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import uuid
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -57,9 +58,10 @@ class ReportPaths:
     report_md: Path
     audit_jsonl: Path
     head: str = ""     # final chain hash; printed in the deliverables
+    assessment_id: str = ""   # permanent engagement id, minted at run start
 
 
-# Audit-trail format v1 — see docs/AUDIT-TRAIL.md. Field names and canonical
+# Verification-trail format v1 — see docs/VERIFICATION-TRAIL.md. Field names and canonical
 # form are FROZEN: hashes cover the field-name bytes, so any rename orphans
 # every existing client trail.
 TRAIL_FORMAT = "balise-audit-trail/1"
@@ -91,7 +93,8 @@ def _sealed(record: dict, prev: str | None) -> dict:
     return record
 
 
-def _build_trail(findings: list[Finding], target: str) -> list[dict]:
+def _build_trail(findings: list[Finding], target: str,
+                 assessment_id: str) -> list[dict]:
     """Genesis + one sealed record per finding, hash-chained.
 
     The genesis record binds the chain to its engagement (target, date, tool)
@@ -102,6 +105,9 @@ def _build_trail(findings: list[Finding], target: str) -> list[dict]:
         "format": TRAIL_FORMAT,
         "ts": datetime.now(UTC).isoformat(),
         "target": target,
+        # additive 2026-08-25; verifiers must not require it, so
+        # pre-existing trails stay valid
+        "assessment_id": assessment_id,
         "tool": "balise 0.1.0",
         # producer provenance: every ingredient whose change alters output
         # must be visible in the record it produced — a silent model, prompt
@@ -113,7 +119,7 @@ def _build_trail(findings: list[Finding], target: str) -> list[dict]:
         "records": len(ordered),
     }, prev=None)]
     for finding in ordered:
-        records.append(_sealed({
+        record = {
             "ts": datetime.now(UTC).isoformat(),
             "check": finding.check_id,
             "legal_hook": finding.check.legal_hook,
@@ -124,7 +130,13 @@ def _build_trail(findings: list[Finding], target: str) -> list[dict]:
             "evidence": finding.evidence,
             "reasoning": finding.reasoning,
             "reasoning_fr": finding.reasoning_fr,
-        }, prev=records[-1]["sha256"]))
+        }
+        # additive 2026-08-25; absent when the finding examined no artifact
+        # (intake answers are testimony, not examined artifacts), and
+        # verifiers must not require it
+        if finding.sources:
+            record["sources"] = finding.sources
+        records.append(_sealed(record, prev=records[-1]["sha256"]))
     return records
 
 
@@ -220,13 +232,13 @@ def _render_finding(finding: Finding, lang: str) -> str:
 def _integrity_block(head: str, lang: str) -> list[str]:
     if lang == "fr":
         text = ("**Intégrité** : cette évaluation est scellée par une piste "
-                "d'audit chaînée (chaque enregistrement contient l'empreinte "
+                "de vérification chaînée (chaque enregistrement contient l'empreinte "
                 "du précédent). Empreinte finale (SHA-256) : `" + head + "`. "
                 "Une piste dont l'empreinte finale diffère ne correspond pas "
                 "à ce rapport.")
     else:
         text = ("**Integrity**: this assessment is sealed by a hash-chained "
-                "audit trail (each record contains the previous record's "
+                "verification trail (each record contains the previous record's "
                 "fingerprint). Final fingerprint (SHA-256): `" + head + "`. "
                 "A trail whose final fingerprint differs does not correspond "
                 "to this report.")
@@ -235,15 +247,18 @@ def _integrity_block(head: str, lang: str) -> list[str]:
 
 def _render_language_section(findings: list[Finding], target: str, lang: str,
                              notices: list[tuple[str, str]],
-                             head: str = "") -> str:
+                             head: str = "", assessment_id: str = "") -> str:
     title = ("Rapport de préparation — Loi 25" if lang == "fr"
              else "Law 25 Readiness Report")
     disclaimer = DISCLAIMER_FR if lang == "fr" else DISCLAIMER_EN
     posture_title = "Posture par domaine" if lang == "fr" else "Posture by domain"
     findings_title = "Constats" if lang == "fr" else "Findings"
     lines = [f"# {title}", "", f"**Site:** {target}",
-             f"**Date:** {datetime.now(UTC).date().isoformat()}", "",
-             disclaimer, ""]
+             f"**Date:** {datetime.now(UTC).date().isoformat()}"]
+    if assessment_id:
+        id_label = "Évaluation" if lang == "fr" else "Assessment"
+        lines.append(f"**{id_label}:** `{assessment_id}`")
+    lines.extend(["", disclaimer, ""])
     for notice_fr, notice_en in notices:
         lines.extend([f"> ⚠️ **{notice_fr if lang == 'fr' else notice_en}**", ""])
     lines.extend(_exec_summary(findings, lang))
@@ -261,28 +276,101 @@ def _render_language_section(findings: list[Finding], target: str, lang: str,
     return "\n".join(lines)
 
 
+def _write_evidence_archive(findings: list[Finding], snapshot,
+                            out: Path) -> None:
+    """Archive every page the findings reference — and only those.
+
+    The chain is the index: the expected archive contents are derived by
+    collecting source references from the findings, so the archive holds
+    exactly the referenced set. Files are content-addressed (named by
+    their sha256), which makes deduplication automatic and lets a
+    verifier check each file against its name."""
+    referenced = {ref["sha256"]
+                  for finding in findings for ref in finding.sources}
+    if not referenced:
+        return
+    by_hash = {page.source_ref()["sha256"]: page for page in snapshot.pages}
+    evidence_dir = out / "evidence"
+    evidence_dir.mkdir(parents=True, exist_ok=True)
+    for digest in sorted(referenced):
+        page = by_hash.get(digest)
+        if page is not None:
+            (evidence_dir / f"{digest}.html").write_bytes(
+                page.html.encode("utf-8"))
+
+
 def write_report(findings: list[Finding], target: str, out_dir: str | Path,
-                 notices: list[tuple[str, str]] | None = None) -> ReportPaths:
+                 notices: list[tuple[str, str]] | None = None,
+                 snapshot=None) -> ReportPaths:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     notices = notices or []
+    if snapshot is not None:
+        _write_evidence_archive(findings, snapshot, out)
 
     # Trail first: its head is printed in the report body, making the
     # delivered document itself the head record — a truncated or regenerated
     # trail contradicts the paper in the client's hands.
-    trail = _build_trail(findings, target)
+    assessment_id = str(uuid.uuid4())
+    trail = _build_trail(findings, target, assessment_id)
     head = trail[-1]["sha256"]
     audit_path = out / "audit-trail.jsonl"
     with audit_path.open("w", encoding="utf-8") as handle:
         for record in trail:
             handle.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-    body = (_render_language_section(findings, target, "fr", notices, head)
+    body = (_render_language_section(findings, target, "fr", notices, head,
+                                     assessment_id)
             + "\n\n---\n\n"
-            + _render_language_section(findings, target, "en", notices, head))
+            + _render_language_section(findings, target, "en", notices, head,
+                                       assessment_id))
     report_path = out / "rapport-balise.md"
     report_path.write_text(body, encoding="utf-8")
-    return ReportPaths(report_md=report_path, audit_jsonl=audit_path, head=head)
+    return ReportPaths(report_md=report_path, audit_jsonl=audit_path,
+                       head=head, assessment_id=assessment_id)
+
+
+# Manifest format — the package's sidecar list, written LAST. It lists the
+# post-close artifacts by the hash of their shipped bytes and carries the
+# trail head, which commits the whole chain (and, through the finding
+# records' source references, the evidence archive) transitively. It has no
+# self-hash and nothing may reference it: seals (anchor, signature) apply to
+# the manifest file's bytes from outside. assessment_id/target/created_at
+# are display copies; their committed truth lives in the trail genesis.
+MANIFEST_FORMAT = "balise-assessment/1"
+
+# Deliverables the manifest lists when present beside it. The trail is
+# deliberately absent: its head is the commitment, a file hash would be a
+# second source of truth for the same fact.
+_MANIFEST_ARTIFACTS = ("rapport-balise.md", "sommaire-balise.html",
+                       "apercu-balise.html")
+
+
+def write_manifest(out_dir: str | Path, *, assessment_id: str, target: str,
+                   trail_head: str) -> Path:
+    """Write the package manifest. Must be the last write in the package:
+    it hashes the artifacts' shipped bytes, so anything written after it
+    would diverge from its listing."""
+    out = Path(out_dir)
+    artifacts = {}
+    for name in _MANIFEST_ARTIFACTS:
+        path = out / name
+        if path.is_file():
+            artifacts[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    manifest = {
+        "format": MANIFEST_FORMAT,
+        "assessment_id": assessment_id,
+        "target": target,
+        "created_at": datetime.now(UTC).isoformat(),
+        "trail_head": trail_head,
+        "artifacts": artifacts,
+        "seals": [],
+    }
+    manifest_path = out / "manifest.json"
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8")
+    return manifest_path
 
 
 def verify_audit_trail(path: str | Path, expect_head: str | None = None) -> bool:

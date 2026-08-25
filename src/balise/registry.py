@@ -55,7 +55,7 @@ class EvidenceGrade(str, Enum):
 
     A grade qualifies a status, never changes it: it measures the
     independence of the evidence, not the correctness of the conclusion.
-    Grading table with examples: docs/AUDIT-TRAIL.md."""
+    Grading table with examples: docs/VERIFICATION-TRAIL.md."""
     SELF_REPORTED = "self_reported"              # subject testimony, unexamined
     DOCUMENT_EVIDENCED = "document_evidenced"    # a supporting document was received
     ARTIFACT_INSPECTED = "artifact_inspected"    # the artifact itself was examined

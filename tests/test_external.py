@@ -87,3 +87,21 @@ def test_every_finding_carries_reasoning():
     ]))
     for finding in findings:
         assert finding.reasoning.strip(), finding.check_id
+
+
+def test_findings_carry_source_references_for_examined_pages():
+    import hashlib
+    site = site_with([
+        ("https://x.example/", COMPLIANT_HOME),
+        ("https://x.example/politique-de-confidentialite", COMPLIANT_POLICY),
+    ])
+    findings = run_external_scan(site)
+    a1 = next(f for f in findings if f.check_id == "A1")
+
+    assert a1.sources, "A1 examined a page; it must reference it"
+    ref = a1.sources[0]
+    policy = site.page("https://x.example/politique-de-confidentialite")
+    assert ref["url"] == policy.url
+    assert ref["sha256"] == hashlib.sha256(
+        policy.html.encode("utf-8")).hexdigest()
+    assert {"url", "retrieved_at", "sha256", "content_type"} <= set(ref)
