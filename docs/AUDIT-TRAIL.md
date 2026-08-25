@@ -6,7 +6,7 @@ The audit trail is the engagement's machine-readable record: one JSONL file, has
 
 Line 1 is the **genesis record**; every following line is one **finding record**. Field names are **frozen**: hashes cover the field-name bytes, so renaming any field orphans every existing trail.
 
-Genesis record fields: `format`, `ts`, `target`, `tool`, `records` (the exact number of finding records that follow), `prev` (always `null`), `sha256`.
+Genesis record fields: `format`, `ts`, `target`, `tool`, `engine` (the semantic model configured for the run, or `none`; added 2026-08-25 — verifiers must not require it, so pre-existing trails stay valid), `records` (the exact number of finding records that follow), `prev` (always `null`), `sha256`. The freeze rule bars renaming or removing fields; additive genesis metadata is permitted precisely because verification never depends on optional fields.
 
 Finding record fields: `ts`, `check`, `legal_hook`, `tier`, `contested`, `status`, `evidence`, `reasoning`, `reasoning_fr`, `prev` (the previous record's `sha256`), `sha256`.
 

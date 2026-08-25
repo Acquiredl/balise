@@ -1,6 +1,6 @@
 """The client-side questionnaire page must never drift from the intake
 template: same check ids, same applicable gating, same question wording.
-On failure, re-run the injection (see docs comment) after editing the
+On failure, run `python tools/build_questionnaire.py` after editing the
 template."""
 
 import json

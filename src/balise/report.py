@@ -17,6 +17,7 @@ from .advice import CLIENT_COPY
 from .external import Finding
 from .insurer import render_appendix
 from .registry import STATUS_LABELS, Domain, Status
+from .semantic import SemanticEngine
 
 DISCLAIMER_FR = (
     "> **Avis important** — Ce rapport est une autoévaluation de préparation "
@@ -79,6 +80,9 @@ def _build_trail(findings: list[Finding], target: str) -> list[dict]:
         "ts": datetime.now(UTC).isoformat(),
         "target": target,
         "tool": "balise 0.1.0",
+        # which judgment engine produced the semantic findings: a silent
+        # model change must be visible in the record it produced
+        "engine": SemanticEngine.MODEL if SemanticEngine.configured() else "none",
         "records": len(ordered),
     }, prev=None)]
     for finding in ordered:
