@@ -1,7 +1,8 @@
 # Rapport de préparation — Loi 25
 
 **Site:** https://pepiniere-renard-bleu.example
-**Date:** 2026-08-24
+**Date:** 2026-08-26
+**Évaluation:** `c82e59b4-b39d-42c7-b334-df8c7344ac68`
 
 > **Avis important** — Ce rapport est une autoévaluation de préparation produite par un outil automatisé. Il ne constitue pas un avis juridique, ne rend aucun verdict de conformité et ne remplace pas la consultation d'un professionnel du droit. Chaque constat indique le niveau d'autorité de sa base légale (LOI / CAI / INTERPRÉTATION).
 
@@ -30,6 +31,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Atteint
 - **Base légale:** s. 8.2 [LOI]
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - https://pepiniere-renard-bleu.example/politique-de-confidentialite.html
 - **Raisonnement:** Une page dédiée à la politique de confidentialité a été trouvée.
@@ -38,19 +40,21 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Partiel
 - **Base légale:** ss. 8, 8.2 + guide CAI [LOI]
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - Dernière mise à jour : mars 2024
-  - nous recueillons votre nom, votre adresse, votre numéro de carte-cadeau le cas échéant, ainsi que vos coordonnées
   - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
-  - Nous utilisons des outils de commerce en ligne et d'envoi de courriels fournis par des entreprises situées à l'extérieur du Canada
+  - des entreprises situées à l'extérieur du Canada pour exploiter notre boutique et notre infolettre
   - Vous pouvez vous désabonner de l'infolettre en tout temps grâce au lien présent dans chaque courriel.
   - La direction de la pépinière agit comme responsable de la protection des renseignements personnels.
-- **Raisonnement:** La politique couvre une partie des éléments obligatoires : langage clair, date de mise à jour, description des renseignements recueillis et de leurs finalités, mention des témoins et indication que certaines données sont transmises à des fournisseurs hors Canada. Toutefois, elle ne traite pas des droits d'accès, de rectification, de retrait du consentement ni du processus de plainte (seul le désabonnement à l'infolettre est prévu), n'indique pas les catégories de personnel interne ayant accès aux données, ne précise pas les catégories de destinataires et les finalités pour chaque transmission à des tiers, et ne mentionne aucun moyen de refuser certaines collectes ni les conséquences d'un tel refus. Les éléments facultatifs (mesures de sécurité, nom du responsable, moyens technologiques d'exercice des droits) sont aussi absents, mais cela ne constitue qu'une suggestion, pas une lacune. La politique demeure une page distincte des conditions de vente, respectant ainsi la règle anti-fusion.
+  - Politique de confidentialité · Conditions de vente
+- **Raisonnement:** La politique couvre plusieurs éléments obligatoires : elle précise les renseignements recueillis, les finalités, mentionne les témoins, indique une date de mise à jour (mars 2024), nomme un responsable et évoque des transmissions hors Canada. Cependant, elle omet les droits d'accès et de rectification, le processus de plainte, les catégories de personnel interne ayant accès aux données, ainsi qu'un moyen général de refuser la collecte et ses conséquences (seul le désabonnement à l'infolettre est prévu). La politique demeure une page distincte des 'Conditions de vente', ce qui respecte la règle anti-fusion.
 
 ### A3 — Titre et coordonnées du responsable de la protection des renseignements personnels publiés
 
 - **Statut:** Partiel
 - **Base légale:** s. 3.1 [LOI]
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - https://pepiniere-renard-bleu.example/politique-de-confidentialite.html
   - « …e en tout temps grâce au lien présent dans chaque courriel. Responsable de la protection des renseignements personnels La direction de la pépinière agit comme responsable de la p… »
@@ -60,15 +64,17 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** s. 3.2 [LOI]
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
   - La direction de la pépinière agit comme responsable de la protection des renseignements personnels. Pour toute question, écrivez-nous via le formulaire de la page Nous joindre.
-- **Raisonnement:** La politique de confidentialité aborde la collecte, les finalités, le partage avec des tiers et désigne un responsable, mais elle ne fournit aucune information sur les règles de conservation/destruction, les rôles et responsabilités liés au cycle de vie des renseignements, ni sur un processus de traitement des plaintes. Seul un formulaire de contact générique est offert, sans précision sur la gestion des plaintes en matière de vie privée.
+- **Raisonnement:** La politique de confidentialité publiée traite de la collecte, de l'utilisation, du partage des données et identifie un responsable, mais elle ne mentionne ni les règles de conservation/destruction, ni les rôles et responsabilités tout au long du cycle de vie des renseignements, ni de processus de traitement des plaintes. Ces éléments exigés par l'article 3.2 sont absents du texte fourni.
 
 ### A5 — Témoins non essentiels inactifs avant consentement; bannière avec refus accessible
 
 - **Statut:** Partiel
 - **Base légale:** s. 8.1 + Lignes directrices 2023-1 [CAI] *(interprétation contestée)*
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - https://pepiniere-renard-bleu.example/
   - traceurs / trackers: Google Analytics / GTM
@@ -78,14 +84,16 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Partiel
 - **Base légale:** s. 8.1 [LOI]
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
-- **Raisonnement:** La politique mentionne l'utilisation de témoins pour mesurer l'achalandage, ce qui constitue une technologie de suivi, mais elle ne précise pas les fonctions d'identification, de localisation ou de profilage de ces témoins ni les moyens offerts pour les activer ou les désactiver. Aucun mécanisme de gestion des cookies ou de consentement spécifique n'est décrit dans le texte fourni.
+- **Raisonnement:** La politique mentionne l'utilisation de témoins (cookies) pour mesurer l'achalandage, ce qui constitue une technologie ayant une fonction potentielle de profilage, mais elle ne précise pas de fonctions d'identification ou de localisation ni les moyens offerts pour activer ou désactiver ces technologies. Cette absence de précision sur les moyens d'activation rend la divulgation partielle au regard de l'article 8.1.
 
 ### A7 — Version française du site, de la politique et des conditions (français d'abord pour les contrats d'adhésion)
 
 - **Statut:** Atteint
 - **Base légale:** Charte de la langue française, art. 52, 55 [INTERPRÉTATION] *(interprétation contestée)*
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - https://pepiniere-renard-bleu.example/
   - html lang=fr
@@ -96,35 +104,39 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** s. 14 [LOI]
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - Courriel [input name=courriel type=email required] Nom complet [input name=nom type=text required] Téléphone [input name=telephone type=tel required] Je m'abonne
-  - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
-  - Nom complet [input name=nom type=text required] Courriel [input name=courriel type=email required] Téléphone [input name=telephone type=tel required] Date de naissance [input name=naissance type=date required] Votre message [textarea name=message required] Envoyer
-- **Raisonnement:** Le formulaire d'infolettre ne comporte qu'un champ courriel, nom, téléphone et un bouton 'Je m'abonne', sans case à cocher ni mention de consentement distincte ou spécifique à une finalité, et rien ne le sépare des conditions de vente. Le formulaire de contact ne présente non plus aucun mécanisme de consentement, seulement des champs à remplir. La politique de confidentialité évoque un consentement ('si vous y avez consenti') mais les formulaires eux-mêmes ne montrent pas de consentement granulaire, distinct ou explicite tel qu'exigé.
+  - Date de naissance [input name=naissance type=date required]
+  - Politique de confidentialité · Conditions de vente
+- **Raisonnement:** Les formulaires d'infolettre et de contact recueillent des renseignements personnels (courriel, nom, téléphone, et même date de naissance) sans case à cocher de consentement, sans mention distincte des finalités, ni lien vers la politique de confidentialité au moment de la collecte. Le consentement à l'infolettre semble simplement implicite au fait de s'abonner, sans formulation granulaire, distincte ou limitée dans le temps comme l'exigent les critères de validité de la CAI. Rien n'indique que le consentement soit séparé des autres conditions, comme les « Conditions de vente » apparaissant sur la même page.
 
 ### A9 — Pratique d'avis de modification de la politique
 
 - **Statut:** Non atteint
 - **Base légale:** s. 8.2 [LOI]
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - Dernière mise à jour : mars 2024
-- **Raisonnement:** Le texte de la politique fourni ne mentionne aucune façon dont les modifications futures seraient annoncées aux utilisateurs. On y voit seulement une date de 'Dernière mise à jour', sans procédure d'avis décrite. Aucune preuve d'un mécanisme de notification des changements n'apparaît dans le contenu fourni.
+- **Raisonnement:** La politique de confidentialité fournie ne comporte aucune clause précisant comment les modifications futures seraient communiquées aux utilisateurs (par avis, courriel ou mise à jour du site). On y trouve seulement une date de 'Dernière mise à jour', sans mécanisme décrit pour annoncer les changements.
 
 ### A10 — Formulaires : aucun refus de biens ou services pour refus de fournir des RP non nécessaires
 
 - **Statut:** Non atteint
 - **Base légale:** s. 9 [LOI]
+- **Nature de la preuve:** Observé sur le site
 - **Éléments observés:**
   - Date de naissance [input name=naissance type=date required]
   - Téléphone [input name=telephone type=tel required]
   - Une question sur une variété, une commande ou une livraison? Remplissez le formulaire et nous vous répondrons rapidement.
   - Recevez nos conseils de saison et nos offres exclusives.
-- **Raisonnement:** Le formulaire de contact exige un numéro de téléphone et une date de naissance comme champs obligatoires, alors que le but énoncé est simplement de répondre à une question sur une variété, une commande ou une livraison, ce qui ne semble pas requérir une date de naissance. De même, le formulaire d'infolettre rend le téléphone obligatoire, bien que cela ne paraisse pas nécessaire pour l'envoi de courriels. Ces champs obligatoires semblent dépasser ce qui est nécessaire aux fins déclarées des formulaires.
+- **Raisonnement:** Le formulaire de contact impose un champ obligatoire de date de naissance en plus du nom, du courriel et du téléphone, alors que son but déclaré est de répondre à des questions sur des produits, commandes ou livraisons — un objectif qui ne justifie pas raisonnablement une date de naissance. Le formulaire d'infolettre exige aussi un numéro de téléphone obligatoire pour un envoi purement courriel, ce qui semble superflu par rapport à sa finalité. Ces champs obligatoires semblent dépasser ce qui est nécessaire aux fins énoncées.
 
 ### B1 — Registre des incidents de confidentialité (8 éléments prescrits, conservation 5 ans) et processus de réponse
 
 - **Statut:** Non atteint
 - **Base légale:** ss. 3.5-3.8 + Règlement sur les incidents [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non, on note les pépins dans un cahier quand on y pense, mais il n'y a pas de registre officiel ni de marche à suivre.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -133,6 +145,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** s. 3.3 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non, on n'a jamais fait ça. La boutique en ligne a été montée par notre neveu en 2021.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -141,6 +154,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** s. 17 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non. On utilise Shopify pour la boutique et Mailchimp pour l'infolettre, mais personne n'a évalué ça ni signé d'entente particulière.
   - Hébergement aux États-Unis pour les deux outils.
@@ -150,6 +164,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Partiel
 - **Base légale:** s. 18.3 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: partiellement. On a les contrats standards des fournisseurs, mais on ne sait pas s'ils contiennent les clauses dont vous parlez.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -158,6 +173,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** s. 3.2 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non, rien d'écrit. On garde les factures sept ans pour l'impôt, c'est pas mal tout.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -166,6 +182,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Sans objet
 - **Base légale:** LCCJTI, art. 44-45 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: pas de biométrie ici.
 - **Raisonnement:** Déclaré sans objet dans le questionnaire (la pratique visée par cette vérification n'est pas utilisée).
@@ -174,6 +191,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Sans objet
 - **Base légale:** s. 12.1 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non, toutes les décisions passent par un humain.
 - **Raisonnement:** Déclaré sans objet dans le questionnaire (la pratique visée par cette vérification n'est pas utilisée).
@@ -182,6 +200,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Sans objet
 - **Base légale:** s. 4.1 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: on ne vise pas les enfants, nos clients sont des adultes.
 - **Raisonnement:** Déclaré sans objet dans le questionnaire (la pratique visée par cette vérification n'est pas utilisée).
@@ -190,6 +209,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Indéterminé
 - **Base légale:** s. 27 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: incertain. Shopify doit bien pouvoir exporter quelque chose, mais on n'a jamais essayé.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -198,6 +218,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Sans objet
 - **Base légale:** ss. 12-13 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: rien de sensible, des commandes de plantes.
 - **Raisonnement:** Déclaré sans objet dans le questionnaire (la pratique visée par cette vérification n'est pas utilisée).
@@ -206,6 +227,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** attente de la CAI (guides) [CAI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non, jamais eu de formation là-dessus.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -214,6 +236,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Partiel
 - **Base légale:** s. 10 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: partiellement. Les mots de passe sont dans un cahier au bureau; l'ordinateur de la caisse a un antivirus.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -222,6 +245,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Atteint
 - **Base légale:** s. 11 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: oui, les dossiers clients sont à jour dans Shopify.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -230,6 +254,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** s. 23 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non, on n'efface jamais rien. Les anciennes listes de clients sont toutes gardées.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -238,6 +263,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Partiel
 - **Base légale:** ss. 12, 22 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: partiellement. Les gens s'abonnent eux-mêmes à l'infolettre, mais on a déjà ajouté des clients de la caisse sans leur demander.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -246,6 +272,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Indéterminé
 - **Base légale:** ss. 27-34 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: incertain. Personne n'a jamais demandé, on ne saurait pas trop comment répondre dans les délais.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -254,6 +281,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** pratique-phare de la CAI (aide-mémoire; guide prévention, étape 2; guide EFVP, étape 3) [CAI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non, on n'a pas de liste de ce qu'on détient ni où c'est rendu.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -262,6 +290,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Partiel
 - **Base légale:** fiche vidéosurveillance (2019, jurisprudence) + s. 8; EFVP obligatoire post-Loi 25 [CAI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: partiellement. Il y a quatre caméras contre le vol, une affichette à l'entrée, mais on garde les images tant que le disque n'est pas plein.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -270,6 +299,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Partiel
 - **Base légale:** s. 10 (application courante) [INTERPRÉTATION]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: partiellement. La MFA est activée sur le courriel de la propriétaire, mais pas sur les deux autres comptes ni sur l'accès à distance de la caisse.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -278,6 +308,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** s. 10 (application courante) [INTERPRÉTATION]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non, la sauvegarde est sur un disque branché en permanence à l'ordinateur du bureau.
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -286,6 +317,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Sans objet
 - **Base légale:** s. 9.1 [LOI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: notre boutique en ligne n'offre pas de comptes clients avec des réglages de confidentialité.
 - **Raisonnement:** Déclaré sans objet dans le questionnaire (la pratique visée par cette vérification n'est pas utilisée).
@@ -294,6 +326,7 @@ Un constat « Indéterminé » est un point à clarifier ensemble, pas un échec
 
 - **Statut:** Non atteint
 - **Base légale:** s. 5 + lignes directrices CAI recrutement (2025-03-17) [CAI]
+- **Nature de la preuve:** Déclaré par l'entreprise, non vérifié
 - **Éléments observés:**
   - réponse / answer: non. On photocopie le permis de conduire en entrevue et on garde tous les CV reçus « au cas où ».
 - **Raisonnement:** Autodéclaré dans le questionnaire; les documents à l'appui n'ont pas été vérifiés de façon indépendante.
@@ -320,7 +353,7 @@ Les demandes d'assurance cyber s'ouvrent sur le chiffre d'affaires et le nombre 
 
 ---
 
-**Intégrité** : cette évaluation est scellée par une piste d'audit chaînée (chaque enregistrement contient l'empreinte du précédent). Empreinte finale (SHA-256) : `15be6ef91697516e655dfcc61a9c1efbd720246636779f119e3efb6f070a2620`. Une piste dont l'empreinte finale diffère ne correspond pas à ce rapport.
+**Intégrité** : cette évaluation est scellée par une piste de vérification chaînée (chaque enregistrement contient l'empreinte du précédent). Empreinte finale (SHA-256) : `5fdb3e11ab09087c1609a5e239246751c8221203a526de7ac2d2570e8dad637d`. Une piste dont l'empreinte finale diffère ne correspond pas à ce rapport.
 
 
 ---
@@ -328,7 +361,8 @@ Les demandes d'assurance cyber s'ouvrent sur le chiffre d'affaires et le nombre 
 # Law 25 Readiness Report
 
 **Site:** https://pepiniere-renard-bleu.example
-**Date:** 2026-08-24
+**Date:** 2026-08-26
+**Assessment:** `c82e59b4-b39d-42c7-b334-df8c7344ac68`
 
 > **Important notice** — This report is a readiness self-assessment produced by an automated tool. It is not legal advice, renders no compliance verdict, and does not replace consulting a legal professional. Every finding states the authority tier of its legal basis (STATUTE / CAI / FIRM).
 
@@ -357,6 +391,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Met
 - **Legal basis:** s. 8.2 [STATUTE]
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - https://pepiniere-renard-bleu.example/politique-de-confidentialite.html
 - **Reasoning:** A dedicated privacy-policy page was retrieved.
@@ -365,19 +400,21 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Partial
 - **Legal basis:** ss. 8, 8.2 + guide CAI [STATUTE]
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - Dernière mise à jour : mars 2024
-  - nous recueillons votre nom, votre adresse, votre numéro de carte-cadeau le cas échéant, ainsi que vos coordonnées
   - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
-  - Nous utilisons des outils de commerce en ligne et d'envoi de courriels fournis par des entreprises situées à l'extérieur du Canada
+  - des entreprises situées à l'extérieur du Canada pour exploiter notre boutique et notre infolettre
   - Vous pouvez vous désabonner de l'infolettre en tout temps grâce au lien présent dans chaque courriel.
   - La direction de la pépinière agit comme responsable de la protection des renseignements personnels.
-- **Reasoning:** The policy addresses several MUST elements: it is written in plain language, states an effective/update date, describes the personal information collected and its purposes, mentions cookies, and notes that some data is sent to service providers outside Canada. However, it does not describe rights of access/rectification, consent withdrawal or the CAI complaint process (only newsletter unsubscription is covered), does not identify categories of internal personnel with access, does not specify the categories/purposes tied to each external recipient, and does not describe any means to refuse certain collections or their consequences. The MAY elements (security measures, named officer, technological rights-exercise tools) are also absent, but their absence is only a recommendation gap, not a compliance gap. The policy is kept as a distinct page separate from the sales conditions, satisfying the anti-conflation rule.
+  - Politique de confidentialité · Conditions de vente
+- **Reasoning:** The policy addresses several MUST elements: it identifies data collected and purposes, mentions cookies, states an update date (March 2024), notes an accountable person, and refers to transmissions outside Canada. However, it lacks explicit mention of the right to access/rectify personal information, the complaint process, the categories of internal personnel with access to data, and a general means to refuse collection with resulting consequences (only newsletter unsubscribe is covered). The policy is also kept as a distinct page from the 'Conditions de vente', consistent with the anti-conflation rule.
 
 ### A3 — Privacy officer title and contact information published
 
 - **Status:** Partial
 - **Legal basis:** s. 3.1 [STATUTE]
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - https://pepiniere-renard-bleu.example/politique-de-confidentialite.html
   - « …e en tout temps grâce au lien présent dans chaque courriel. Responsable de la protection des renseignements personnels La direction de la pépinière agit comme responsable de la p… »
@@ -387,15 +424,17 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** s. 3.2 [STATUTE]
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
   - La direction de la pépinière agit comme responsable de la protection des renseignements personnels. Pour toute question, écrivez-nous via le formulaire de la page Nous joindre.
-- **Reasoning:** The privacy policy covers what data is collected, why, sharing with third parties, and identifies a privacy officer, but it contains no information about retention/destruction rules, roles and responsibilities across the information lifecycle, or a complaint-handling process. There is only a generic contact form with no mention of how privacy complaints are received or processed.
+- **Reasoning:** The published privacy policy covers data collection, purpose, sharing, and identifies a privacy officer, but it does not address retention/destruction rules, roles and responsibilities throughout the information lifecycle, or a complaint-handling process. These elements required under s. 3.2 are absent from the text provided.
 
 ### A5 — Non-essential trackers inactive before consent; banner with accessible refusal
 
 - **Status:** Partial
 - **Legal basis:** s. 8.1 + Lignes directrices 2023-1 [CAI] *(contested interpretation)*
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - https://pepiniere-renard-bleu.example/
   - traceurs / trackers: Google Analytics / GTM
@@ -405,14 +444,16 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Partial
 - **Legal basis:** s. 8.1 [STATUTE]
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - Notre site utilise aussi des témoins (cookies) pour mesurer l'achalandage.
-- **Reasoning:** The privacy policy mentions the use of cookies ('témoins') to measure traffic, which is a profiling/tracking technology, but it does not specify the identification, location or profiling functions of these cookies, nor does it describe the means available to activate or deactivate them (e.g., browser settings, consent banner). No cookie consent mechanism or opt-out tool is described anywhere in the text.
+- **Reasoning:** The privacy policy mentions the use of cookies ('témoins') to measure site traffic, which is a technology with a potential profiling/tracking function, but it does not specify identification or location functions, nor does it describe the means available to activate or deactivate these technologies (e.g., cookie settings or browser controls). Without details on how users can control or activate these functions, the disclosure is incomplete relative to s. 8.1 requirements.
 
 ### A7 — French version of site, policy and terms (French-first for adhesion contracts)
 
 - **Status:** Met
 - **Legal basis:** Charte de la langue française, art. 52, 55 [FIRM] *(contested interpretation)*
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - https://pepiniere-renard-bleu.example/
   - html lang=fr
@@ -423,35 +464,39 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** s. 14 [STATUTE]
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - Courriel [input name=courriel type=email required] Nom complet [input name=nom type=text required] Téléphone [input name=telephone type=tel required] Je m'abonne
-  - Nous utilisons ces renseignements pour préparer vos commandes, organiser les livraisons et vous transmettre notre infolettre si vous y avez consenti.
-  - Nom complet [input name=nom type=text required] Courriel [input name=courriel type=email required] Téléphone [input name=telephone type=tel required] Date de naissance [input name=naissance type=date required] Votre message [textarea name=message required] Envoyer
-- **Reasoning:** The newsletter signup form only collects email, name, and phone with a single 'Je m'abonne' submit button, with no visible checkbox or explicit consent statement tied to a specific purpose, and no separation from other terms like the sales conditions. The contact form similarly has no consent mechanism at all, just data fields and a send button. The privacy policy mentions consent ('si vous y avez consenti') but the actual forms shown do not implement granular, distinct, or explicit consent capture as described.
+  - Date de naissance [input name=naissance type=date required]
+  - Politique de confidentialité · Conditions de vente
+- **Reasoning:** The newsletter and contact forms shown collect personal information (email, name, phone, and even date of birth) but display no consent checkbox, no purpose-specific consent statement, and no link to the privacy policy at the point of collection. Consent for the newsletter is only inferable from the act of subscribing, with no distinct, granular, or time-limited consent language as required by the CAI's validity criteria. There is no indication that consent is separated from other terms (e.g., 'Conditions de vente') on the same page.
 
 ### A9 — Policy amendment-notice practice
 
 - **Status:** Not met
 - **Legal basis:** s. 8.2 [STATUTE]
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - Dernière mise à jour : mars 2024
-- **Reasoning:** The privacy policy text provided does not contain any statement about how future amendments to the policy will be announced or communicated to users. Only a 'Dernière mise à jour' date is shown, with no notice mechanism described. No evidence of an amendment notification process is present in the supplied content.
+- **Reasoning:** The privacy policy provided does not contain any clause describing how changes or amendments to the policy will be communicated to users (e.g., via notice, email, or website update). Only a 'Dernière mise à jour' date is present, with no stated process for announcing future amendments.
 
 ### A10 — Forms: no refusal of goods or services over declining to provide unnecessary PI
 
 - **Status:** Not met
 - **Legal basis:** s. 9 [STATUTE]
+- **Evidence basis:** Observed on the site
 - **Evidence:**
   - Date de naissance [input name=naissance type=date required]
   - Téléphone [input name=telephone type=tel required]
   - Une question sur une variété, une commande ou une livraison? Remplissez le formulaire et nous vous répondrons rapidement.
   - Recevez nos conseils de saison et nos offres exclusives.
-- **Reasoning:** The contact form marks phone number and date of birth as required fields, even though the stated purpose is only to answer a question about a variety, order, or delivery, which does not appear to necessitate a birthdate. Similarly, the newsletter subscription form requires a phone number, which is not evidently necessary for sending email communications. These mandatory fields exceed what appears necessary for the stated purposes of the forms.
+- **Reasoning:** The contact form collects a mandatory birthdate field alongside name, email, and phone, despite its stated purpose being to answer questions about products, orders, or deliveries — a purpose that does not plausibly require a birthdate. The newsletter signup form also mandates a phone number for a purely email-based communication, which appears unnecessary for that stated purpose. These mandatory fields exceed what seems necessary for the forms' stated purposes.
 
 ### B1 — Confidentiality-incident register (8 prescribed elements, 5-year retention) and response process
 
 - **Status:** Not met
 - **Legal basis:** ss. 3.5-3.8 + Règlement sur les incidents [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non, on note les pépins dans un cahier quand on y pense, mais il n'y a pas de registre officiel ni de marche à suivre.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -460,6 +505,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** s. 3.3 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non, on n'a jamais fait ça. La boutique en ligne a été montée par notre neveu en 2021.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -468,6 +514,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** s. 17 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non. On utilise Shopify pour la boutique et Mailchimp pour l'infolettre, mais personne n'a évalué ça ni signé d'entente particulière.
   - Hébergement aux États-Unis pour les deux outils.
@@ -477,6 +524,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Partial
 - **Legal basis:** s. 18.3 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: partiellement. On a les contrats standards des fournisseurs, mais on ne sait pas s'ils contiennent les clauses dont vous parlez.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -485,6 +533,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** s. 3.2 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non, rien d'écrit. On garde les factures sept ans pour l'impôt, c'est pas mal tout.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -493,6 +542,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not applicable
 - **Legal basis:** LCCJTI, art. 44-45 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: pas de biométrie ici.
 - **Reasoning:** Declared not applicable in the intake (the practice this check covers is not in use).
@@ -501,6 +551,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not applicable
 - **Legal basis:** s. 12.1 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non, toutes les décisions passent par un humain.
 - **Reasoning:** Declared not applicable in the intake (the practice this check covers is not in use).
@@ -509,6 +560,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not applicable
 - **Legal basis:** s. 4.1 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: on ne vise pas les enfants, nos clients sont des adultes.
 - **Reasoning:** Declared not applicable in the intake (the practice this check covers is not in use).
@@ -517,6 +569,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Unknown
 - **Legal basis:** s. 27 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: incertain. Shopify doit bien pouvoir exporter quelque chose, mais on n'a jamais essayé.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -525,6 +578,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not applicable
 - **Legal basis:** ss. 12-13 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: rien de sensible, des commandes de plantes.
 - **Reasoning:** Declared not applicable in the intake (the practice this check covers is not in use).
@@ -533,6 +587,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** attente de la CAI (guides) [CAI]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non, jamais eu de formation là-dessus.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -541,6 +596,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Partial
 - **Legal basis:** s. 10 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: partiellement. Les mots de passe sont dans un cahier au bureau; l'ordinateur de la caisse a un antivirus.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -549,6 +605,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Met
 - **Legal basis:** s. 11 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: oui, les dossiers clients sont à jour dans Shopify.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -557,6 +614,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** s. 23 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non, on n'efface jamais rien. Les anciennes listes de clients sont toutes gardées.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -565,6 +623,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Partial
 - **Legal basis:** ss. 12, 22 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: partiellement. Les gens s'abonnent eux-mêmes à l'infolettre, mais on a déjà ajouté des clients de la caisse sans leur demander.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -573,6 +632,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Unknown
 - **Legal basis:** ss. 27-34 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: incertain. Personne n'a jamais demandé, on ne saurait pas trop comment répondre dans les délais.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -581,6 +641,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** pratique-phare de la CAI (aide-mémoire; guide prévention, étape 2; guide EFVP, étape 3) [CAI]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non, on n'a pas de liste de ce qu'on détient ni où c'est rendu.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -589,6 +650,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Partial
 - **Legal basis:** fiche vidéosurveillance (2019, jurisprudence) + s. 8; EFVP obligatoire post-Loi 25 [CAI]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: partiellement. Il y a quatre caméras contre le vol, une affichette à l'entrée, mais on garde les images tant que le disque n'est pas plein.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -597,6 +659,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Partial
 - **Legal basis:** s. 10 (application courante) [FIRM]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: partiellement. La MFA est activée sur le courriel de la propriétaire, mais pas sur les deux autres comptes ni sur l'accès à distance de la caisse.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -605,6 +668,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** s. 10 (application courante) [FIRM]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non, la sauvegarde est sur un disque branché en permanence à l'ordinateur du bureau.
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -613,6 +677,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not applicable
 - **Legal basis:** s. 9.1 [STATUTE]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: notre boutique en ligne n'offre pas de comptes clients avec des réglages de confidentialité.
 - **Reasoning:** Declared not applicable in the intake (the practice this check covers is not in use).
@@ -621,6 +686,7 @@ An 'Unknown' finding is a point to clarify together, not a failure.
 
 - **Status:** Not met
 - **Legal basis:** s. 5 + lignes directrices CAI recrutement (2025-03-17) [CAI]
+- **Evidence basis:** Self-reported, unverified
 - **Evidence:**
   - réponse / answer: non. On photocopie le permis de conduire en entrevue et on garde tous les CV reçus « au cas où ».
 - **Reasoning:** Self-reported through the intake questionnaire; supporting documents not independently verified.
@@ -647,4 +713,4 @@ Cyber-insurance applications open with revenue and employee count; the controls 
 
 ---
 
-**Integrity**: this assessment is sealed by a hash-chained audit trail (each record contains the previous record's fingerprint). Final fingerprint (SHA-256): `15be6ef91697516e655dfcc61a9c1efbd720246636779f119e3efb6f070a2620`. A trail whose final fingerprint differs does not correspond to this report.
+**Integrity**: this assessment is sealed by a hash-chained verification trail (each record contains the previous record's fingerprint). Final fingerprint (SHA-256): `5fdb3e11ab09087c1609a5e239246751c8221203a526de7ac2d2570e8dad637d`. A trail whose final fingerprint differs does not correspond to this report.
