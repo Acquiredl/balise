@@ -280,7 +280,7 @@ def write_teaser(findings: list[Finding], target: str, out_dir: str | Path) -> P
             + _teaser_section(findings, target, "en")
             + "</body></html>")
     path = out / "apercu-balise.html"
-    path.write_text(html, encoding="utf-8")
+    path.write_text(html, encoding="utf-8", newline="\n")
     return path
 
 
@@ -298,5 +298,5 @@ def write_summary(findings: list[Finding], target: str, out_dir: str | Path,
             + _lang_section(findings, target, "en", notices, head)
             + "</body></html>")
     path = out / "sommaire-balise.html"
-    path.write_text(html, encoding="utf-8")
+    path.write_text(html, encoding="utf-8", newline="\n")
     return path

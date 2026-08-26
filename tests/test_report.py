@@ -350,3 +350,18 @@ def test_manifest_is_written_last_and_lists_artifacts_by_hash(tmp_path):
     assert "sha256" not in manifest
     body = paths.report_md.read_text(encoding="utf-8")
     assert "manifest" not in body.lower()
+
+
+def test_package_bytes_are_platform_independent(tmp_path):
+    # Content-addressed seals hash shipped bytes: a package generated on
+    # Windows must be byte-identical to one generated anywhere else, so
+    # every writer pins LF instead of inheriting the platform newline.
+    from balise.report import write_manifest
+
+    findings = [Finding("A1", Status.MET, reasoning="x", reasoning_fr="x")]
+    paths = write_report(findings, target="https://x.example",
+                         out_dir=tmp_path)
+    write_manifest(tmp_path, assessment_id=paths.assessment_id,
+                   target="https://x.example", trail_head=paths.head)
+    for name in ("rapport-balise.md", "audit-trail.jsonl", "manifest.json"):
+        assert b"\r" not in (tmp_path / name).read_bytes(), name

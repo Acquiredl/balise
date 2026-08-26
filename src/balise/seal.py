@@ -282,7 +282,7 @@ def _declare_seals(package: Path, kinds: list[str]) -> None:
     manifest["seals"] = kinds
     manifest_path.write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8")
+        encoding="utf-8", newline="\n")
 
 
 def anchor_package(package: Path, calendars: list[str] | None = None) -> int:
@@ -307,7 +307,8 @@ def anchor_package(package: Path, calendars: list[str] | None = None) -> int:
             "calendar": url,
             "proof": base64.b64encode(proof_bytes).decode("ascii"),
         }
-        with (seals_dir / ANCHORS_FILE).open("a", encoding="utf-8") as handle:
+        with (seals_dir / ANCHORS_FILE).open("a", encoding="utf-8",
+                                             newline="\n") as handle:
             handle.write(json.dumps(record, sort_keys=True,
                                     separators=(",", ":")) + "\n")
         written += 1
@@ -366,7 +367,8 @@ def upgrade_anchors(package: Path) -> int:
         except ProofError as exc:
             print(f"warning: calendar {url} sent an unusable completion: {exc}")
             continue
-        with anchors_path.open("a", encoding="utf-8") as handle:
+        with anchors_path.open("a", encoding="utf-8",
+                               newline="\n") as handle:
             handle.write(json.dumps({
                 "manifest_sha256": record["manifest_sha256"],
                 "ts": datetime.now(UTC).isoformat(),
@@ -399,7 +401,7 @@ def sign_package(package: Path, private_key_hex: str | None = None) -> str:
     seals_dir.mkdir(exist_ok=True)
     (seals_dir / SIGNATURE_FILE).write_bytes(signature)
     (seals_dir / PUBLIC_KEY_FILE).write_text(public_bytes.hex() + "\n",
-                                             encoding="utf-8")
+                                             encoding="utf-8", newline="\n")
     return key_fingerprint(public_bytes)
 
 
