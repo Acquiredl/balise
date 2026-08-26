@@ -36,6 +36,18 @@ Les vérifications déterministes s'exécutent sans aucune configuration. Les v�
 
 Deux options utiles : `--also <url>` ajoute à l'analyse une page que le robot manquerait (un formulaire d'inscription, une page de portail), et `--mini` produit un aperçu gratuit à partir des seules vérifications déterministes.
 
+### Vérifier une évaluation livrée — sans serveur, sans compte, sans Balise
+
+Chaque mandat est livré comme un paquet : le rapport, le sommaire visuel, la piste de vérification chaînée par hachage, les preuves archivées sur lesquelles chaque constat s'appuie, et un manifeste écrit en dernier qui prend l'empreinte de l'ensemble. Quiconque détient le paquet peut le vérifier hors ligne :
+
+```bash
+balise verify ./mandat-001
+```
+
+La liste de contrôle parcourt tout le paquet — intégrité de la chaîne, chaque artefact contre son empreinte, les preuves archivées contre la piste — et se termine par un verdict qui nomme exactement ce qui a été établi (`SELF-CONSISTENT`, et avec les sceaux, `+ ANCHORED (block N)` et `+ SIGNED (key: …)`). Changez un seul caractère n'importe où et la ligne correspondante passe au rouge. Essayez-le sur le mandat d'exemple dans [samples/demo/out](samples/demo/out).
+
+Les sceaux permettent au paquet de prouver plus que sa cohérence interne : `balise seal` engage le manifeste dans Bitcoin via OpenTimestamps (gratuit, sans portefeuille — dit *quand* il existait) et applique la signature de l'émetteur (dit *qui* l'a émis; l'empreinte de la clé est publiée dans [docs/SIGNING.md](docs/SIGNING.md) et dans chaque lettre de mandat). Ce que chaque affirmation établit — et n'établit pas — est détaillé dans [docs/VERIFICATION-TRAIL.md](docs/VERIFICATION-TRAIL.md), sans gonflage.
+
 ## Construit avec l'IA, vérifié par un humain
 
 Balise est construit avec assistance IA, et six de ses vérifications utilisent un moteur IA au moment de l'évaluation. On traite ces deux faits comme des choses à encadrer, pas à cacher :
