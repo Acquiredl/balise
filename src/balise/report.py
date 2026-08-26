@@ -322,7 +322,10 @@ def write_report(findings: list[Finding], target: str, out_dir: str | Path,
     trail = _build_trail(findings, target, assessment_id)
     head = trail[-1]["sha256"]
     audit_path = out / "audit-trail.jsonl"
-    with audit_path.open("w", encoding="utf-8") as handle:
+    # newline="\n" on every package writer: content-addressed seals hash
+    # shipped bytes, so output must be byte-identical across platforms —
+    # a Windows-run pipeline must not produce a different package.
+    with audit_path.open("w", encoding="utf-8", newline="\n") as handle:
         for record in trail:
             handle.write(json.dumps(record, ensure_ascii=False) + "\n")
 
@@ -332,7 +335,7 @@ def write_report(findings: list[Finding], target: str, out_dir: str | Path,
             + _render_language_section(findings, target, "en", notices, head,
                                        assessment_id))
     report_path = out / "rapport-balise.md"
-    report_path.write_text(body, encoding="utf-8")
+    report_path.write_text(body, encoding="utf-8", newline="\n")
     return ReportPaths(report_md=report_path, audit_jsonl=audit_path,
                        head=head, assessment_id=assessment_id)
 
@@ -376,7 +379,7 @@ def write_manifest(out_dir: str | Path, *, assessment_id: str, target: str,
     manifest_path = out / "manifest.json"
     manifest_path.write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8")
+        encoding="utf-8", newline="\n")
     return manifest_path
 
 

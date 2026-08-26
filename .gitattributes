@@ -1,0 +1,6 @@
+# The demo package is content-addressed: evidence files are named by
+# their sha256, the anchor commits the manifest bytes, and the manifest
+# lists artifacts by shipped-bytes hash. Line-ending conversion on
+# checkout would break every one of those seals, so these files pass
+# through git byte-exact.
+samples/demo/out/** -text

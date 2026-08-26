@@ -1,0 +1,14 @@
+{
+  "format": "balise-assessment/1",
+  "assessment_id": "c82e59b4-b39d-42c7-b334-df8c7344ac68",
+  "target": "https://pepiniere-renard-bleu.example",
+  "created_at": "2026-08-26T19:11:46.643126+00:00",
+  "trail_head": "5fdb3e11ab09087c1609a5e239246751c8221203a526de7ac2d2570e8dad637d",
+  "artifacts": {
+    "rapport-balise.md": "649347231f34415e40d69bc637259a8cd58a5a7b6dd8a67ff93db6af88e74818",
+    "sommaire-balise.html": "449b16a485dc479e8246d0fa9c547ffca1c8042f4b06d402b7d69d5a7c4b5331"
+  },
+  "seals": [
+    "anchor"
+  ]
+}

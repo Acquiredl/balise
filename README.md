@@ -40,6 +40,18 @@ pip install -e ".[semantic]"
 
 Two more flags worth knowing: `--also <url>` adds a page the crawler would miss (a signup form, a portal page) to the scan, and `--mini` produces a free-preview summary from the deterministic checks alone.
 
+### Verify a delivered assessment — no server, no account, no Balise
+
+Every engagement ships as a package: the report, the visual summary, the hash-chained verification trail, the archived evidence each finding rests on, and a manifest written last that fingerprints all of it. Anyone holding the package can check it offline:
+
+```bash
+balise verify ./engagement-001
+```
+
+The checklist walks the whole package — chain integrity, every artifact against its fingerprint, the evidence archive against the trail — and ends on a verdict that names exactly what was established (`SELF-CONSISTENT`, and with seals, `+ ANCHORED (block N)` and `+ SIGNED (key: …)`). Change one character anywhere and the matching line goes red. Try it on the sample engagement in [samples/demo/out](samples/demo/out).
+
+The seals are how a package proves more than internal consistency: `balise seal` commits the manifest to Bitcoin via OpenTimestamps (free, no wallet — says *when* it existed) and applies the issuer signature (says *who* issued it; the key's fingerprint is published in [docs/SIGNING.md](docs/SIGNING.md) and in every engagement letter). What each claim does and does not establish is spelled out in [docs/VERIFICATION-TRAIL.md](docs/VERIFICATION-TRAIL.md), without inflation.
+
 ## Built with AI, verified by a human
 
 Balise is built with AI assistance, and six of its checks use an LLM at assessment time. We treat both facts as things to engineer around, not to hide:
