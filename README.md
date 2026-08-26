@@ -52,6 +52,8 @@ The checklist walks the whole package — chain integrity, every artifact agains
 
 The seals are how a package proves more than internal consistency: `balise seal` commits the manifest to Bitcoin via OpenTimestamps (free, no wallet — says *when* it existed) and applies the issuer signature (says *who* issued it; the key's fingerprint is published in [docs/SIGNING.md](docs/SIGNING.md) and in every engagement letter). What each claim does and does not establish is spelled out in [docs/VERIFICATION-TRAIL.md](docs/VERIFICATION-TRAIL.md), without inflation.
 
+The trail and package design follow the [loxodonta](https://github.com/Acquiredl/loxodonta) canon — a tamper-evident flight recorder for AI agent pipelines, whose decision records govern evidence grades, the package manifest, and issuer signatures. Balise is its first derived design.
+
 ## Built with AI, verified by a human
 
 Balise is built with AI assistance, and six of its checks use an LLM at assessment time. We treat both facts as things to engineer around, not to hide:

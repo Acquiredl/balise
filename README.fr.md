@@ -48,6 +48,8 @@ La liste de contrôle parcourt tout le paquet — intégrité de la chaîne, cha
 
 Les sceaux permettent au paquet de prouver plus que sa cohérence interne : `balise seal` engage le manifeste dans Bitcoin via OpenTimestamps (gratuit, sans portefeuille — dit *quand* il existait) et applique la signature de l'émetteur (dit *qui* l'a émis; l'empreinte de la clé est publiée dans [docs/SIGNING.md](docs/SIGNING.md) et dans chaque lettre de mandat). Ce que chaque affirmation établit — et n'établit pas — est détaillé dans [docs/VERIFICATION-TRAIL.md](docs/VERIFICATION-TRAIL.md), sans gonflage.
 
+La conception de la piste et du paquet suit le canon [loxodonta](https://github.com/Acquiredl/loxodonta), un enregistreur de vol pour pipelines d'agents IA où toute altération est détectable, et dont les registres de décisions gouvernent les niveaux de preuve, le manifeste du paquet et les signatures d'émetteur. Balise en est la première conception dérivée.
+
 ## Construit avec l'IA, vérifié par un humain
 
 Balise est construit avec assistance IA, et six de ses vérifications utilisent un moteur IA au moment de l'évaluation. On traite ces deux faits comme des choses à encadrer, pas à cacher :
