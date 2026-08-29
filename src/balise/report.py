@@ -58,7 +58,7 @@ class ReportPaths:
     report_md: Path
     audit_jsonl: Path
     head: str = ""     # final chain hash; printed in the deliverables
-    assessment_id: str = ""   # permanent engagement id, minted at run start
+    assessment_id: str = ""   # permanent assessment id, minted at run start
 
 
 # Verification-trail format v1 — see docs/VERIFICATION-TRAIL.md. Field names and canonical
@@ -97,7 +97,7 @@ def _build_trail(findings: list[Finding], target: str,
                  assessment_id: str) -> list[dict]:
     """Genesis + one sealed record per finding, hash-chained.
 
-    The genesis record binds the chain to its engagement (target, date, tool)
+    The genesis record binds the chain to its assessment (target, date, tool)
     and declares the expected record count, so a truncated tail fails
     verification on its own — not only against the head in the report."""
     ordered = sorted(findings, key=_check_order)

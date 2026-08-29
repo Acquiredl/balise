@@ -4,7 +4,7 @@
 
 ## Summary
 
-The domain artifact for Balise: what it checks, how each check traces to law, how findings are scored and reported. Built from primary-source research (CAI guidance + statute triangulated through ≥3 convergent sources) and the competitive scan. On ratification, this seeds the repo at Stage 2.
+The domain artifact for Balise: what it checks, how each check traces to law, how findings are scored and reported. Built from primary-source research (CAI guidance + statute triangulated through ≥3 convergent sources) and a survey of what existing automated tools actually check. On ratification, this seeds the repo at Stage 2.
 
 **Verification obligation before shipping:** LegisQuébec and CanLII blocked automated access, so statutory section numbers were triangulated, not read from the consolidated statute. A human spot-verify of every section reference against CQLR c. P-39.1 on LegisQuébec is a **hard pre-ship gate**.
 
@@ -12,8 +12,8 @@ The domain artifact for Balise: what it checks, how each check traces to law, ho
 
 **Balise is the organizational-depth readiness assessment with legible reasoning.** Three deliberate contrasts with the field:
 
-1. **Depth vs surface.** Every automated competitor (Conformité PME's scanner, cookie CMPs) checks the website surface. Most Law 25 obligations are organizational — incident registry, PIAs, vendor contracts, biometrics. Balise = external scan **plus** structured intake covering the organizational layer.
-2. **Honest broker vs fear marketing.** No AMP or penal fine against any enterprise has been verified through Aug 2026; "first sanctions in 2026" claims are vendor marketing with zero named cases. Balise markets on obligation-gap reality, incident preparedness, and insurance-questionnaire alignment — never on imminent-fine fear. In a market of fear-sellers, verifiable honesty is a differentiator that compounds with the audit trail.
+1. **Depth vs surface.** The automated tools in this space check the website surface: policy present, banner present, officer named. Most Law 25 obligations are organizational — incident registry, PIAs, vendor contracts, biometrics. Balise = external scan **plus** structured intake covering the organizational layer.
+2. **Honest broker vs fear marketing.** No AMP or penal fine against any enterprise has been verified through Aug 2026; "first sanctions in 2026" claims are marketing with zero named cases behind them. Balise reports obligation gaps, incident preparedness, and insurance-questionnaire alignment, and never invokes an imminent fine. Where the surrounding copy runs on fear, a claim that survives being checked is worth more than a loud one.
 3. **Legible reasoning vs black-box score.** Every finding carries its evidence, its legal hook, and its **authority tier** (see below). The tool's own transparency mirrors s. 12.1's explainability demand — Balise eats its own cooking.
 
 **Liability line (hard):** readiness self-assessment, not legal advice. Disclaimer on every report; recommendations phrased as obligations-to-review, not legal conclusions; no "you are compliant" verdicts — readiness posture only.
@@ -26,7 +26,7 @@ Every check is tagged with the strength of its legal basis:
 - **[CAI]** — regulator guidance/expectation (e.g., Guidelines 2023-1 on consent).
 - **[FIRM]** — convergent law-firm interpretation, not settled text or case law.
 
-Findings inherit the tag. This prevents the tool from overstating contested points — and it's the feature no competitor has.
+Findings inherit the tag. This prevents the tool from overstating contested points, which is the whole reason the tier system exists.
 
 **Encoded corrections to common market errors:**
 - **No "72-hour" breach deadline.** The statutory standard is notification "with diligence" (ss. 3.6). The 72h figure is GDPR contamination propagated by vendor marketing; Balise explicitly flags it as a misconception.
@@ -67,17 +67,9 @@ Findings inherit the tag. This prevents the tool from overstating contested poin
 
 - **Per-check status:** met / partial / not-met / not-applicable / unknown. Never a binary "compliant" verdict.
 - **Priority model:** P1 = [STATUTE] + enforcement-active (B6 biometrics; B1 incidents) or externally visible (A1, A3, A7); P2 = [STATUTE] paper obligations (B3 s.17 PIAs, B4, B5); P3 = [CAI]/[FIRM]-tier and lower-likelihood items. Conservative-middle: prioritization reflects *both* legal clarity and observed enforcement, and says so.
-- **Readiness posture by domain** (transparency / governance / incidents / vendors & transfers / special categories) — deliberately **not** a single percentage score. A single "82% compliant" number implies a legal conclusion; domain posture doesn't. (Explicit contrast with Conformité PME's 80-point compliance score.)
-- **Report:** bilingual (FR canonical, EN mirror). Each finding = evidence → obligation → authority tier → gap → suggested next step. Full reasoning trace appended (the audit trail).
-- **Insurer appendix:** findings mapped to the recurring cyber-insurance questionnaire themes (incident procedures, MFA/backups adjacent, documented audit) — shaped so the report answers the broker's "prove it" moment, the strongest demand trigger found.
-
-## Channel implications (for Stage 3)
-
-Primary outreach: **MSPs/IT providers** (already bundling Loi 25 into recurring SMB relationships; Vanta's MSP program is the distribution template — Balise as the assessment layer they white-label or refer). Secondary: web agencies (own the website layer, run free-audit funnels). Trigger-moment framing: insurance questionnaires and enterprise vendor reviews, not fine-fear. CPAs deprioritized (least evidence of being asked).
-
-## Competitive anchors (for pricing at Stage 3)
-
-Market: $150 DIY kit → Conformité PME $299/$690/$1,290 + $49/mo → consultants $2–10K. Balise's assessment must justify sitting at/above Conformité PME's top tier by demonstrably covering the organizational layer the scanners miss. Pricing decision deferred to Stage 3 with probe data.
+- **Readiness posture by domain** (transparency / governance / incidents / vendors & transfers / special categories) — deliberately **not** a single percentage score. A single "82% compliant" number implies a legal conclusion; domain posture doesn't. The scanners that publish one are stating a verdict they have no standing to state.
+- **Report:** bilingual (FR canonical, EN mirror). Each finding = evidence → obligation → authority tier → gap → suggested next step. Full reasoning trace appended (the verification trail).
+- **Insurer appendix:** findings mapped to the recurring cyber-insurance questionnaire themes (incident procedures, MFA/backups adjacent, documented audit) — shaped so the report is usable at the broker's "prove it" moment, which is where an SMB most often needs this paperwork.
 
 ## Outcomes / Decisions
 

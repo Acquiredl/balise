@@ -439,7 +439,7 @@ def seal_package(package: str | Path, *, sign: bool = True,
             print(f"error: {exc}")
             return 1
         print(f"signed (key: {fingerprint[:16]}…) — recipients compare this "
-              "fingerprint against docs/SIGNING.md and the engagement letter")
+              "fingerprint against docs/SIGNING.md")
     return 0
 
 

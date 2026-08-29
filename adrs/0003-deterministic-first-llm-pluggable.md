@@ -15,6 +15,6 @@ Some checks are mechanical (a privacy-policy link exists; a tracker script is pr
 
 ## Consequences
 
-- The tool demos meaningfully with zero configuration (Module A deterministic subset) — important for the free-scan funnel and for the public repo as a career artifact.
+- The tool does something useful with zero configuration (Module A deterministic subset) — anyone can clone it and get a real result without an API key.
 - Honest `unknown`s instead of hallucinated verdicts — consistent with ADR 0001's posture.
 - Two code paths to maintain. Accepted: the split is also the security boundary.
