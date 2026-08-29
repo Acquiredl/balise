@@ -195,10 +195,9 @@ def _lang_section(findings: list[Finding], target: str, lang: str,
     return "\n".join(out)
 
 
-def _teaser_section(findings: list[Finding], target: str, lang: str) -> str:
-    """Free-preview page: the deterministic remote findings with full evidence
-    treatment (the differentiator, visible at first touch), then an honest
-    account of what the complete assessment adds."""
+def _apercu_section(findings: list[Finding], target: str, lang: str) -> str:
+    """Quick-look page: the deterministic remote findings with full evidence
+    treatment, then an honest account of what a full run adds on top."""
     fr = lang == "fr"
     total = len(CHECKS)
     remaining = total - len(findings)
@@ -210,23 +209,23 @@ def _teaser_section(findings: list[Finding], target: str, lang: str) -> str:
     solid = [f for f in findings if f.status is Status.MET]
 
     out = []
-    out.append(f"<h1>{'Aperçu gratuit — Loi 25' if fr else 'Free preview — Law 25'}</h1>")
+    out.append(f"<h1>{'Aperçu rapide — Loi 25' if fr else 'Quick look — Law 25'}</h1>")
     out.append(f'<p class="meta">{target} · {datetime.now(UTC).date().isoformat()}</p>')
     out.append('<div class="disclaimer">' + (
         "Aperçu produit par une analyse automatisée du site public seulement. "
         "Ce n'est pas un avis juridique et aucun verdict de conformité n'est "
         "rendu. Chaque constat montre sa preuve et sa base légale — c'est la "
-        "même rigueur que l'évaluation complète." if fr else
+        "même rigueur qu'une analyse complète." if fr else
         "Preview produced by an automated analysis of the public website only. "
         "This is not legal advice and no compliance verdict is rendered. Every "
-        "finding shows its evidence and legal basis — the same rigour as the "
-        "complete assessment.") + "</div>")
+        "finding shows its evidence and legal basis — the same rigour as a "
+        "full run.") + "</div>")
 
     out.append('<div class="tiles">')
     for n, t_fr, t_en in ((len(gaps), "écarts observés à distance", "gaps observed remotely"),
                           (len(solid), "points en place", "in place"),
-                          (remaining, "vérifications supplémentaires dans l'évaluation complète",
-                           "additional checks in the complete assessment")):
+                          (remaining, "vérifications supplémentaires dans une analyse complète",
+                           "additional checks in a full run")):
         out.append(f'<div class="tile"><div class="n">{n}</div>'
                    f'<div class="t">{t_fr if fr else t_en}</div></div>')
     out.append("</div>")
@@ -253,31 +252,31 @@ def _teaser_section(findings: list[Finding], target: str, lang: str) -> str:
             f"<li>{CLIENT_COPY[f.check_id].plain_fr if fr else CLIENT_COPY[f.check_id].plain_en}</li>"
             for f in sorted(solid, key=_check_order) if f.check_id in CLIENT_COPY) + "</ul>")
 
-    out.append(f"<h2>{'Ce que l’évaluation complète ajoute' if fr else 'What the complete assessment adds'}</h2>")
+    out.append(f"<h2>{'Ce qu’une analyse complète ajoute' if fr else 'What a full run adds'}</h2>")
     out.append("<ul class=\"unklist\">" + "".join(f"<li>{item}</li>" for item in ((
         f"{remaining} vérifications supplémentaires ({total} au total), dont les obligations internes que le site ne montre pas",
         "L'analyse de jugement du contenu réel de votre politique et de vos formulaires",
-        "Le questionnaire guidé sur vos pratiques internes, en conversation",
+        "Le questionnaire sur vos pratiques internes (Module B)",
         "Le rapport complet avec preuve et base légale pour chaque constat, le sommaire visuel, et la piste de vérification",
         "L'annexe assurance cyber : vos constats reliés aux questions des assureurs") if fr else (
         f"{remaining} additional checks ({total} in total), including the internal obligations a website cannot show",
         "Judgment-level analysis of your policy's and forms' actual content",
-        "The guided questionnaire on your internal practices, in conversation",
+        "The questionnaire on your internal practices (Module B)",
         "The full report with evidence and legal basis for every finding, the visual summary, and the verifiable trail",
         "The cyber-insurance appendix: your findings mapped to insurers' questions"))) + "</ul>")
-    out.append(f'<p class="small">{"Évaluation complète offerte sur demande." if fr else "Complete assessment available on request."}</p>')
+    out.append(f'<p class="small">{"Pour l’analyse complète : remplissez le questionnaire du dépôt (intake/) et relancez balise scan sans --mini." if fr else "For the full run: fill in the questionnaire from the repo (intake/) and run balise scan again without --mini."}</p>')
     return "\n".join(out)
 
 
-def write_teaser(findings: list[Finding], target: str, out_dir: str | Path) -> Path:
+def write_apercu(findings: list[Finding], target: str, out_dir: str | Path) -> Path:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     html = ("<!DOCTYPE html>\n<html lang=\"fr\"><head><meta charset=\"UTF-8\">"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
             "<title>Aperçu Balise</title><style>" + _CSS + "</style></head><body>"
-            + _teaser_section(findings, target, "fr")
+            + _apercu_section(findings, target, "fr")
             + '<div class="pagebreak"></div>'
-            + _teaser_section(findings, target, "en")
+            + _apercu_section(findings, target, "en")
             + "</body></html>")
     path = out / "apercu-balise.html"
     path.write_text(html, encoding="utf-8", newline="\n")

@@ -1,4 +1,4 @@
-"""Regenerate the demo engagement for the fictional Pépinière du Renard Bleu.
+"""Regenerate the demo assessment for the fictional Pépinière du Renard Bleu.
 
 Runs the REAL pipeline on staged inputs: the fixture site in ./site is loaded
 into a SiteSnapshot directly (the domain is fictional, so the fetcher is
@@ -33,7 +33,7 @@ def main() -> int:
     site = SiteSnapshot(root_url=BASE)
     # The fixture pages are "retrieved" now: the staged file is the
     # artifact the checks examine, so the source references and the
-    # evidence archive carry its fingerprint like any real engagement.
+    # evidence archive carry its fingerprint like any real assessment.
     staged_at = datetime.now(UTC).isoformat()
     for filename, url in PAGES:
         html = (HERE / "site" / filename).read_text(encoding="utf-8")

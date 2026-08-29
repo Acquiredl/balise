@@ -1,6 +1,6 @@
 # Issuer signing key — fingerprint and custody
 
-This page is the canonical out-of-band channel for the Balise issuer key: the one place a package cannot rewrite. A recipient runs `balise verify` on their package, reads the fingerprint it prints, and compares it against this page and their engagement letter. The verifier's job is the math; this comparison is the recipient's job — the tool prints `SIGNED (key: …)` and never a name, because a key inside a package proves nothing about who holds it.
+This page is the canonical out-of-band channel for the Balise issuer key: the one place a package cannot rewrite. A recipient runs `balise verify` on their package, reads the fingerprint it prints, and compares it against this page. The verifier's job is the math; this comparison is the recipient's job — the tool prints `SIGNED (key: …)` and never a name, because a key inside a package proves nothing about who holds it.
 
 ## Current fingerprint
 
@@ -20,8 +20,8 @@ Nothing more. It does not claim the package is the only version ever issued (ord
 
 The private key lives in the operator's password manager and nowhere else — never on disk, never in a repo, never on the machine the assessment pipeline runs on, out of reach of any process the trail records. The ritual:
 
-1. **Once:** `balise keygen` — the private key is printed a single time and written nowhere. Store it in the password manager; publish the fingerprint here and in engagement letters; close the terminal.
-2. **Per engagement:** run the pipeline, then `balise seal <package-dir>` — paste the key at the prompt (it is read without echo, held in memory for the duration of one signature, and never written). The command also anchors the manifest via OpenTimestamps.
+1. **Once:** `balise keygen` — the private key is printed a single time and written nowhere. Store it in the password manager; publish the fingerprint here; close the terminal.
+2. **Per assessment:** run the pipeline, then `balise seal <package-dir>` — paste the key at the prompt (it is read without echo, held in memory for the duration of one signature, and never written). The command also anchors the manifest via OpenTimestamps.
 3. **A few hours later:** `balise seal <package-dir> --upgrade` completes the anchor once Bitcoin has it. This touches only the seals sidecar; the sealed manifest is never modified.
 
 The seal declaration is part of the sealed bytes: `balise seal` declares the full seal set before applying anything, so a stripped seal shows up as `SEAL-MISSING` on verification, never as a silent downgrade.

@@ -1,8 +1,8 @@
 name: Eval and red-team suite
 
-# Manual trigger only: this run calls the real semantic engine (paid API,
-# roughly $0.50 per full run). Run before releases, after prompt changes,
-# and after model updates. Requires the ANTHROPIC_API_KEY repository secret.
+# Manual trigger only: this run calls the real semantic engine against the
+# live API, so it is not on a schedule. Run before releases, after prompt
+# changes, and after model updates. Requires the ANTHROPIC_API_KEY secret.
 on:
   workflow_dispatch:
 

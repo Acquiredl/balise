@@ -27,9 +27,9 @@ Three design rules we hold ourselves to:
 
 ```bash
 pip install -e .
-balise scan https://www.example.com --out ./engagement-001
+balise scan https://www.example.com --out ./assessment-001
 # with the organizational questionnaire:
-balise scan https://www.example.com --intake intake/filled.yaml --out ./engagement-001
+balise scan https://www.example.com --intake intake/filled.yaml --out ./assessment-001
 ```
 
 Deterministic checks run with zero configuration. Judgment-type checks (plain-language analysis, disclosure coverage) use an optional LLM engine. Without it, those checks honestly report `unknown` instead of guessing.
@@ -38,21 +38,21 @@ Deterministic checks run with zero configuration. Judgment-type checks (plain-la
 pip install -e ".[semantic]"
 ```
 
-Two more flags worth knowing: `--also <url>` adds a page the crawler would miss (a signup form, a portal page) to the scan, and `--mini` produces a free-preview summary from the deterministic checks alone.
+Two more flags worth knowing: `--also <url>` adds a page the crawler would miss (a signup form, a portal page) to the scan, and `--mini` produces a quick summary from the deterministic checks alone, with no engine and no intake.
 
 ### Verify a delivered assessment — no server, no account, no Balise
 
-Every engagement ships as a package: the report, the visual summary, the hash-chained verification trail, the archived evidence each finding rests on, and a manifest written last that fingerprints all of it. Anyone holding the package can check it offline:
+Every assessment ships as a package: the report, the visual summary, the hash-chained verification trail, the archived evidence each finding rests on, and a manifest written last that fingerprints all of it. Anyone holding the package can check it offline:
 
 ```bash
-balise verify ./engagement-001
+balise verify ./assessment-001
 ```
 
-The checklist walks the whole package — chain integrity, every artifact against its fingerprint, the evidence archive against the trail — and ends on a verdict that names exactly what was established (`SELF-CONSISTENT`, and with seals, `+ ANCHORED (block N)` and `+ SIGNED (key: …)`). Change one character anywhere and the matching line goes red. Try it on the sample engagement in [samples/demo/out](samples/demo/out).
+The checklist walks the whole package — chain integrity, every artifact against its fingerprint, the evidence archive against the trail — and ends on a verdict that names exactly what was established (`SELF-CONSISTENT`, and with seals, `+ ANCHORED (block N)` and `+ SIGNED (key: …)`). Change one character anywhere and the matching line goes red. Try it on the sample assessment in [samples/demo/out](samples/demo/out).
 
-The seals are how a package proves more than internal consistency: `balise seal` commits the manifest to Bitcoin via OpenTimestamps (free, no wallet — says *when* it existed) and applies the issuer signature (says *who* issued it; the key's fingerprint is published in [docs/SIGNING.md](docs/SIGNING.md) and in every engagement letter). What each claim does and does not establish is spelled out in [docs/VERIFICATION-TRAIL.md](docs/VERIFICATION-TRAIL.md), without inflation.
+The seals are how a package proves more than internal consistency: `balise seal` commits the manifest to Bitcoin via OpenTimestamps (free, no wallet — says *when* it existed) and applies the issuer signature (says *who* issued it; the key's fingerprint is published in [docs/SIGNING.md](docs/SIGNING.md), a channel a package cannot rewrite). What each claim does and does not establish is spelled out in [docs/VERIFICATION-TRAIL.md](docs/VERIFICATION-TRAIL.md), without inflation.
 
-The trail and package design follow the [loxodonta](https://github.com/Acquiredl/loxodonta) canon — a tamper-evident flight recorder for AI agent pipelines, whose decision records govern evidence grades, the package manifest, and issuer signatures. Balise is its first derived design.
+None of that design is original to Balise. It comes from [loxodonta](https://github.com/Acquiredl/loxodonta), a flight recorder for AI agents: every action leaves a receipt, and every receipt carries the hash of the one before it, so editing history is detectable rather than prevented. Its decision records are the canon for trail designs derived from it, and they govern the evidence-grade scale, the package manifest as a single sealing surface, and the issuer signature. Balise is the first design derived from that canon — it exists in part to find out whether the canon survives contact with a real domain, and so far it has.
 
 ## Built with AI, verified by a human
 
@@ -83,4 +83,4 @@ v0.1. Working scanner and report pipeline. Statutory references verified against
 
 ## License
 
-MIT. Questions or feedback, open an issue. Happy to talk.
+MIT — free to use, free to fork, catalog included. Questions or feedback, open an issue. Happy to talk.

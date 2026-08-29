@@ -4,7 +4,7 @@
 
 *[English version: README.md](README.md)*
 
-Balise analyse le site web public d'une entreprise et le combine à un court questionnaire pour évaluer sa préparation aux obligations de la Loi 25. Il produit un rapport bilingue (FR/EN) où chaque constat montre ses éléments observés, sa base légale et la force réelle de cette base. L'évaluation complète est aussi consignée dans une piste de vérification lisible par machine.
+Balise analyse le site web public d'une entreprise et le combine à un court questionnaire pour évaluer sa préparation aux obligations de la Loi 25. Il produit un rapport bilingue (FR/EN) où chaque constat montre ses éléments observés, sa base légale et la force réelle de cette base. L'ensemble de l'évaluation est aussi consigné dans une piste de vérification lisible par machine.
 
 > Balise est un outil d'autoévaluation de préparation. Ce n'est pas un avis juridique, et il ne rend jamais de verdict de conformité.
 
@@ -27,34 +27,34 @@ Trois règles de conception qu'on s'impose :
 
 ```bash
 pip install -e .
-balise scan https://www.exemple.com --out ./mandat-001
+balise scan https://www.exemple.com --out ./evaluation-001
 # avec le questionnaire organisationnel :
-balise scan https://www.exemple.com --intake intake/rempli.yaml --out ./mandat-001
+balise scan https://www.exemple.com --intake intake/rempli.yaml --out ./evaluation-001
 ```
 
 Les vérifications déterministes s'exécutent sans aucune configuration. Les vérifications de jugement (langage clair, couverture des divulgations) passent par un moteur IA optionnel. Sans lui, elles rapportent honnêtement « indéterminé » plutôt que de deviner.
 
-Deux options utiles : `--also <url>` ajoute à l'analyse une page que le robot manquerait (un formulaire d'inscription, une page de portail), et `--mini` produit un aperçu gratuit à partir des seules vérifications déterministes.
+Deux options utiles : `--also <url>` ajoute à l'analyse une page que le robot manquerait (un formulaire d'inscription, une page de portail), et `--mini` produit un aperçu rapide à partir des seules vérifications déterministes, sans moteur et sans questionnaire.
 
 ### Vérifier une évaluation livrée — sans serveur, sans compte, sans Balise
 
-Chaque mandat est livré comme un paquet : le rapport, le sommaire visuel, la piste de vérification chaînée par hachage, les preuves archivées sur lesquelles chaque constat s'appuie, et un manifeste écrit en dernier qui prend l'empreinte de l'ensemble. Quiconque détient le paquet peut le vérifier hors ligne :
+Chaque évaluation est livrée comme un paquet : le rapport, le sommaire visuel, la piste de vérification chaînée par hachage, les preuves archivées sur lesquelles chaque constat s'appuie, et un manifeste écrit en dernier qui prend l'empreinte de l'ensemble. Quiconque détient le paquet peut le vérifier hors ligne :
 
 ```bash
-balise verify ./mandat-001
+balise verify ./evaluation-001
 ```
 
-La liste de contrôle parcourt tout le paquet — intégrité de la chaîne, chaque artefact contre son empreinte, les preuves archivées contre la piste — et se termine par un verdict qui nomme exactement ce qui a été établi (`SELF-CONSISTENT`, et avec les sceaux, `+ ANCHORED (block N)` et `+ SIGNED (key: …)`). Changez un seul caractère n'importe où et la ligne correspondante passe au rouge. Essayez-le sur le mandat d'exemple dans [samples/demo/out](samples/demo/out).
+La liste de contrôle parcourt tout le paquet — intégrité de la chaîne, chaque artefact contre son empreinte, les preuves archivées contre la piste — et se termine par un verdict qui nomme exactement ce qui a été établi (`SELF-CONSISTENT`, et avec les sceaux, `+ ANCHORED (block N)` et `+ SIGNED (key: …)`). Changez un seul caractère n'importe où et la ligne correspondante passe au rouge. Essayez-le sur l'évaluation d'exemple dans [samples/demo/out](samples/demo/out).
 
-Les sceaux permettent au paquet de prouver plus que sa cohérence interne : `balise seal` engage le manifeste dans Bitcoin via OpenTimestamps (gratuit, sans portefeuille — dit *quand* il existait) et applique la signature de l'émetteur (dit *qui* l'a émis; l'empreinte de la clé est publiée dans [docs/SIGNING.md](docs/SIGNING.md) et dans chaque lettre de mandat). Ce que chaque affirmation établit — et n'établit pas — est détaillé dans [docs/VERIFICATION-TRAIL.md](docs/VERIFICATION-TRAIL.md), sans gonflage.
+Les sceaux permettent au paquet de prouver plus que sa cohérence interne : `balise seal` engage le manifeste dans Bitcoin via OpenTimestamps (gratuit, sans portefeuille — dit *quand* il existait) et applique la signature de l'émetteur (dit *qui* l'a émis; l'empreinte de la clé est publiée dans [docs/SIGNING.md](docs/SIGNING.md), un canal que le paquet ne peut pas réécrire). Ce que chaque affirmation établit — et n'établit pas — est détaillé dans [docs/VERIFICATION-TRAIL.md](docs/VERIFICATION-TRAIL.md), sans gonflage.
 
-La conception de la piste et du paquet suit le canon [loxodonta](https://github.com/Acquiredl/loxodonta), un enregistreur de vol pour pipelines d'agents IA où toute altération est détectable, et dont les registres de décisions gouvernent les niveaux de preuve, le manifeste du paquet et les signatures d'émetteur. Balise en est la première conception dérivée.
+Rien de cette conception n'est propre à Balise. Elle vient de [loxodonta](https://github.com/Acquiredl/loxodonta), un enregistreur de vol pour agents IA : chaque action laisse un reçu, et chaque reçu porte l'empreinte du précédent, de sorte que réécrire l'historique se détecte au lieu de s'empêcher. Ses registres de décisions font office de canon pour les pistes qui en dérivent : ils gouvernent l'échelle des niveaux de preuve, le manifeste comme unique surface de scellement, et la signature de l'émetteur. Balise est la première conception dérivée de ce canon — elle existe en partie pour voir si le canon tient au contact d'un vrai domaine, et jusqu'ici il tient.
 
 ## Construit avec l'IA, vérifié par un humain
 
 Balise est construit avec assistance IA, et six de ses vérifications utilisent un moteur IA au moment de l'évaluation. On traite ces deux faits comme des choses à encadrer, pas à cacher :
 
-- Chaque référence légale a été vérifiée par un humain contre le texte officiel sur LégisQuébec avant tout usage client ([docs/VERIFICATION.md](docs/VERIFICATION.md)).
+- Chaque référence légale a été vérifiée par un humain contre le texte officiel sur LégisQuébec avant qu'un constat ne serve à quoi que ce soit ([docs/VERIFICATION.md](docs/VERIFICATION.md)).
 - Le moteur de jugement ne peut pas inventer une obligation. La liste des vérifications est fermée, les questions légales sont des textes rédigés, et la base légale vient toujours du catalogue, jamais du modèle.
 - Les citations retournées par le moteur sont vérifiées contre le texte récupéré. Une citation introuvable est retirée, et le retrait est indiqué dans le constat.
 - Sans moteur configuré, les vérifications de jugement rapportent « indéterminé » plutôt que de deviner.
@@ -71,7 +71,7 @@ Ce que cette version ne fait pas encore, pour que vous ne l'appreniez pas à vos
 
 ## Posture de sécurité
 
-Voir [THREAT-MODEL.md](THREAT-MODEL.md) : garde anti-SSRF, confinement de l'injection d'instructions pour le contenu non fiable, données client locales seulement, piste de vérification chaînée où toute altération est détectable.
+Voir [THREAT-MODEL.md](THREAT-MODEL.md) : garde anti-SSRF, confinement de l'injection d'instructions pour le contenu non fiable, données de l'entreprise évaluée locales seulement, piste de vérification chaînée où toute altération est détectable.
 
 ## Statut
 
@@ -79,4 +79,4 @@ v0.1. Analyseur et rapport fonctionnels. Références légales vérifiées contr
 
 ## Licence
 
-MIT. Questions ou commentaires, ouvrez un issue. Ça fait toujours plaisir de jaser.
+MIT — libre d'utilisation, libre de forker, catalogue inclus. Questions ou commentaires, ouvrez un issue. Ça fait toujours plaisir de jaser.

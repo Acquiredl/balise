@@ -61,9 +61,9 @@ def main(argv: list[str] | None = None) -> int:
                            "contact or signup form the crawler would miss); "
                            "repeatable")
     scan.add_argument("--mini", action="store_true",
-                      help="Free-preview mode: deterministic remote checks "
+                      help="Quick-look mode: deterministic remote checks "
                            "only (no intake, no semantic engine), producing a "
-                           "teaser summary instead of the full deliverables")
+                           "short summary instead of the full deliverables")
     verify_cmd = sub.add_parser(
         "verify", help="Verify a delivered assessment package offline")
     verify_cmd.add_argument("package", help="Path to the package directory")
@@ -98,8 +98,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"private key (store in your password manager, then close "
               f"this terminal):\n  {private_hex}\n")
         print(f"public key:\n  {public_hex}\n")
-        print(f"fingerprint (publish in docs/SIGNING.md and engagement "
-              f"letters):\n  {fingerprint}")
+        print(f"fingerprint (publish in docs/SIGNING.md):"
+              f"\n  {fingerprint}")
         return 0
 
     if args.command == "seal":
@@ -128,9 +128,9 @@ def main(argv: list[str] | None = None) -> int:
     findings = external.run_external_scan(site)
 
     if args.mini:
-        teaser_path = summary.write_teaser(findings, target=site.root_url,
+        apercu_path = summary.write_apercu(findings, target=site.root_url,
                                            out_dir=args.out)
-        print(f"preview: {teaser_path}")
+        print(f"preview: {apercu_path}")
         return 0
 
     findings += semantic.run_semantic_checks(site)

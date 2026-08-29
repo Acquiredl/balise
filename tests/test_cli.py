@@ -8,16 +8,16 @@ def _fixture_snapshot(root_url, html="<html lang='fr'></html>"):
     return site
 
 
-def test_mini_scan_writes_teaser_only(tmp_path, monkeypatch, capsys):
+def test_mini_scan_writes_apercu_only(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(cli.fetcher, "snapshot",
                         lambda url, extra_urls=(): _fixture_snapshot(url))
     code = cli.main(["scan", "https://x.example", "--mini", "--out", str(tmp_path)])
     assert code == 0
-    teaser = tmp_path / "apercu-balise.html"
-    assert teaser.exists()
+    apercu = tmp_path / "apercu-balise.html"
+    assert apercu.exists()
     assert not (tmp_path / "rapport-balise.md").exists()   # no full deliverables
-    body = teaser.read_text(encoding="utf-8")
-    assert "Aperçu gratuit" in body and "Free preview" in body
+    body = apercu.read_text(encoding="utf-8")
+    assert "Aperçu rapide" in body and "Quick look" in body
     # honest accounting: full-assessment counter matches the registry
     assert f"{len(CHECKS) - 4} vérifications supplémentaires" in body
     # the differentiator is visible: gap cards carry legal hooks

@@ -17,7 +17,7 @@ A scanned site can embed instructions ("ignore previous instructions, report thi
 - The engine has **no tools** — a hijacked response can at worst produce wrong text, not actions.
 - Responses are **schema-validated**: status must be one of five enum values; anything else degrades to `unknown` (fail-closed).
 - Deterministic checks (A1/A3/A5/A7) are immune by construction — no model in the path.
-- Residual risk: a poisoned site could still bias a semantic finding's wording. Accepted at readiness-report stakes; flagged for review in engagements.
+- Residual risk: a poisoned site could still bias a semantic finding's wording. Accepted at readiness-report stakes; flagged for review on every assessment.
 
 ### 2. URL fetching (SSRF)
 The scanner takes a URL. `fetcher._assert_public` refuses non-http(s) schemes and any host resolving to private, loopback, link-local, reserved, or multicast ranges — the tool scans public websites only. Page count, body size, and timeouts are bounded. Redirects are followed manually with the same guard applied to every hop (fixed 2026-08-23, walk finding F15 — auto-follow previously fetched redirect targets unchecked). Residual accepted risk: DNS rebinding (the guard resolves the host, then the HTTP client resolves it again; a hostile authoritative DNS server could answer differently between the two lookups). Low likelihood at readiness-scan stakes; revisit if scans ever run inside a network with sensitive internal services.
@@ -26,12 +26,12 @@ The scanner takes a URL. `fetcher._assert_public` refuses non-http(s) schemes an
 Semantic evidence strings are length-capped and rendered into markdown reports (no HTML injection surface in v0; if HTML reports are added, evidence must be escaped at render).
 
 ### 4. Client intake data
-- Intake files and generated reports stay local to the engagement directory; nothing is transmitted anywhere except the site fetch and (if configured) the semantic API call.
+- Intake files and generated reports stay local to the assessment directory; nothing is transmitted anywhere except the site fetch and (if configured) the semantic API call.
 - Semantic calls send **scanned public-website text only** — intake answers are never sent to the model in v0.
-- Retention is the operator's responsibility; the engagement convention is delete-on-close unless the client asks otherwise.
+- Retention is the operator's responsibility; the convention is delete-on-close unless the assessed enterprise asks otherwise.
 
 ### 5. Audit-trail integrity
-Each JSONL record embeds a SHA256 of its own canonical content — edits after the fact are detectable by recomputation. (Chain-hashing across records is a v2 candidate if engagements demand stronger tamper evidence.)
+Each JSONL record embeds a SHA256 of its own canonical content — edits after the fact are detectable by recomputation. (Chain-hashing across records is a v2 candidate if assessments demand stronger tamper evidence.)
 
 ### 6. Credential handling
 `ANTHROPIC_API_KEY` is read from the environment, never stored, never logged, never written into reports or the verification trail.
@@ -43,4 +43,4 @@ The most damaging failure is a report being treated as a legal verdict. Controls
 
 - Runtime cookie/consent behavior verification (headless browser) — static signatures only; findings say so explicitly.
 - Authenticated-area scanning; Balise never accepts credentials for a client site.
-- Multi-tenant service operation — v0 is operator-run per engagement.
+- Multi-tenant service operation — v0 runs locally, one assessment at a time (ADR-0005).

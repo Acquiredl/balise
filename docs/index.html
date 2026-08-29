@@ -123,11 +123,6 @@ h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.6vw,38px);lin
 .step h3{font-family:var(--serif);font-size:19px;margin-bottom:4px}
 .step p{font-size:15.5px;color:var(--ink-soft)}
 
-/* MSP band */
-.msp{background:var(--paper-deep)}
-.msp-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
-@media(max-width:820px){.msp-inner{grid-template-columns:1fr}}
-.msp p{margin-top:14px;color:var(--ink-soft);max-width:56ch}
 
 /* honesty */
 .honest ul{margin-top:24px;max-width:66ch;list-style:none}
@@ -181,12 +176,12 @@ footer a{color:var(--ink)}
       <span class="en">Balise assesses your SMB's readiness against Quebec's Law 25 and hands you a report where every finding shows its evidence, its legal basis, and how strong that basis actually is. No magic percentage. No fine-threat theatre. Just where you stand, verifiable line by line.</span>
     </p>
     <div class="hero-actions reveal d2">
-      <a class="btn btn-primary" href="#contact"><span class="fr">Demander une évaluation</span><span class="en">Request an assessment</span></a>
-      <a class="btn btn-ghost" href="https://github.com/Acquiredl/balise" rel="noopener"><span class="fr">Voir la méthode (code ouvert)</span><span class="en">See the method (open source)</span></a>
+      <a class="btn btn-primary" href="https://github.com/Acquiredl/balise" rel="noopener"><span class="fr">Obtenir Balise — gratuit</span><span class="en">Get Balise — free</span></a>
+      <a class="btn btn-ghost" href="https://github.com/Acquiredl/balise/blob/main/docs/methodology.md" rel="noopener"><span class="fr">Lire la méthode</span><span class="en">Read the method</span></a>
     </div>
     <p class="hero-note reveal d3">
-      <span class="fr">Outil d'autoévaluation de préparation. Ce n'est pas un avis juridique, et il ne rend jamais de verdict de conformité.</span>
-      <span class="en">A readiness self-assessment tool. Not legal advice, and it never renders a compliance verdict.</span>
+      <span class="fr">Outil libre et gratuit, exécuté sur votre propre machine. C'est un outil d'autoévaluation de préparation : ce n'est pas un avis juridique, et il ne rend jamais de verdict de conformité.</span>
+      <span class="en">Free and open, run on your own machine. It is a readiness self-assessment tool: not legal advice, and it never renders a compliance verdict.</span>
     </p>
   </div>
 </div>
@@ -279,30 +274,17 @@ footer a{color:var(--ink)}
     <h2><span class="fr">Trois étapes, un rapport bilingue.</span><span class="en">Three steps, one bilingual report.</span></h2>
     <div class="steps">
       <div class="step"><div>
-        <h3><span class="fr">On regarde votre site</span><span class="en">We look at your site</span></h3>
-        <p><span class="fr">Votre site public, tel qu'un visiteur le voit : la politique, le responsable, les traceurs, la version française. Rien à installer.</span><span class="en">Your public site, as a visitor sees it: the policy, the officer, the trackers, the French version. Nothing to install.</span></p>
+        <h3><span class="fr">Balise regarde votre site</span><span class="en">Balise looks at your site</span></h3>
+        <p><span class="fr">Votre site public, tel qu'un visiteur le voit : la politique, le responsable, les traceurs, la version française. Une seule commande.</span><span class="en">Your public site, as a visitor sees it: the policy, the officer, the trackers, the French version. One command.</span></p>
       </div></div>
       <div class="step"><div>
-        <h3><span class="fr">On regarde vos pratiques</span><span class="en">We look at your practices</span></h3>
-        <p><span class="fr">Une rencontre guidée sur ce qui se passe à l'interne : comment vous gérez un incident, vos fournisseurs, vos caméras ou horodateurs, les demandes d'accès. Vos réponses restent chez vous.</span><span class="en">A guided conversation about what happens internally: how you handle an incident, your vendors, your cameras or time-clocks, access requests. Your answers stay with you.</span></p>
+        <h3><span class="fr">Vous répondez sur vos pratiques</span><span class="en">You answer for your practices</span></h3>
+        <p><span class="fr">Un <a href="questionnaire.html">questionnaire</a> sur ce qui se passe à l'interne : comment vous gérez un incident, vos fournisseurs, vos caméras ou horodateurs, les demandes d'accès. Il se remplit dans votre navigateur et rien n'est transmis — vos réponses restent chez vous.</span><span class="en">A <a href="questionnaire.html">questionnaire</a> about what happens internally: how you handle an incident, your vendors, your cameras or time-clocks, access requests. It fills in inside your browser and nothing is transmitted — your answers stay with you.</span></p>
       </div></div>
       <div class="step"><div>
-        <h3><span class="fr">Vous recevez le rapport</span><span class="en">You get the report</span></h3>
+        <h3><span class="fr">Vous obtenez le rapport</span><span class="en">You get the report</span></h3>
         <p><span class="fr">Où vous en êtes, domaine par domaine. Quoi corriger en premier. Et l'annexe qui montre comment chaque constat a été établi, utile aussi pour répondre au questionnaire de votre assureur.</span><span class="en">Where you stand, domain by domain. What to fix first. And the annex showing how each finding was reached, also handy for your insurer's questionnaire.</span></p>
       </div></div>
-    </div>
-  </div>
-</section>
-
-<section class="msp">
-  <div class="wrap msp-inner">
-    <div>
-      <p class="kicker"><span class="fr">Fournisseurs TI et agences</span><span class="en">MSPs and agencies</span></p>
-      <h2><span class="fr">Vous servez des PME? Offrez la couche que vos outils ne couvrent pas.</span><span class="en">You serve SMBs? Offer the layer your tools don't cover.</span></h2>
-      <p><span class="fr">Vous gérez déjà leurs TI ou leur site. Balise ajoute l'évaluation organisationnelle, sous votre marque ou en référence, avec un rapport défendable que vos clients peuvent montrer à leur assureur.</span><span class="en">You already run their IT or their website. Balise adds the organizational assessment, white-labeled or by referral, with a defensible report your clients can show their insurer.</span></p>
-    </div>
-    <div>
-      <a class="btn btn-primary" href="#contact"><span class="fr">Parlons partenariat</span><span class="en">Let's talk partnership</span></a>
     </div>
   </div>
 </section>
@@ -323,19 +305,19 @@ footer a{color:var(--ink)}
   </div>
 </section>
 
-<section class="cta" id="contact">
+<section class="cta" id="start">
   <div class="wrap">
-    <p class="kicker"><span class="fr">Premier arrivés, premiers servis</span><span class="en">First come, first served</span></p>
-    <h2><span class="fr">On prend un petit nombre de premières évaluations.</span><span class="en">We're taking a small number of first assessments.</span></h2>
+    <p class="kicker"><span class="fr">Commencer</span><span class="en">Get started</span></p>
+    <h2><span class="fr">Le code est ouvert, la méthode est publique, l'outil est gratuit.</span><span class="en">The code is open, the method is public, the tool is free.</span></h2>
     <p class="section-lede">
-      <span class="fr">Écrivez-nous en une ligne : votre entreprise, votre site web, et ce qui vous amène. On vous répond avec les prochaines étapes, sans pression et sans infolettre surprise.</span>
-      <span class="en">Write us one line: your company, your website, and what brings you. We reply with next steps, no pressure and no surprise newsletter.</span>
+      <span class="fr">Balise s'installe et s'exécute sur votre machine. Rien à héberger, aucun compte, et vos réponses ne quittent jamais votre poste. Vous pouvez lire exactement comment chaque constat est établi avant de lancer quoi que ce soit.</span>
+      <span class="en">Balise installs and runs on your own machine. Nothing to host, no account, and your answers never leave your computer. You can read exactly how every finding is reached before you run a thing.</span>
     </p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="mailto:CONTACT-A-DEFINIR@example.com"><span class="fr">Écrivez-nous</span><span class="en">Write to us</span></a>
-      <a class="btn btn-ghost" href="https://github.com/Acquiredl/balise" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="https://github.com/Acquiredl/balise" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://github.com/Acquiredl/balise/issues" rel="noopener"><span class="fr">Signaler un problème</span><span class="en">Report an issue</span></a>
     </div>
-    <p class="cta-sub"><span class="fr">La méthode est publique et le code est ouvert. Vous pouvez lire exactement comment on évalue avant de nous écrire.</span><span class="en">The method is public and the code is open. You can read exactly how we assess before you write.</span></p>
+    <p class="cta-sub"><span class="fr">C'est une v0.1 et ça se voit par endroits. Si un constat vous semble faux, ouvrez un issue : c'est exactement le genre de retour qui améliore le catalogue.</span><span class="en">This is a v0.1 and it shows in places. If a finding looks wrong to you, open an issue — that is exactly the kind of feedback that improves the catalog.</span></p>
   </div>
 </section>
 </main>
