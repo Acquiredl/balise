@@ -19,6 +19,11 @@ dist/
 build/
 .pytest_cache/
 
+# loxodonta activity chains - agent session records, never committed
+# (loxodonta also drops a self-ignoring receipts/.gitignore; this is the
+# root-level rule, which survives that marker being removed)
+receipts/
+
 # env / secrets
 .env
 
