@@ -2,6 +2,8 @@
 
 The verification trail is the engagement's machine-readable record: one JSONL file, hash-chained, from which the rapport and sommaire can be regenerated without rescanning. This document freezes the format and states exactly what verification does and does not prove.
 
+The design derives from the [loxodonta](https://github.com/Acquiredl/loxodonta) trail canon: its decision records govern the evidence-grade scale, the package manifest as a single sealing surface, and the issuer signature admitted for cross-party delivery. Where this document states a rule without arguing it, the argument lives there.
+
 ## Format: `balise-audit-trail/1`
 
 The format identifier keeps its original name: it is frozen (hashes cover its bytes in every existing genesis record), and renaming it would orphan every trail issued before the public name changed to *verification trail*.
